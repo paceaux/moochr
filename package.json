@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "supervisor ./bin/www",
-    "postinstall": "node models/todoDB.js && node models/userDB.js",
+    "postinstall": "node models/todoDB.js && node models/usersDB.js",
     "build": "webpack --mode production"
   },
   "dependencies": {
@@ -24,3 +24,4 @@
     "webpack-cli": "^2.0.12"
   }
 }
+
