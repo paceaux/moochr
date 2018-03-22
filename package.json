@@ -1,0 +1,26 @@
+{
+  "name": "moochr",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "supervisor ./bin/www",
+    "postinstall": "node models/todoDB.js && node models/userDB.js",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "pg": "^7.4.1",
+    "serve-favicon": "~2.4.5",
+    "supervisor": "^0.12.0",
+    "vue": "^2.5.16",
+    "vue-loader": "^14.2.1",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  }
+}
