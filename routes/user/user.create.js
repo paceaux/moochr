@@ -7,6 +7,7 @@ module.exports = function postCb (req, res, next) {
 
     const data = req.body;
     const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    data.timestamp = timestamp;
     const dataKeys = Object.keys(data).toString();
     const sqlData = Object.keys(data).map( key=>  typeof data[key] == 'string' ? `'${data[key]}'` : data[key]);
   
