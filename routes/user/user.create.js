@@ -7,17 +7,15 @@ module.exports = function postCb (req, res, next) {
 
     const data = req.body;
     const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    const dataKeys = Object.keys(data);
-    const sqlData = Object.keys(data).map( key=>  data[key] || ' ');
-
+    const dataKeys = Object.keys(data).toString();
+    const sqlData = Object.keys(data).map( key=>  typeof data[key] == 'string' ? `'${data[key]}'` : data[key]);
   
-    console.log(Object.keys(data));
-    console.log('========');
-    console.log(sqlData.toString());
+    const query = `INSERT INTO users(${dataKeys}) values(${sqlData.toString()})`;
+    console.log(query);
     // Get a Postgres client from the connection pool
     client.connect()
     .then(()=>{
-      client.query(`INSERT INTO users(${dataKeys}) values(${sqlData.toString()})`)
+      client.query(query)
       .then((queryRes) => {
         client.query('SELECT * FROM users ORDER BY id ASC')
         .then((rowRes) => {
