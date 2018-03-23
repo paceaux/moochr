@@ -1,16 +1,14 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var todoCrud = require('./routes/todo/index');
-var users = require('./routes/user/index');
+const todoCrud = require('./api/todo/index');
+const users = require('./api/user/index');
 
-var app = express();
-
-// view engine setup
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,6 +26,7 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+  // todo: forward a 404 page
 });
 
 // error handler
@@ -38,7 +37,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.send('error'); // todo: forward a 500 page
 });
 
 module.exports = app;
