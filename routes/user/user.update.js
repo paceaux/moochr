@@ -5,7 +5,7 @@ const crudOp = 'update';
 module.exports = function updateCb(req, res, done) {
     const client = new Client(dbConfig);
     const data = req.body;
-    const id = req.params.todo_id;
+    const id = req.params.user_id;
     const sqlData = [data.firstname, data.lastname, data.email, data.street1,data.street2, data.city, data.state, data.country, id];
 
     client.connect()

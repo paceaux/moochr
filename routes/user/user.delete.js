@@ -4,7 +4,7 @@ const crudOp = 'delete';
 
 module.exports = function deleteCb(req,res, done) {
     const client = new Client(dbConfig);
-    const id = req.params.todo_id;
+    const id = req.params.user_id;
 
     client.connect()
     .then(() => {
