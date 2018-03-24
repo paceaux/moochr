@@ -1,17 +1,17 @@
 <template>
-  <table>
-      <thead>
+  <table class="userTable">
+      <thead class="userTable__head">
           <tr>
-              <th id="id">id</th>
-              <th id="firstname">firstname</th>
-              <th id="lastname">lastname</th>
-              <th id="email">email</th>
-              <th id="phone">phone</th>
-              <th id="city">city</th>
+              <th class="userTable__heading" id="id">id</th>
+              <th class="userTable__heading" id="firstname">firstname</th>
+              <th class="userTable__heading" id="lastname">lastname</th>
+              <th class="userTable__heading" id="email">email</th>
+              <th class="userTable__heading" id="phone">phone</th>
+              <th class="userTable__heading" id="city">city</th>
               <td></td>
           </tr>
       </thead>
-      <tbody v-f="state.users.length">
+      <tbody class="userTable__body" v-f="state.users.length">
           <UserRowItem v-for="user in state.users" 
           :key="user.id"
           :user="user" 
