@@ -10,7 +10,6 @@
 </template>
 <script>
 import TH from '../helpers/timehelper.js';
-import { Object } from 'core-js/library/web/timers';
 export default {
   props: {
       todo: {
