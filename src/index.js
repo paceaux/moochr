@@ -16,5 +16,11 @@ new Vue({
             });
         });
 
+        this.getUsers().then(users => {
+            users.forEach(user => {
+                this.state.users.push(user);
+            });
+        });
+
     }
 });
