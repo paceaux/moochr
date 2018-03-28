@@ -1,6 +1,10 @@
 <template>
   <header>
-      <h1>Hey there</h1>
+      <nav>
+        <router-link to="/addUser">Add User</router-link>
+        <router-link to="/userList">User Table</router-link>
+        <router-link to="/todoList">Todo List</router-link>
+      </nav>
   </header>
 </template>
 
