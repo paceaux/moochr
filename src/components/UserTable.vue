@@ -1,4 +1,6 @@
 <template>
+    <section class="users">
+    <UserAdd @add="addItem"></UserAdd>
   <table class="userTable">
       <thead class="userTable__head">
           <tr class="userTable__headingHeaderRow userTable__headingHeaderRow--columnGroups">
@@ -31,14 +33,17 @@
           </UserRowItem>
       </tbody>
   </table>
+  </section>
 </template>
 <script>
     import Store from '../store.js';
     import UserRowItem from './UserRowItem.vue';
+    import UserAdd from './UserAdd.vue';
 
     export default {
         components: {
-            UserRowItem
+            UserRowItem,
+            UserAdd
         },
         data () {
             return Store;
@@ -51,9 +56,11 @@
                 this.updateUser(user);
                 console.log(this.state.users);
             },
+            addItem(user){
+                this.createUser(user);
+            },
             collapseColumn(evt) {
                 const headers = evt.target.getAttribute('id');
-                consol
             }
         }
     }
