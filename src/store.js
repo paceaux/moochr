@@ -32,14 +32,22 @@ export default {
         });
     },
     updateUser(user) {
-        const id = user.id;
+        console.group('store updating user');
+        console.log(user);
+        console.log(user.id);
+        console.log(user.firstname);
+            const apiUrl = `${apiGetUsers}/${user.id}`;
 
-        const indexOfUser = this.state.users.findIndex((el) => {
-            return el.id == id;
-        });
+            sendToApi(apiUrl, 'PUT', user)
+            .then(responseText => {
+                console.log(responseText);
+            })
+            .catch(err=> {
+                console.log(err);
+            });
 
-        if (indexOfUser != -1) this.state.users[indexOfUser] = user;
-
+            console.log(this.state.users);
+        
     },
     deleteUser(id) {
 
