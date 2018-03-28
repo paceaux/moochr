@@ -29,3 +29,43 @@
 .todo__content {
 
 }
+
+.userTable {
+    width: 100vw;
+}
+
+.userTable__head {
+    background-color: #dcdcdc;
+}
+.userTable__headingHeaderRow th{
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.userTable__headingHeader {
+    text-align: center;
+}
+
+.userTable__headingHeader--controls {
+    width: 4em;
+}
+
+.userTable__headingHeaderRow + .userTable__headingHeaderRow th {
+    font-size: .8em;
+}
+.userTable__body {
+    font-size: .75em;
+}
+
+.userTable__cell {
+    padding: .25em;
+}
+
+.userTable__cell input {
+    width: 100%;
+}
+
+.userTable #id,
+.userTable #state,
+.userTable #country {
+    width: 4ch;
+}
