@@ -84,6 +84,7 @@ export default {
   methods: {
       addContent() {
         this.Store.createUser(this.user);
+        this.$router.push('/userList');
       }
   }
 }
