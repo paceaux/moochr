@@ -54,7 +54,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+legend {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
   line-height: 1.2;
@@ -461,4 +462,14 @@ tfoot th {
 
 *, :before, :after {
   box-sizing: border-box;
+}
+
+/*==========
+#Form
+==========*/
+input, textarea, select {
+  padding: .25em .5rem;
+}
+label {
+  font-family: Helvetica, Arial, sans-serif;
 }
