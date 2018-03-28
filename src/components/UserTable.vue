@@ -1,13 +1,13 @@
 <template>
   <table class="userTable">
       <thead class="userTable__head">
-          <tr>
-              <th id="id"></th>
-              <th id="name" colspan="2">Name</th>
-              <th id="contact" colspan="2">Contact</th>
-              <th id="address" colspan="5">Address </th>
+          <tr class="userTable__headingHeaderRow">
+              <th class="userTable__headingHeader" id="id"></th>
+              <th class="userTable__headingHeader" id="name" colspan="2" v-on:dblclick="collapseColumn($event)">Name</th>
+              <th class="userTable__headingHeader" id="contact" colspan="2">Contact</th>
+              <th class="userTable__headingHeader" id="address" colspan="5">Address </th>
           </tr>
-          <tr>
+          <tr class="userTable__headingHeaderRow">
               <th class="userTable__heading" id="id">id</th>
               <th class="userTable__heading" id="firstname">firstname</th>
               <th class="userTable__heading" id="lastname">lastname</th>
@@ -50,6 +50,10 @@
             updateItem(user) {
                 this.updateUser(user);
                 console.log(this.state.users);
+            },
+            collapseColumn(evt) {
+                const headers = evt.target.getAttribute('id');
+                consol
             }
         }
     }
