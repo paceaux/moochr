@@ -54,7 +54,6 @@
             },
             updateItem(user) {
                 this.updateUser(user);
-                console.log(this.state.users);
             },
             collapseColumn(evt) {
                 const headers = evt.target.getAttribute('id');
