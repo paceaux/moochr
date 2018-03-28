@@ -51,7 +51,7 @@
             </label>
         </fieldset>
         <fieldset class="userCreate__fieldset userCreate__fieldset--controls">
-            <button class="userCreate__submit" @click="$emit('add', user)">save</button>
+            <button class="userCreate__submit" v-on:click="addContent(user)">save</button>
         </fieldset>
     </form>
 </template>
@@ -83,7 +83,7 @@ export default {
   },
   methods: {
       addContent() {
-        this.$emit('add', this.user);
+        this.Store.createUser(this.user);
       }
   }
 }

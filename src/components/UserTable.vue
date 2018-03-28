@@ -1,6 +1,6 @@
 <template>
     <section class="users">
-    <UserAdd @add="addItem"></UserAdd>
+    <UserAdd></UserAdd>
   <table class="userTable">
       <thead class="userTable__head">
           <tr class="userTable__headingHeaderRow userTable__headingHeaderRow--columnGroups">
@@ -55,9 +55,6 @@
             updateItem(user) {
                 this.updateUser(user);
                 console.log(this.state.users);
-            },
-            addItem(user){
-                this.createUser(user);
             },
             collapseColumn(evt) {
                 const headers = evt.target.getAttribute('id');
