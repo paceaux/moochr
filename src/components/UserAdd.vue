@@ -1,6 +1,6 @@
 <template>
       <form class="userCreate">
-        <fieldset class="userCreate__fieldset">
+        <fieldset class="userCreate__fieldset userCreate__fieldset--name">
             <legend class="userCreate__fieldsetLegend">name</legend>
             <label for="firstname" class="userCreate__field"> 
                 <span class="userCreate__fieldLabel">firstname</span>
@@ -12,7 +12,7 @@
                 <input v-model="user.lastname" type="text" />
             </label>
         </fieldset>
-        <fieldset class="userCreate__fieldset">
+        <fieldset class="userCreate__fieldset userCreate__fieldset--contact">
             <legend class="userCreate__fieldsetLegend">contact</legend>
             <label for="email" class="userCreate__field"> 
                 <span class="userCreate__fieldLabel">email</span>
@@ -23,7 +23,7 @@
                 <input v-model="user.phone" type="tel"/>
             </label>
         </fieldset>
-        <fieldset class="userCreate__fieldset" >
+        <fieldset class="userCreate__fieldset userCreate__fieldset--address" >
             <legend class="userCreate__fieldsetLegend">address</legend>
             <label for="street1" class="userCreate__field"> 
                 <span class="userCreate__fieldLabel">street1</span>
@@ -50,8 +50,8 @@
                 <input v-model="user.country" type="text"/>
             </label>
         </fieldset>
-        <fieldset class="userCreate__fieldset">
-            <button @click="$emit('add', user)">save</button>
+        <fieldset class="userCreate__fieldset userCreate__fieldset--controls">
+            <button class="userCreate__submit" @click="$emit('add', user)">save</button>
         </fieldset>
     </form>
 </template>
