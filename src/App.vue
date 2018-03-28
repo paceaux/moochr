@@ -1,8 +1,7 @@
 <template>
 	<div id="TodoApp">
 		<Intro/>
-		<UserTable />
-        	<TodoList />
+		<router-view></router-view>
 	</div>
 </template>
 <script>
