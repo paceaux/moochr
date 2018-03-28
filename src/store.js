@@ -32,10 +32,6 @@ export default {
         });
     },
     updateUser(user) {
-        console.group('store updating user');
-        console.log(user);
-        console.log(user.id);
-        console.log(user.firstname);
             const apiUrl = `${apiGetUsers}/${user.id}`;
 
             sendToApi(apiUrl, 'PUT', user)
@@ -45,8 +41,6 @@ export default {
             .catch(err=> {
                 console.log(err);
             });
-
-            console.log(this.state.users);
         
     },
     deleteUser(id) {
