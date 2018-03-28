@@ -23,26 +23,26 @@
   </section>
 </template>
 <script>
-    import Store from '../store.js';
-    import CategoryRowItem from './CategoryRowItem.vue';
-    import CategoryAdd from './CategoryAdd.vue';
+import Store from '../store.js';
+import CategoryRowItem from './CategoryRowItem.vue';
+import CategoryAdd from './CategoryAdd.vue';
 
-    export default {
-        components: {
-            CategoryRowItem,
-            CategoryAdd
+export default {
+    components: {
+        CategoryRowItem,
+        CategoryAdd
+    },
+    data () {
+        return Store;
+    },
+    methods: {
+        removeItem(id) {
+            this.deleteCategory(id);
         },
-        data () {
-            return Store;
-        },
-        methods: {
-            removeItem(id) {
-                this.deleteCategory(id);
-            },
-            updateItem(category) {
-                this.updateCategory(category);
-                console.log(this.state.categories);
-            }
+        updateItem(category) {
+            this.updateCategory(category);
+            console.log(this.state.categories);
         }
     }
+}
 </script>

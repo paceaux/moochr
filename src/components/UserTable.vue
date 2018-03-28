@@ -36,28 +36,28 @@
   </section>
 </template>
 <script>
-    import Store from '../store.js';
-    import UserRowItem from './UserRowItem.vue';
-    import UserAdd from './UserAdd.vue';
+import Store from '../store.js';
+import UserRowItem from './UserRowItem.vue';
+import UserAdd from './UserAdd.vue';
 
-    export default {
-        components: {
-            UserRowItem,
-            UserAdd
+export default {
+    components: {
+        UserRowItem,
+        UserAdd
+    },
+    data () {
+        return Store;
+    },
+    methods: {
+        removeItem(id) {
+            this.deleteUser(id);
         },
-        data () {
-            return Store;
+        updateItem(user) {
+            this.updateUser(user);
         },
-        methods: {
-            removeItem(id) {
-                this.deleteUser(id);
-            },
-            updateItem(user) {
-                this.updateUser(user);
-            },
-            collapseColumn(evt) {
-                const headers = evt.target.getAttribute('id');
-            }
+        collapseColumn(evt) {
+            const headers = evt.target.getAttribute('id');
         }
     }
+}
 </script>

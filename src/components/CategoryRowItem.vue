@@ -22,7 +22,6 @@
             <button v-show="isEditable" @click="updateContent()">save</button>
             <button @click="$emit('remove',category.id)">Delete</button>
         </td>
-
     </tr>
 </template>
 <script>

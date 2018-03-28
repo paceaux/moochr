@@ -12,11 +12,11 @@
 
 <script>
 export default {
-  props: {
+    props: {
 
-  },
-  computed: {
-      
-  }
+    },
+    computed: {
+        
+    }
 }
 </script>

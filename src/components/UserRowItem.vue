@@ -36,7 +36,6 @@
             <button v-show="isEditable" @click="updateContent()">save</button>
             <button @click="$emit('remove',user.id)">Delete</button>
         </td>
-
     </tr>
 </template>
 <script>

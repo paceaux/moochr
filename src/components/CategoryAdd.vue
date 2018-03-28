@@ -24,35 +24,34 @@
                 </select>
             </label>
         </fieldset>
-
         <fieldset class="categoryCreate__fieldset categoryCreate__fieldset--controls">
             <button class="categoryCreate__submit" v-on:click="addContent(category)">save</button>
         </fieldset>
     </form>
 </template>
 <script>
-    import Store from '../store.js';
+import Store from '../store.js';
 
 export default {
-  data () {
-      return {
-          Store,
-          category: {
-              name: '',
-              slug: '',
-              parent: ''
+    data () {
+        return {
+            Store,
+            category: {
+            name: '',
+            slug: '',
+            parent: ''
 
-          }
-      };
-  },
-  props : {
+            }
+        };
+    },
+    props : {
 
-  },
-  methods: {
-      addContent() {
-        this.Store.createCategory(this.category);
-        this.$router.push('/categoryList');
-      }
-  }
+    },
+    methods: {
+        addContent() {
+            this.Store.createCategory(this.category);
+            this.$router.push('/categoryList');
+        }
+    }
 }
 </script>
