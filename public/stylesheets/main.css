@@ -69,3 +69,52 @@
 .userTable #country {
     width: 4ch;
 }
+
+.userCreate {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr 1fr;
+    grid-template-areas: "header header""name address" "contact address" "footer footer"
+}
+
+.userCreate__fieldset {
+    border: none;
+    background-color: rgb(245,245,245);
+}
+
+.userCreate__fieldset--name {
+    grid-area: name;
+}
+
+.userCreate__fieldset--contact {
+    grid-area: contact;
+}
+
+.userCreate__fieldset--address {
+    grid-area: address;
+}
+
+.userCreate__fieldset--controls {
+    grid-area: footer;
+}
+
+.userCreate__fieldsetLegend {
+    text-transform: capitalize;
+}
+.userCreate__field {
+    display: inline-block;
+    width: 49%;
+}
+
+.userCreate__fieldLabel {
+    text-transform: capitalize;
+    display: inline-block;
+    width: 5em;
+}
+
+.userCreate__submit {
+    font-size: 1.25rem;
+    padding: .618em;
+}
