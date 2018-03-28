@@ -8,6 +8,7 @@
         <td class="userTable__cell" headers="phone contact"><input :disabled="!isEditable" v-model="user.phone"/></td>
         <td class="userTable__cell" headers="street1 address"><input :disabled="!isEditable" v-model="user.street1"/></td>
         <td class="userTable__cell" headers="street2 address"><input :disabled="!isEditable" v-model="user.street2"/></td>
+        <td class="userTable__cell" headers="zip address"><input :disabled="!isEditable" v-model="user.zip"/></td>
         <td class="userTable__cell" headers="city address"><input :disabled="!isEditable" v-model="user.city"/></td>
         <td class="userTable__cell" headers="state address"><input :disabled="!isEditable" v-model="user.state"/></td>
         <td class="userTable__cell" headers="country address"><input :disabled="!isEditable" v-model="user.country"/></td>
