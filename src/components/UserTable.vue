@@ -7,7 +7,7 @@
               <th class="userTable__headingHeader" id="id" rowspan="2">id</th>
               <th class="userTable__headingHeader" id="name" colspan="2" v-on:dblclick="collapseColumn($event)">Name</th>
               <th class="userTable__headingHeader" id="contact" colspan="2">Contact</th>
-              <th class="userTable__headingHeader" id="address" colspan="5">Address </th>
+              <th class="userTable__headingHeader" id="address" colspan="6">Address </th>
               <td class="userTable__headingHeader userTable__headingHeader--controls" rowspan="2"></td>
           </tr>
           <tr class="userTable__headingHeaderRow">
