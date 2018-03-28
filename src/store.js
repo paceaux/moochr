@@ -1,5 +1,6 @@
 const apiGetTodos = 'http://localhost:3000/api/v1/todos';
 const apiGetUsers = 'http://localhost:3000/api/v1/user';
+const apiGetCategories = 'http://localhost:3000/api/v1/category';
 
 function sendToApi (url, type, data) {
     return new Promise((resolve,reject) => {
@@ -19,7 +20,8 @@ function sendToApi (url, type, data) {
 export default {
     state: {
         todos: [],
-        users: []
+        users: [],
+        categories: []
     },
     getUsers() {
         return sendToApi(apiGetUsers, 'GET');
@@ -52,6 +54,38 @@ export default {
         sendToApi(`${apiGetUsers}/${id}`, 'DELETE').then(result => {
             console.log(result);
 
+        });
+    },
+    getCategories() {
+        return sendToApi(apiGetCategories, 'GET');
+    },
+    createCategory(category) {
+        this.state.categories.push(category);
+
+        sendToApi(apiGetCategories, 'POST', category).then(result => {
+            console.log('created', result);
+        });
+    },
+    updateCategory(category) {
+            const apiUrl = `${apiGetCategories}/${category.id}`;
+
+            sendToApi(apiUrl, 'PUT', category)
+            .then(responseText => {
+                console.log(responseText);
+            })
+            .catch(err=> {
+                console.log(err);
+            });
+        
+    },
+    deleteCategory(id) {
+
+        this.state.categories = this.state.categories.filter( category => {
+            return category.id !== id;
+        });
+
+        sendToApi(`${apiGetCategories}/${id}`, 'DELETE').then(result => {
+            console.log(result);
         });
     },
    getTodos() {

@@ -25,5 +25,11 @@ new Vue({
             });
         });
 
+        this.getCategories().then(categories => {
+            categories.forEach(category => {
+                this.state.categories.push(category);
+            });
+        });
+
     }
 });

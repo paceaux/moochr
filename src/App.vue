@@ -8,12 +8,14 @@
 import Intro from './components/Intro.vue';
 import TodoList from './components/TodoList.vue';
 import UserTable from './components/UserTable.vue';
+import CategoryTable from './components/CategoryTable.vue';
 
 export default {
 	components: {
         Intro,
         TodoList,
-	UserTable
+		UserTable,
+		CategoryTable
 	}
 }
 </script>
