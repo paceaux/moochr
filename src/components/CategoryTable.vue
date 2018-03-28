@@ -24,14 +24,13 @@
 </template>
 <script>
     import Store from '../store.js';
-    import categoryRowItem from './categoryRowItem.vue';
-    import categoryAdd from './categoryAdd.vue';
-import index from 'vue';
+    import CategoryRowItem from './CategoryRowItem.vue';
+    import CategoryAdd from './CategoryAdd.vue';
 
     export default {
         components: {
-            categoryRowItem,
-            categoryAdd
+            CategoryRowItem,
+            CategoryAdd
         },
         data () {
             return Store;
