@@ -1,14 +1,14 @@
 <template>
   <table class="userTable">
       <thead class="userTable__head">
-          <tr class="userTable__headingHeaderRow">
-              <th class="userTable__headingHeader" id="id"></th>
+          <tr class="userTable__headingHeaderRow userTable__headingHeaderRow--columnGroups">
+              <th class="userTable__headingHeader" id="id" rowspan="2">id</th>
               <th class="userTable__headingHeader" id="name" colspan="2" v-on:dblclick="collapseColumn($event)">Name</th>
               <th class="userTable__headingHeader" id="contact" colspan="2">Contact</th>
               <th class="userTable__headingHeader" id="address" colspan="5">Address </th>
+              <td class="userTable__headingHeader userTable__headingHeader--controls" rowspan="2"></td>
           </tr>
           <tr class="userTable__headingHeaderRow">
-              <th class="userTable__heading" id="id">id</th>
               <th class="userTable__heading" id="firstname">firstname</th>
               <th class="userTable__heading" id="lastname">lastname</th>
               <th class="userTable__heading" id="email">email</th>
@@ -18,7 +18,6 @@
               <th class="userTable__heading" id="city">city</th>
               <th class="userTable__heading" id="state">state</th>
               <th class="userTable__heading" id="country">country</th>
-              <td></td>
           </tr>
       </thead>
       <tbody class="userTable__body" v-f="state.users.length">
