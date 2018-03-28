@@ -2,12 +2,22 @@
   <table class="userTable">
       <thead class="userTable__head">
           <tr>
+              <th id="id"></th>
+              <th id="name" colspan="2">Name</th>
+              <th id="contact" colspan="2">Contact</th>
+              <th id="address" colspan="5">Address </th>
+          </tr>
+          <tr>
               <th class="userTable__heading" id="id">id</th>
               <th class="userTable__heading" id="firstname">firstname</th>
               <th class="userTable__heading" id="lastname">lastname</th>
               <th class="userTable__heading" id="email">email</th>
               <th class="userTable__heading" id="phone">phone</th>
+              <th class="userTable__heading" id="street1">street1</th>
+              <th class="userTable__heading" id="street2">street2</th>
               <th class="userTable__heading" id="city">city</th>
+              <th class="userTable__heading" id="state">state</th>
+              <th class="userTable__heading" id="country">country</th>
               <td></td>
           </tr>
       </thead>
