@@ -49,7 +49,8 @@ export default {
     },
     methods: {
         updateContent(evt) {
-            this.$emit('update', this.user);
+            //this.$emit('update', this.user);
+            console.log(this.$store.state.users);
             this.isEditable = !this.isEditable;
         },
         toggleEdit() {

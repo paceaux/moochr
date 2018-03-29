@@ -23,8 +23,8 @@
               <th class="userTable__heading" id="country">country</th>
           </tr>
       </thead>
-      <tbody class="userTable__body" v-f="state.users.length">
-          <UserRowItem v-for="user in state.users" 
+      <tbody class="userTable__body" v-if="users.length">
+          <UserRowItem v-for="user in users" 
           :key="user.id"
           :user="user" 
           @remove="removeItem" 
@@ -36,7 +36,7 @@
   </section>
 </template>
 <script>
-import Store from '../store.js';
+// import Store from '../store.js';
 import UserRowItem from './UserRowItem.vue';
 import UserAdd from './UserAdd.vue';
 
@@ -45,15 +45,17 @@ export default {
         UserRowItem,
         UserAdd
     },
-    data () {
-        return Store;
+    computed: {
+        users() {
+            return this.$store.state.users;
+        }
     },
     methods: {
         removeItem(id) {
-            this.deleteUser(id);
+            this.$store.dispatch('deleteUser',id);
         },
         updateItem(user) {
-            this.updateUser(user);
+            this.$store.dispatch('updateUser',user);
         },
         collapseColumn(evt) {
             const headers = evt.target.getAttribute('id');

@@ -56,12 +56,10 @@
     </form>
 </template>
 <script>
-import Store from '../store.js';
 
 export default {
   data () {
       return {
-          Store,
           user: {
               firstname: '',
               lastname: '',
@@ -83,8 +81,20 @@ export default {
   },
   methods: {
       addContent() {
-        this.Store.createUser(this.user);
-        this.$router.push('/userList');
+        this.$store.dispatch('addUser', this.user);
+        this.user = {
+              firstname: '',
+              lastname: '',
+              email: '',
+              phone: '',
+              street1: '',
+              street2: '',
+              city: '',
+              zip: '',
+              state: '',
+              country: ''
+        };
+       // this.$router.push('/userList');
       }
   }
 }
