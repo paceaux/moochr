@@ -13,7 +13,7 @@ import CategoryTable from './components/CategoryTable.vue';
 export default {
 	components: {
         Intro,
-        TodoList,
+        // TodoList,
 		UserTable,
 		CategoryTable
 	}

@@ -10,8 +10,8 @@
                     <th class="categoryTable__heading" id="parent">parent</th>
                 </tr>
             </thead>
-            <tbody class="categoryTable__body" v-f="state.categories.length">
-                <categoryRowItem v-for="category in state.categories" 
+            <tbody class="categoryTable__body" v-if="categories.length">
+                <categoryRowItem v-for="category in categories" 
                 :key="category.id"
                 :category="category" 
                 @remove="removeItem" 
@@ -23,7 +23,6 @@
   </section>
 </template>
 <script>
-import Store from '../store.js';
 import CategoryRowItem from './CategoryRowItem.vue';
 import CategoryAdd from './CategoryAdd.vue';
 
@@ -32,8 +31,13 @@ export default {
         CategoryRowItem,
         CategoryAdd
     },
+    computed: {
+        categories() {
+            return this.$store.state.categories;
+        }
+    },
     data () {
-        return Store;
+        
     },
     methods: {
         removeItem(id) {

@@ -33,6 +33,12 @@ export default new Vuex.Store({
         },
         DELETEUSER(state,userIndex) {
             state.users.splice(userIndex,1);
+        },
+        ADDCATEGORY(state,category) {
+            state.categories.push(category);
+        },
+        DELETECATEGORY(state,categoryIndex) {
+            state.categories.splice(categoryIndex,1);
         }
     },
     actions: {
@@ -41,6 +47,12 @@ export default new Vuex.Store({
         },
         deleteUser({commit}, userId) {
             commit('DELETEUSER', userId);
+        },
+        addCategory({commit}, category) {
+            commit('ADDCATEGORY', category);
+        },
+        deleteCategory({commit}, categoryId) {
+            commit('DELETECATEGORY', categoryId);
         }
     }
 });

@@ -17,7 +17,7 @@
                 <span class="categoryCreate__fieldLabel">parent</span>
                 <select v-model="category.parent"> 
                     <option>Pick a Parent</option>
-                    <option v-for="category in Store.state.categories" 
+                    <option v-for="category in categories" 
                     :key="category.id"
                     :category="category"
                     :value="category.id">{{category.name}}</option>
@@ -30,12 +30,15 @@
     </form>
 </template>
 <script>
-import Store from '../store.js';
 
 export default {
+    computed: {
+        categories() {
+            return this.$store.state.categories;
+        }
+    },
     data () {
         return {
-            Store,
             category: {
             name: '',
             slug: '',
@@ -49,8 +52,13 @@ export default {
     },
     methods: {
         addContent() {
-            this.Store.createCategory(this.category);
-            this.$router.push('/categoryList');
+            this.$store.dispatch('addCategory',this.category);
+            this.category = {
+                name: '',
+                slug: '',
+                parent: ''
+            };
+            // this.$router.push('/categoryList');
         }
     }
 }

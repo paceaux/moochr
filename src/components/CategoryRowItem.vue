@@ -11,7 +11,7 @@
                 <span v-show="!isEditable">{{parentName}}</span>
                 <select v-show="isEditable" v-model="category.parent">
                     <option>Pick a Parent</option>
-                    <option v-for="category in state.categories" 
+                    <option v-for="category in categories" 
                     :key="category.id"
                     :category="category"
                     :value="category.id">{{category.name}}</option>
@@ -25,7 +25,6 @@
     </tr>
 </template>
 <script>
-import Store from '../store.js';
 
 export default {
     props: {
@@ -36,12 +35,14 @@ export default {
         isEditable: false
     },
     data() {
-        return Store;
     },
     computed: {
+        categories() {
+            return this.$store.state.categories;
+        },
         parentName() {
             const id = this.category.parent || '';
-            const parent = this.state.categories.find(cat => {
+            const parent = this.categories.find(cat => {
                 return cat.id == id;
             });
 
