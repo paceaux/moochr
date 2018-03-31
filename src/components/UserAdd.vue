@@ -94,7 +94,7 @@ export default {
               state: '',
               country: ''
         };
-       // this.$router.push('/userList');
+       this.$router.push('/userList');
       }
   }
 }

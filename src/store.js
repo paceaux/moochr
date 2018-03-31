@@ -53,6 +53,28 @@ export default new Vuex.Store({
         },
         deleteCategory({commit}, categoryId) {
             commit('DELETECATEGORY', categoryId);
+        },
+        requestUsers({commit}) {
+            sendToApi(apiGetUsers, 'GET')
+            .then(users => {
+                users.forEach(user => {
+                    commit('ADDUSER', user);
+                });
+            })
+            .catch(err=> {
+                console.warn(err);
+            });
+        },
+        requestCategories({commit}) {
+            sendToApi(apiGetCategories, 'GET')
+            .then(categories => {
+                categories.forEach(category => {
+                    commit('ADDCATEGORY', category);
+                });
+            })
+            .catch(err=> {
+                console.warn(err);
+            });
         }
     }
 });

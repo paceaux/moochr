@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
-import Store from './store.js';
+import store from './store.js';
 import router from './routes/index.js';
 
 Vue.config.productionTip = false;
@@ -10,26 +10,28 @@ new Vue({
     el: '#VueMain',
     components: {App},
     template: '<App />',
-    data: Store,
+    store,
     router,
-    mounted() {
-        this.getTodos().then(todos => {
-            todos.items.forEach(todo => {
-                this.state.todos.push(todo);
-            });
-        });
+    beforeCreate() {
+        this.$store.dispatch('requestUsers');
+        this.$store.dispatch('requestCategories');
+        // this.getTodos().then(todos => {
+        //     todos.items.forEach(todo => {
+        //         this.state.todos.push(todo);
+        //     });
+        // });
 
-        this.getUsers().then(users => {
-            users.forEach(user => {
-                this.state.users.push(user);
-            });
-        });
+        // this.getUsers().then(users => {
+        //     users.forEach(user => {
+        //         this.state.users.push(user);
+        //     });
+        // });
 
-        this.getCategories().then(categories => {
-            categories.forEach(category => {
-                this.state.categories.push(category);
-            });
-        });
+        // this.getCategories().then(categories => {
+        //     categories.forEach(category => {
+        //         this.state.categories.push(category);
+        //     });
+        // });
 
     }
 });
