@@ -71,8 +71,6 @@ export default {
               zip: '',
               state: '',
               country: ''
-
-
           }
       };
   },

@@ -37,15 +37,14 @@ export default {
         }
     },
     data () {
-        
+
     },
     methods: {
         removeItem(id) {
-            this.deleteCategory(id);
+            this.$store.dispatch('deleteCategory', id);
         },
         updateItem(category) {
-            this.updateCategory(category);
-            console.log(this.state.categories);
+            this.$store.dispatch('updateCategory',category);
         }
     }
 }

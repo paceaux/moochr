@@ -34,8 +34,6 @@ export default {
         },
         isEditable: false
     },
-    data() {
-    },
     computed: {
         categories() {
             return this.$store.state.categories;
@@ -51,7 +49,7 @@ export default {
     },
     methods: {
         updateContent(evt) {
-            this.$emit('update', this.category);
+            this.$store.dispatch('updateCategory', this.category);
             this.isEditable = !this.isEditable;
         },
         toggleEdit() {
