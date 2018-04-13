@@ -6,6 +6,11 @@ import router from './routes/index.js';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+
+store.subscribe((mutation, state) => {
+    console.log('mutation observed', mutation);
+    localStorage.setItem('store', JSON.stringify(state));
+});
 new Vue({
     el: '#VueMain',
     components: {App},
@@ -15,6 +20,9 @@ new Vue({
     beforeCreate() {
         this.$store.dispatch('requestUsers');
         this.$store.dispatch('requestCategories');
+    },
+    mount() {
+
         // this.getTodos().then(todos => {
         //     todos.items.forEach(todo => {
         //         this.state.todos.push(todo);
@@ -32,6 +40,9 @@ new Vue({
         //         this.state.categories.push(category);
         //     });
         // });
+
+    },
+    destroyed() {
 
     }
 });
