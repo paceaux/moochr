@@ -3,9 +3,11 @@ import Vuex from 'vuex';
 const apiGetTodos = 'http://localhost:3000/api/v1/todos';
 const apiGetUsers = 'http://localhost:3000/api/v1/user';
 const apiGetCategories = 'http://localhost:3000/api/v1/category';
+const isServerSync = true;
 
-function sendToApi (url, type, data) {
+function sendToApi (url, type, data, shouldAjax =  isServerSync) {
     return new Promise((resolve,reject) => {
+        if (!shouldAjax) resolve(data);
         var xhr = new XMLHttpRequest();
         xhr.open(type, url);
         xhr.onload = ()=> resolve(JSON.parse(xhr.responseText));
@@ -25,11 +27,16 @@ export default new Vuex.Store({
     state: {
         todos: [],
         users: [],
-        categories: []
+        categories: [],
+        isServerSync
     },
     mutations: {
         ADDUSER(state,user) {
             state.users.push(user);
+        },
+        UPDATEUSER(state, user) {
+            const userIndex = state.users.findIndex(usr => usr.id == user.id);
+            Vue.set(state.users, userIndex, user);
         },
         DELETEUSER(state,userIndex) {
             state.users.splice(userIndex,1);
@@ -39,20 +46,71 @@ export default new Vuex.Store({
         },
         DELETECATEGORY(state,categoryIndex) {
             state.categories.splice(categoryIndex,1);
+        },
+        INITSTORE(state) {
+            
         }
     },
     actions: {
         addUser({commit}, user) {
-            commit('ADDUSER', user);
+            sendToApi(apiGetUsers, 'POST', user, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                commit('ADDUSER', user);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
+        },
+        updateUser({commit}, user) {
+            sendToApi(`${apiGetUsers}/${user.id}`, 'PUT', user, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                commit('UPDATEUSER', user);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
         },
         deleteUser({commit}, userId) {
-            commit('DELETEUSER', userId);
+            sendToApi(`${apiGetUsers}/${userId}`,'DELETE', undefined, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                commit('DELETEUSER', userId);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
         },
         addCategory({commit}, category) {
-            commit('ADDCATEGORY', category);
+            sendToApi(apiGetCategories, 'POST', category, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                this.commit('ADDCATEGORY', category);
+            })
+            .catch(err=> {
+                console.warn(err);
+            });
+        },
+        updateCategory({commit}, category) {
+            sendToApi(`${apiGetCategories}/${category.id}`, 'PUT', category, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                commit('UPDATEUSER', category);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
         },
         deleteCategory({commit}, categoryId) {
-            commit('DELETECATEGORY', categoryId);
+            sendToApi(`${apiGetUsers}/${categoryId}`,'DELETE', undefined, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                commit('DELETEUSER', categoryId);
+            })
+            .catch(err => {
+                console.warn(err);
+            });        
         },
         requestUsers({commit}) {
             sendToApi(apiGetUsers, 'GET')
@@ -75,7 +133,7 @@ export default new Vuex.Store({
             .catch(err=> {
                 console.warn(err);
             });
-        }
+        },
     }
 });
 
