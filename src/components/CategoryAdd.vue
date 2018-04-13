@@ -40,10 +40,9 @@ export default {
     data () {
         return {
             category: {
-            name: '',
-            slug: '',
-            parent: ''
-
+                name: '',
+                slug: '',
+                parent: ''
             }
         };
     },
@@ -58,7 +57,7 @@ export default {
                 slug: '',
                 parent: ''
             };
-            // this.$router.push('/categoryList');
+            this.$router.push('/categoryList');
         }
     }
 }
