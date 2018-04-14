@@ -12,7 +12,6 @@ module.exports = function postCb (req, res, next) {
     const sqlData = Object.keys(data).map( key=>  typeof data[key] == 'string' ? `'${data[key]}'` : data[key]);
   
     const query = `INSERT INTO users(${dataKeys}) values(${sqlData.toString()}) RETURNING *`;
-    console.log(query);
     // Get a Postgres client from the connection pool
     client.connect()
     .then(()=>{
