@@ -55,8 +55,7 @@ export default new Vuex.Store({
         addUser({commit}, user) {
             sendToApi(apiGetUsers, 'POST', user, this.state.isServerSync)
             .then(res => {
-                console.info(res);
-                commit('ADDUSER', user);
+                commit('ADDUSER', res);
             })
             .catch(err => {
                 console.warn(err);
