@@ -30,12 +30,15 @@ export default new Vuex.Store({
         categories: [],
         isServerSync
     },
+    getters: {
+        userIndexById: state => (id) => state.users.findIndex(user => user.id == id)
+    },
     mutations: {
         ADDUSER(state,user) {
             state.users.push(user);
         },
         UPDATEUSER(state, user) {
-            const userIndex = state.users.findIndex(usr => usr.id == user.id);
+            const userIndex = this.getters.userIndexById(user.id);
             Vue.set(state.users, userIndex, user);
         },
         DELETEUSER(state,userIndex) {
@@ -71,11 +74,11 @@ export default new Vuex.Store({
                 console.warn(err);
             });
         },
-        deleteUser({commit}, userId) {
+        deleteUser({commit, store}, userId) {
             sendToApi(`${apiGetUsers}/${userId}`,'DELETE', undefined, this.state.isServerSync)
             .then(res => {
-                console.info(res);
-                commit('DELETEUSER', userId);
+                const userIndex = this.getters.userIndexById(userId);
+                commit('DELETEUSER', userIndex);
             })
             .catch(err => {
                 console.warn(err);
