@@ -6,7 +6,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const todoCrud = require('./api/todo/index');
 const users = require('./api/user/index');
 const categoryCrud = require('./api/category/index');
 
@@ -19,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', todoCrud);
 app.use('/', users);
 app.use('/', categoryCrud);
 

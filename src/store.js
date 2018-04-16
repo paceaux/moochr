@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-const apiGetTodos = 'http://localhost:3000/api/v1/todos';
 const apiGetUsers = 'http://localhost:3000/api/v1/user';
 const apiGetCategories = 'http://localhost:3000/api/v1/category';
 const isServerSync = true;
