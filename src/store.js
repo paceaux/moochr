@@ -30,7 +30,8 @@ export default new Vuex.Store({
         isServerSync
     },
     getters: {
-        userIndexById: state => (id) => state.users.findIndex(user => user.id == id)
+        userIndexById: state => (id) => state.users.findIndex(user => user.id == id),
+        categoryIndexById: state => (id) => state.categories.findIndex(category => category.id == id)
     },
     mutations: {
         ADDUSER(state,user) {
@@ -45,6 +46,10 @@ export default new Vuex.Store({
         },
         ADDCATEGORY(state,category) {
             state.categories.push(category);
+        },
+        UPDATECATEGORY(state, category) {
+            const catIndex = this.getters.categoryIndexById(category.id);
+            Vue.set(state.categories, catIndex, category);
         },
         DELETECATEGORY(state,categoryIndex) {
             state.categories.splice(categoryIndex,1);
@@ -97,17 +102,17 @@ export default new Vuex.Store({
             sendToApi(`${apiGetCategories}/${category.id}`, 'PUT', category, this.state.isServerSync)
             .then(res => {
                 console.info(res);
-                commit('UPDATEUSER', category);
+                commit('UPDATECATEGORY', category);
             })
             .catch(err => {
                 console.warn(err);
             });
         },
         deleteCategory({commit}, categoryId) {
-            sendToApi(`${apiGetUsers}/${categoryId}`,'DELETE', undefined, this.state.isServerSync)
+            sendToApi(`${apiGetCategories}/${categoryId}`,'DELETE', undefined, this.state.isServerSync)
             .then(res => {
-                console.info(res);
-                commit('DELETEUSER', categoryId);
+                const catIndex = this.getters.categoryIndexById(categoryId);
+                commit('DELETECATEGORY', catIndex);
             })
             .catch(err => {
                 console.warn(err);
