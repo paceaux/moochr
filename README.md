@@ -10,12 +10,12 @@ Vue bits based on [another example](https://codesandbox.io/s/o29j95wx9).
 * Node
 * Express
 * Vue
+* Vuex
 * Webpack
 
 ## Startup
 1. Run `npm install`
 2. Run `npm start` (Starts the app)
-3. After modifying any frontend: `npm build`
+3. Run `npm run dev` watches web app files and rebuilds them.
 
-There's a `postinstall` command that creates the DB tables for you. It runs when you run `npm install`. If you haven't yet created the Todo database, don't run any install commands. 
-
+There's a `postinstall` command that creates the DB tables for you. It runs when you run `npm install`. You'll want to create a Todo database.

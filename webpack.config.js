@@ -2,6 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+    watch: true,
+    watchOptions: {
+        ignored: "node_modules"
+    },
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
