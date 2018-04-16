@@ -39,13 +39,18 @@
     </tr>
 </template>
 <script>
+const isEditable = false;
 export default {
     props: {
         user: {
             type: Object,
             required: true
-        },
-        isEditable: false
+        }
+    },
+    data() {
+        return {
+            isEditable
+        };
     },
     methods: {
         updateContent(evt) {

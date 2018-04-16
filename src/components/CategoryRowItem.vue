@@ -11,7 +11,7 @@
                 <span v-show="!isEditable">{{parentName}}</span>
                 <select v-show="isEditable" v-model="category.parent">
                     <option>Pick a Parent</option>
-                    <option v-for="category in categories" 
+                    <option v-for="category in categories"
                     :key="category.id"
                     :category="category"
                     :value="category.id">{{category.name}}</option>
@@ -25,14 +25,18 @@
     </tr>
 </template>
 <script>
-
+const isEditable = false;
 export default {
     props: {
         category: {
             type: Object,
             required: true
-        },
-        isEditable: false
+        }
+    },
+    data() {
+        return {
+            isEditable
+        };
     },
     computed: {
         categories() {
