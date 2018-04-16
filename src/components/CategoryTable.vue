@@ -11,13 +11,13 @@
                 </tr>
             </thead>
             <tbody class="categoryTable__body" v-if="categories.length">
-                <categoryRowItem v-for="category in categories" 
+                <CategoryRowItem v-for="category in categories"
                 :key="category.id"
-                :category="category" 
-                @remove="removeItem" 
+                :category="category"
+                @remove="removeItem"
                 @update="updateItem" >
 
-                </categoryRowItem>
+                </CategoryRowItem>
             </tbody>
         </table>
   </section>
@@ -35,9 +35,6 @@ export default {
         categories() {
             return this.$store.state.categories;
         }
-    },
-    data () {
-
     },
     methods: {
         removeItem(id) {
