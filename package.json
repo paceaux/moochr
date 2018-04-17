@@ -6,7 +6,8 @@
     "start": "supervisor ./bin/www",
     "postinstall": "node models/usersDB.js && node models/categories.js",
     "build": "webpack --mode production",
-    "dev" : "webpack --mode development"
+    "dev": "webpack --mode development",
+    "test": "mocha --recursive"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -16,6 +17,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "pg": "^7.4.1",
+    "sequelize": "^4.37.6",
     "serve-favicon": "~2.4.5",
     "supervisor": "^0.12.0",
     "vue": "^2.5.16",
@@ -25,5 +27,10 @@
     "vuex": "^3.0.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.1.0"
   }
 }
