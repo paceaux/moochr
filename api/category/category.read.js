@@ -4,13 +4,15 @@ const crudOp = 'read';
 
 module.exports = function readCb(req, res, next) {
     const client = new Client(dbConfig);
-    const query = 'SELECT * FROM categories ORDER BY id ASC';
-    
+    const catId = req.params.category_id;
+    const query = catId ? `SELECT * FROM categories WHERE id=${catId}` : 'SELECT * FROM categories ORDER BY id ASC';
+
         client.connect()
         .then(()=>{
             client.query(query)
             .then(queryRes=> {
-                res.send(queryRes.rows);
+                const result = catId ? queryRes.rows[0] : queryRes.rows;
+                res.send(result);
                 client.end();
             })
             .catch(queryErr=>{
