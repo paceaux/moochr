@@ -61,6 +61,31 @@ describe(`API endpoint ${endpoint}` , function (){
             });
     });
 
+    it('should return one user if I request by id', function () {
+        return chai.request(appUrl)
+            .get(endpoint)
+            .then(function (res) {
+                const addedUser = res.body.find(usr => {
+                    return (
+                        usr.firstname == testUser.firstname &&
+                        usr.lastname == testUser.lastname &&
+                        usr.email == testUser.email &&
+                        usr.phone == testUser.phone &&
+                        usr.city == testUser.city &&
+                        usr.country == testUser.country
+                    );
+                });
+            return chai.request(appUrl)
+                .get(endpoint + addedUser.id)
+                .then(function (userRes) {
+                    expect(userRes).to.have.status(200);
+                    expect(userRes).to.be.json;
+                    expect(userRes.body).to.be.an('object');
+                    expect(userRes.body).to.include(testUser);
+                });
+            });
+    });
+
     it('should update a user', function () {
         return chai.request(appUrl)
             .get(endpoint)
