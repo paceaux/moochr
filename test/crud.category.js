@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = require('chai').expect;
-
+const appUrl = 'http://localhost:3000/api/v1';
+const endpoint = '/category/';
 chai.use(require('chai-http'));
 
 const testCategory = {
@@ -15,7 +16,7 @@ const testUpdatedCategory = {
     "parent": "3"
 };
 
-describe('API endpoint /category', function (){
+describe(`API endpoint ${endpoint}`, function (){
     this.timeout(5000);
 
     before(function () {
@@ -27,8 +28,8 @@ describe('API endpoint /category', function (){
     });
 
     it('should return some categories', function () {
-        return chai.request('http://localhost:3000/api/v1')
-            .get('/category')
+        return chai.request(appUrl)
+            .get(endpoint)
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
@@ -37,8 +38,8 @@ describe('API endpoint /category', function (){
     });
 
     it('should add a category', function () {
-        return chai.request('http://localhost:3000/api/v1')
-            .post('/category')
+        return chai.request(appUrl)
+            .post(endpoint)
             .send(testCategory)
             .then(function(res) {
                 expect(res).to.have.status(200);
@@ -48,13 +49,13 @@ describe('API endpoint /category', function (){
     });
 
     it('should update a category', function () {
-        return chai.request('http://localhost:3000/api/v1')
-            .get('/category/')
+        return chai.request(appUrl)
+            .get(endpoint)
             .then(function(res) {
                 const lastItem = res.body[res.body.length - 1];
 
-                return chai.request('http://localhost:3000/api/v1')
-                .put('/category/' + lastItem.id)
+                return chai.request(appUrl)
+                .put(endpoint + lastItem.id)
                 .send(testUpdatedCategory)
                 .then(function(updateRes) {
                     expect(updateRes).to.have.status(200);
@@ -67,13 +68,13 @@ describe('API endpoint /category', function (){
     });
 
     it('should delete a category', function () {
-        return chai.request('http://localhost:3000/api/v1')
-            .get('/category/')
+        return chai.request(appUrl)
+            .get(endpoint)
             .then(function(res) {
                 const lastItem = res.body[res.body.length - 1];
 
-                return chai.request('http://localhost:3000/api/v1')
-                .delete('/category/' + lastItem.id)
+                return chai.request(appUrl)
+                .delete(endpoint + lastItem.id)
                 .then(function(delRes) {
                     expect(delRes).to.have.status(200);
                 });
