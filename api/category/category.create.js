@@ -11,18 +11,13 @@ module.exports = function postCb (req, res, next) {
     const dataKeys = Object.keys(data).toString();
     const sqlData = Object.keys(data).map( key=>  typeof data[key] == 'string' ? `'${data[key]}'` : data[key]);
   
-    const query = `INSERT INTO categories(${dataKeys}) values(${sqlData.toString()})`;
-    console.log(query);
+    const query = `INSERT INTO categories(${dataKeys}) values(${sqlData.toString()}) RETURNING *`;
     // Get a Postgres client from the connection pool
     client.connect()
     .then(()=>{
       client.query(query)
       .then((queryRes) => {
-        client.query('SELECT * FROM categories ORDER BY id ASC')
-        .then((rowRes) => {
-          res.send(rowRes.rows);
-          client.end();
-        });
+        res.send(queryRes.rows[0]);
       })
       .catch(queryErr => {
         console.log(queryErr);
