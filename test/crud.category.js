@@ -3,8 +3,6 @@ const expect = require('chai').expect;
 
 chai.use(require('chai-http'));
 
-const app = require('../app.js');
-
 const testCategory = {
     name: "test name",
     slug: "test-slug",
