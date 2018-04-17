@@ -4,13 +4,15 @@ const crudOp = 'read';
 
 module.exports = function readCb(req, res, next) {
     const client = new Client(dbConfig);
-    const query = 'SELECT * FROM users ORDER BY id ASC';
-    
+    const userId = req.params.user_id;
+    const query = userId ? `SELECT * FROM users WHERE id=${userId}` : 'SELECT * FROM users ORDER BY id ASC';
+
         client.connect()
         .then(()=>{
             client.query(query)
             .then(queryRes=> {
-                res.send(queryRes.rows);
+                const result = userId ? queryRes.rows[0] : queryRes.rows;
+                res.send(result);
                 client.end();
             })
             .catch(queryErr=>{
