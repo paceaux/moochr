@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/api/v1/user', userApi.create );
 router.get('/api/v1/user', userApi.read);
+router.get('/api/v1/user/:user_id', userApi.read);
 router.put('/api/v1/user/:user_id', userApi.update);
 router.delete('/api/v1/user/:user_id', userApi.delete);
 
