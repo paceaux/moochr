@@ -7,7 +7,7 @@ chai.use(require('chai-http'));
 const testCategory = {
     name: "test name",
     slug: "test-slug",
-    parent: 3
+    parent: "3"
 };
 
 const testUpdatedCategory = {
@@ -45,6 +45,28 @@ describe(`API endpoint ${endpoint}`, function (){
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object').to.have.all.keys('id', 'name', 'slug', 'parent', 'timestamp');
+            });
+    });
+
+    it('should return one category if I request by id', function () {
+        return chai.request(appUrl)
+            .get(endpoint)
+            .then(function (res) {
+                const addedCategory = res.body.find(cat => {
+                    return (
+                        cat.name == testCategory.name &&
+                        cat.slug == testCategory.slug &&
+                        cat.parent == testCategory.parent
+                    );
+                });
+            return chai.request(appUrl)
+                .get(endpoint + addedCategory.id)
+                .then(function (catRes) {
+                    expect(catRes).to.have.status(200);
+                    expect(catRes).to.be.json;
+                    expect(catRes.body).to.be.an('object');
+                    expect(catRes.body).to.include(testCategory);
+                });
             });
     });
 
