@@ -7,7 +7,8 @@
     "postinstall": "node models/usersDB.js && node models/categories.js",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "syncmodels": "node models/syncModels.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
