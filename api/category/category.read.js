@@ -4,28 +4,26 @@ const sequelize = require('../sql.config');
 const Category = require('../../models/category.model');
 
 module.exports = function readCb(req, res, next) {
-    // const client = new Client(dbConfig);
     const catId = req.params.category_id;
-    console.log(catId);
-
         sequelize
         .authenticate()
         .then( ()=> {
             if (catId) {
-                console.log("there's a catId", catId);
                 Category
                 .findOne({
                     where: {
                         id: catId
                     }
                 })
-                .then(category => res.send(category));
+                .then(category => res.send(category))
+                .catch(err => res.status(500).send({error: err, crudOp}));
             } else {
                 Category
                 .findAll()
                 .then(categories => {
                     res.send(categories);
-                });
+                })
+                .catch(err => res.status(500).send({error: err, crudOp}));
             }
 
         })
