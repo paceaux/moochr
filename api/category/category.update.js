@@ -1,31 +1,33 @@
-const dbConfig = require('../../db.config');
-const {Client} = require('pg');
 const crudOp = 'update';
+const Sequelize = require('sequelize');
+const sequelize = require('../sql.config');
+const Category = require('../../models/category.model');
 
 module.exports = function updateCb(req, res, done) {
-    const client = new Client(dbConfig);
-    const data = req.body;
-    const id = req.params.category_id;
-    const dataKeys = Object.keys(data).filter(key=> key != 'id' || key != 'timestamp');
-    const setArg = dataKeys.map(key => `${key}='${data[key]}'`).toString();
-
-    client.connect()
-    .then(()=>{
-        client.query(`UPDATE categories SET ${setArg}  WHERE id=${id}`)
-        .then(() => {
-            client.query('SELECT * FROM categories ORDER BY id ASC')
-            .then((rowRes)=> {
-                res.send(rowRes.rows);
-                client.end();
-            });
+    sequelize
+        .authenticate()
+        .then( ()=> {
+            Category
+                .findOne({
+                    where: {
+                        id: req.params.category_id
+                    }
+                })
+                .then(result => {
+                    result
+                        .update(req.body)
+                        .then(updateResult => {
+                            res.send(updateResult);
+                        })
+                        .catch(err => {
+                            res.status(500).send({error: err, crudOp});
+                        })
+                })
+                .catch(err => {
+                    res.status(404).send({error: err,crudOp: 'findOne'});
+                });
         })
-        .catch(queryErr => {
-            res.status(500).send({error:queryErr, crudOp});
-            client.end();
+        .catch(err => {
+            res.status(500).send({error: err, crudOp: 'connection'});
         });
-    })
-    .catch(err => {
-        res.status(500).send({error:err, crudOp: 'connection'});
-        client.end();
-    });
 };
