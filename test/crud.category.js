@@ -81,10 +81,10 @@ describe(`API endpoint ${endpoint}`, function (){
                 .send(testUpdatedCategory)
                 .then(function(updateRes) {
                     expect(updateRes).to.have.status(200);
-                    expect(updateRes.body).to.be.an('array');
-                    const lastItem = updateRes.body[updateRes.body.length - 1];
+                    expect(updateRes.body).to.be.an('object');
                     expect(updateRes).to.be.json;
-                    expect(lastItem).to.include(testUpdatedCategory);
+                    expect(updateRes.body).to.have.property('name', testUpdatedCategory.name);
+                    expect(updateRes.body).to.have.property('slug', testUpdatedCategory.slug);
                 });
             });
     });
