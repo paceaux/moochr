@@ -19,16 +19,13 @@ const category = sequelize.define('category', {
         parent: {
             type: Sequelize.STRING,
             allowNull: true
-        },
-        timestamp: {
-            type: Sequelize.DATE,
         }
     },
     {
         tableName: 'categories',
         underscored: true,
-        updatedAt: false,
-        createdAt: false
+        updatedAt: 'last_updated',
+        createdAt: 'timestamp'
     }
 );
 
