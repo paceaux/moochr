@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "supervisor ./bin/www",
-    "postinstall": "node models/usersDB.js && node models/categories.js",
+    "postinstall": "node models/syncModels.js",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
-    "test": "mocha --recursive",
-    "syncmodels": "node models/syncModels.js"
+    "test": "mocha --recursive"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
