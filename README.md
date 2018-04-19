@@ -1,21 +1,22 @@
 # Overview
-Postgres + node stuff inspired/based-on [this tutorial](http://mherman.org/blog/2015/02/12/postgresql-and-nodejs/). Written in ES6 and promisified. 
+A personal inventory app. useful for keeping track of your stuff, and who you loaned it to. 
 
-Architecture based on the [node-postgres-todo](https://github.com/mjhea0/node-postgres-todo)  which is an [express generator](https://expressjs.com/en/starter/generator.html) package.
-
-Vue bits based on [another example](https://codesandbox.io/s/o29j95wx9).
-## Architecture
+## Prerequisites
 
 * [PostgreSQL](https://www.postgresql.org/download/)
-* Node
-* Express
-* Vue
-* Vuex
-* Webpack
+* [Node](https://nodejs.org/en/)
 
+## Stack
+
+* [Express](https://expressjs.com/)
+* [sequelize](http://docs.sequelizejs.com/)
+* [Vue](https://vuejs.org/)
+* [Vuex](https://vuex.vuejs.org/en/intro.html)
+* [Webpack](https://webpack.js.org/)
 ## Startup
-1. Run `npm install`
-2. Run `npm start` (Starts the app)
-3. Run `npm run dev` watches web app files and rebuilds them.
+0. Look in the `db.config.js` and either make a postgres db with those params, or change that file to suit your db
+1. `npm install` (a postinstall command runs after this that sets up the tables)
+2. `npm start` (Starts the app)
+3. `npm run dev` (watches web app files and rebuilds them).
+4. `npm run test` to test the API. App must be running first
 
-There's a `postinstall` command that creates the DB tables for you. It runs when you run `npm install`. You'll want to create a Todo database.
