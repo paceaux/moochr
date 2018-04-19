@@ -9,7 +9,7 @@ const testUser = {
 	firstname: "Test",
 	lastname: "Taco",
 	email: "test@whatevs.com",
-	phone: "888 464 5555",
+	phone: "8884645555",
 	street1: "street 1",
 	street2: "street 2",
 	city: "somewhere",
@@ -21,7 +21,7 @@ const testUpdatedUser = {
 	firstname: "Update Test",
 	lastname: "Taco",
 	email: "test@whatevs.com",
-	phone: "777 464 6666",
+	phone: "7774646666",
 	street1: "street 1",
 	street2: "street 2",
 	city: "somewhere else",
@@ -58,6 +58,7 @@ describe(`API endpoint ${endpoint}` , function (){
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object').to.have.any.keys('id', 'firstname', 'lastname', 'email', 'city');
+                console.log(res);
             });
     });
 
@@ -106,11 +107,12 @@ describe(`API endpoint ${endpoint}` , function (){
                     .send(testUpdatedUser)
                     .then(function(updateRes) {
                         expect(updateRes).to.have.status(200);
-                        expect(updateRes.body).to.be.an('array');
+                        expect(updateRes.body).to.be.an('object');
                         expect(updateRes).to.be.json;
-
-                        const updatedUser = updateRes.body.find(usr => usr.id == addedUser.id);
-                        expect(updatedUser).to.include(testUpdatedUser);
+                        expect(updateRes.body).to.have.property('firstname', testUpdatedUser.firstname);
+                        expect(updateRes.body).to.have.property('phone', testUpdatedUser.phone);
+                        expect(updateRes.body).to.have.property('city', testUpdatedUser.city);
+                        expect(updateRes.body).to.have.property('state', testUpdatedUser.state);
                     });
             });
     });
