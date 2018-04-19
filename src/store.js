@@ -9,7 +9,13 @@ function sendToApi (url, type, data, shouldAjax =  isServerSync) {
         if (!shouldAjax) resolve(data);
         var xhr = new XMLHttpRequest();
         xhr.open(type, url);
-        xhr.onload = ()=> resolve(JSON.parse(xhr.responseText));
+        xhr.onload = ()=> {
+            if (xhr.status == 200) {
+                resolve(JSON.parse(xhr.responseText));
+            } else {
+                reject(JSON.parse(xhr.responseText));
+            }
+        };
         xhr.onerror = () => reject(xhr.statusText);
         if (data) {
             xhr.setRequestHeader('Content-Type', 'application/json');
@@ -55,7 +61,7 @@ export default new Vuex.Store({
             state.categories.splice(categoryIndex,1);
         },
         INITSTORE(state) {
-            
+
         }
     },
     actions: {
@@ -91,17 +97,15 @@ export default new Vuex.Store({
         addCategory({commit}, category) {
             sendToApi(apiGetCategories, 'POST', category, this.state.isServerSync)
             .then(res => {
-                console.info(res);
                 this.commit('ADDCATEGORY', category);
             })
             .catch(err=> {
-                console.warn(err);
+                console.warn('error',err);
             });
         },
         updateCategory({commit}, category) {
             sendToApi(`${apiGetCategories}/${category.id}`, 'PUT', category, this.state.isServerSync)
             .then(res => {
-                console.info(res);
                 commit('UPDATECATEGORY', category);
             })
             .catch(err => {
