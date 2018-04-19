@@ -1,27 +1,34 @@
-const dbConfig = require('../../db.config');
-const {Client, Query} = require('pg');
 const crudOp = 'read';
+const Sequelize = require('sequelize');
+const sequelize = require('../sql.config');
+const User = require('../../models/user.model');
 
 module.exports = function readCb(req, res, next) {
-    const client = new Client(dbConfig);
     const userId = req.params.user_id;
-    const query = userId ? `SELECT * FROM users WHERE id=${userId}` : 'SELECT * FROM users ORDER BY id ASC';
+        sequelize
+        .authenticate()
+        .then( ()=> {
+            if (userId) {
+                User
+                .findOne({
+                    where: {
+                        id: userId
+                    }
+                })
+                .then(user => res.send(user))
+                .catch(err => res.status(500).send({error: err, crudOp}));
+            } else {
+                User
+                .findAll()
+                .then(users => {
+                    res.send(users);
+                })
+                .catch(err => res.status(500).send({error: err, crudOp}));
+            }
 
-        client.connect()
-        .then(()=>{
-            client.query(query)
-            .then(queryRes=> {
-                const result = userId ? queryRes.rows[0] : queryRes.rows;
-                res.send(result);
-                client.end();
-            })
-            .catch(queryErr=>{
-                res.status(500).send({error: queryErr,crudOp});
-                client.end();
-            });
         })
-        .catch(err => {
-            res.status(500).send({error:err,crudOp: 'connection'});
-            client.end();
+        .catch(err=> {
+            console.error('bad connect');
+            res.status(500).send({error:err, crudOp: 'connection'});
         });
-    };
+ };
