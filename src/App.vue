@@ -1,5 +1,5 @@
 <template>
-	<div id="TodoApp">
+	<div id="MoochrApp">
 		<Intro/>
 		<router-view></router-view>
 	</div>
@@ -12,7 +12,6 @@ import CategoryTable from './components/CategoryTable.vue';
 export default {
 	components: {
         Intro,
-        // TodoList,
 		UserTable,
 		CategoryTable
 	}

@@ -23,24 +23,6 @@ new Vue({
     },
     mount() {
 
-        // this.getTodos().then(todos => {
-        //     todos.items.forEach(todo => {
-        //         this.state.todos.push(todo);
-        //     });
-        // });
-
-        // this.getUsers().then(users => {
-        //     users.forEach(user => {
-        //         this.state.users.push(user);
-        //     });
-        // });
-
-        // this.getCategories().then(categories => {
-        //     categories.forEach(category => {
-        //         this.state.categories.push(category);
-        //     });
-        // });
-
     },
     destroyed() {
 
