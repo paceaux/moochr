@@ -1,6 +1,6 @@
 const crudOp = 'update';
 const Sequelize = require('sequelize');
-const sequelize = require('../sql.config');
+const sequelize = require('../../db.config');
 const User = require('../../models/user.model');
 
 module.exports = function updateCb(req, res, done) {

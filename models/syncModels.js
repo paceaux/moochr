@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../api/sql.config');
+const sequelize = require('../db.config');
 
 const Category = require('./category.model');
 const User = require('./user.model');

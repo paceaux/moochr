@@ -1,6 +1,6 @@
 const crudOp = 'read';
 const Sequelize = require('sequelize');
-const sequelize = require('../sql.config');
+const sequelize = require('../../db.config');
 const Category = require('../../models/category.model');
 
 module.exports = function readCb(req, res, next) {

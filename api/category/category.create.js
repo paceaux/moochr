@@ -1,6 +1,6 @@
 const crudOp = 'create';
 const Sequelize = require('sequelize');
-const sequelize = require('../sql.config');
+const sequelize = require('../../db.config');
 const Category = require('../../models/category.model');
 
 

@@ -1,6 +1,6 @@
 const crudOp = 'create';
 const Sequelize = require('sequelize');
-const sequelize = require('../sql.config');
+const sequelize = require('../../db.config');
 const User = require('../../models/user.model');
 
 module.exports = function postCb (req, res, next) {

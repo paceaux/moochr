@@ -1,10 +1,18 @@
-module.exports = {
+const Sequelize = require('sequelize');
+
+const dbConfig = {
     user: 'todo',
     host: 'localhost',
     database: 'todo',
     password: 'todo',
     port: 5432
   };
+
+  module.exports = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
+      dialect: 'postgres',
+      host: dbConfig.host,
+      port: dbConfig.port
+  });
 /* Create Database
   Command:  CREATE DATABASE todo;
   Validate: \l
