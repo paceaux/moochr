@@ -9,7 +9,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'todo.bundle.js'
+        filename: 'moochr.bundle.js'
     },
     resolve: {
         alias: {
