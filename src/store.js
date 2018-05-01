@@ -97,7 +97,7 @@ export default new Vuex.Store({
         addCategory({commit}, category) {
             sendToApi(apiGetCategories, 'POST', category, this.state.isServerSync)
             .then(res => {
-                this.commit('ADDCATEGORY', category);
+                this.commit('ADDCATEGORY', res);
             })
             .catch(err=> {
                 console.warn('error',err);
