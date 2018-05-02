@@ -18,23 +18,23 @@
             <input :disabled="!isEditable" v-model="item.is_loanable" type="checkbox" />
         </td>
         <td class="itemTable__cell" headers="owner">
-            <span v-show="!isEditable">{{userName(item.owner)}}</span>
+            <UserCard v-show="!isEditable" :user="getUserById(item.owner)" :hideAddress="true" :hideContact="true"></UserCard>
                 <select v-show="isEditable" v-model="item.owner">
                     <option>Pick an owner</option>
                     <option v-for="owner in owners"
                     :key="owner.id"
                     :owner="owner"
-                    :value="owner.id">{{userName(item.owner)}}</option>
+                    :value="owner.id">{{userName(owner.id)}}</option>
                 </select>
         </td>
         <td class="itemTable__cell" headers="borrower">
-            <span v-show="!isEditable">{{userName(item.borrower)}}</span>
+            <UserCard v-show="!isEditable" :user="getUserById(item.borrower)" :hideAddress="true" :hideContact="true"></UserCard>
                 <select v-show="isEditable" v-model="item.borrower">
                     <option value=null>Pick a borrower</option>
                     <option v-for="borrower in borrowers"
                     :key="borrower.id"
                     :borrower="borrower"
-                    :value="borrower.id">{{userName(item.borrower)}}</option>
+                    :value="borrower.id">{{userName(borrower.id)}}</option>
                 </select>
         </td>
         <td class="itemTable__cell" headers="image">
@@ -65,8 +65,12 @@
     </tr>
 </template>
 <script>
+import UserCard from './UserCard.vue';
 const isEditable = false;
 export default {
+    components: {
+        UserCard
+    },
     props: {
         item: {
             type: Object,
@@ -122,6 +126,11 @@ export default {
             const category =  this.$store.state.categories.find(category => category.id == id);
 
             return category ? category.name : '';
+        },
+        getUserById(id) {
+            if (!id) return '';
+            
+            return this.$store.state.users.find(user => user.id == id);
         },
         userName(id) {
             if (!id) return '';
