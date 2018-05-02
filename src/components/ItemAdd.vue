@@ -27,6 +27,12 @@
                 <span class="itemCreate__fieldLabel">Serial Number</span>
                 <input id="serial_number" v-model="item.serial_number" type="text" />
             </label>
+
+            <label for="image" class="itemCreate__field itemCreate__field--image">
+                <span class="itemCreate__fieldLabel">Image</span>
+                <input id="file"  type="file" accept="image/*" @change="onFileChange"/>
+                <img v-if="itemPreviewImage" :src="itemPreviewImage" />
+            </label>
         </fieldset>
 
         <fieldset class="itemCreate__fieldset itemCreate__fieldset--owner">
@@ -145,7 +151,8 @@ export default {
                 time_return: null,
                 value: 0.0,
 
-            }
+            },
+            itemPreviewImage: ''
         };
     },
     props : {
@@ -180,6 +187,28 @@ export default {
             }
             };
             this.$router.push('/itemList');
+        },
+        onFileChange(evt) {
+            const files = evt.target.files || evt.dataTransfer.files;
+
+            if (!files.length) return;
+
+            this.createImage(files[0]);
+
+        },
+        createImage(file) {
+            const image = new Image();
+            const reader = new FileReader();
+
+            reader.onload = evt => {
+                this.itemPreviewImage = evt.target.result;
+                this.item.image = evt.target.result;
+            }
+
+            reader.readAsDataURL(file);
+        },
+        removeImage () {
+            this.itemPreviewImage = '';
         }
     }
 }
