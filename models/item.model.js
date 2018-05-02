@@ -73,7 +73,7 @@ const Item = sequelize.define('item', {
 );
 
 Item.belongsToMany(Category, {
-    through: 'CategorizedItems'
+    through: 'CategoryItem'
 });
 
 Item.belongsTo(User);
