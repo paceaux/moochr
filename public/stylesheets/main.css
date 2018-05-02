@@ -118,3 +118,109 @@
     font-size: 1.25rem;
     padding: .618em;
 }
+
+.itemTable {
+    width: 100vw;
+}
+
+.itemTable__head {
+    background-color: #dcdcdc;
+}
+.itemTable__headingHeaderRow th{
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.itemTable__heading {
+    font-size: 1em;
+}
+
+.itemTable__headingHeader {
+    text-align: center;
+}
+
+.itemTable__headingHeader--controls {
+    width: 4em;
+}
+
+.itemTable__body {
+    font-size: .75em;
+}
+
+.itemTable__cell {
+    padding: .25em;
+}
+
+.itemTable__cell input {
+    width: 100%;
+}
+
+.itemTable__cell input[type="checkbox"] {
+    width: 1em;
+}
+
+.itemTable__cell input[type="datetime-local"] {
+    width: 22ch;
+}
+
+.itemCreate {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
+    grid-template-areas: "about about" "owner loan" "footer footer"
+}
+
+.itemCreate__fieldset {
+    border: none;
+    background-color: rgb(245,245,245);
+}
+
+.itemCreate__fieldset--itemInfo {
+    grid-area: about;
+
+}
+
+.itemCreate__fieldset--itemInfo .itemCreate__field {
+    min-height: 3em;
+}
+
+.itemCreate__field--name {  
+    
+}
+
+.itemCreate__field--category {
+}
+
+itemCreate__field--model {
+}
+
+.itemCreate__field--serial {
+}
+
+.itemCreate__fieldset--borrow {
+    grid-area: loan;
+}
+
+.itemCreate__fieldset--controls {
+    grid-area: footer;
+}
+
+.itemCreate__fieldsetLegend {
+    text-transform: capitalize;
+}
+.itemCreate__field {
+    display: inline-block;
+    width: 49%;
+}
+
+.itemCreate__fieldLabel {
+    text-transform: capitalize;
+    display: inline-block;
+    width: 5em;
+}
+
+.itemCreate__submit {
+    font-size: 1.25rem;
+    padding: .618em;
+}
