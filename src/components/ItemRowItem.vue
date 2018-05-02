@@ -124,7 +124,6 @@ export default {
             return category ? category.name : '';
         },
         userName(id) {
-            console.log(id);
             if (!id) return '';
             const user = this.$store.state.users.find(user => user.id == id);
             const first = user && user.firstname ? user.firstname : '';
