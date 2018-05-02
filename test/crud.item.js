@@ -26,11 +26,10 @@ const testUpdatedItem = {
 };
 
 const testLoanedItem = {
-    lender: '4',
     borrower: '5',
     time_loaned: loanTime,
-    time_due: returnTime.setMonth(loanTime.getMonth() + 1),
-    time_return: returnTime.setMonth(loanTime.getMonth() + 2),
+    time_due: new Date(returnTime.setMonth(loanTime.getMonth() + 1)),
+    time_return: new Date(returnTime.setMonth(loanTime.getMonth() + 2)),
 };
 
 describe(`API endpoint ${endpoint}` , function (){
@@ -59,6 +58,7 @@ describe(`API endpoint ${endpoint}` , function (){
             .post(endpoint)
             .send(testItem)
             .then(function(res) {
+
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object').to.have.any.keys('id', 'name', 'owner', 'model_number', 'serial_number');
@@ -95,11 +95,11 @@ describe(`API endpoint ${endpoint}` , function (){
             .then(function (res) {
                 const addedItem = res.body.find(item => {
                     return (
-                        item.name == testUpdatedItem.name &&
-                        item.owner == testUpdatedItem.owner &&
-                        item.model_number == testUpdatedItem.model_number &&
-                        item.serial_number == testUpdatedItem.serial_number &&
-                        item.value == testUpdatedItem.value
+                        item.name == testItem.name &&
+                        item.owner == testItem.owner &&
+                        item.model_number == testItem.model_number &&
+                        item.serial_number == testItem.serial_number &&
+                        item.value == testItem.value
                     );
                 });
 
@@ -119,7 +119,7 @@ describe(`API endpoint ${endpoint}` , function (){
             });
     });
 
-    it('should loan an item', function () {
+    it('should loan an item and return good properties', function () {
         return chai.request(appUrl)
             .get(endpoint)
             .then(function (res) {
@@ -129,7 +129,8 @@ describe(`API endpoint ${endpoint}` , function (){
                         item.owner == testItem.owner &&
                         item.model_number == testUpdatedItem.model_number &&
                         item.serial_number == testUpdatedItem.serial_number &&
-                        item.value == testUpdatedItem.value
+                        item.value == testUpdatedItem.value &&
+                        item.is_loanable == testUpdatedItem.is_loanable
                     );
                 });
 
@@ -141,16 +142,43 @@ describe(`API endpoint ${endpoint}` , function (){
                         expect(updateRes).to.have.status(200);
                         expect(result).to.be.an('object');
                         expect(updateRes).to.be.json;
-                        expect(result).to.have.property('lender', testLoanedItem.lender);
                         expect(result).to.have.property('borrower', testLoanedItem.borrower);
-                        expect(result).to.have.property('time_loaned', testLoanedItem.time_loaned);
-                        expect(result).to.have.property('time_due', testLoanedItem.time_due);
-                        expect(result).to.have.property('time_return', testLoanedItem.time_return);
-                        expect(result).to.include({lender: testLoanedItem.lender});
-                        expect(result).to.include({time_loaned: testLoanedItem.time_loaned});
-                        expect(result).to.include({time_due: testLoanedItem.time_due});
-                        expect(result).to.include({time_return: testLoanedItem.time_return});
+                        expect(result).to.have.property('time_loaned');
+                        expect(result).to.have.property('time_due');
+                        expect(result).to.have.property('time_return');
+                    });
+            });
+    });
 
+    it('should loan an item and return good time values', function () {
+        return chai.request(appUrl)
+            .get(endpoint)
+            .then(function (res) {
+                const addedItem = res.body.find(item => {
+                    return (
+                        item.name == testItem.name &&
+                        item.owner == testItem.owner &&
+                        item.model_number == testUpdatedItem.model_number &&
+                        item.serial_number == testUpdatedItem.serial_number &&
+                        item.value == testUpdatedItem.value &&
+                        item.is_loanable == testUpdatedItem.is_loanable
+                    );
+                });
+
+                return chai.request(appUrl)
+                    .put(endpoint + addedItem.id)
+                    .send(testLoanedItem)
+                    .then(function(updateRes) {
+                        const result = updateRes.body;
+                        const timeLoaned = new Date(result.time_loaned);
+                        const timeReturn = new Date(result.time_return);
+                        const timeDue = new Date(result.time_due);
+                        expect(updateRes).to.have.status(200);
+                        expect(result).to.be.an('object');
+                        expect(updateRes).to.be.json;
+                        expect(timeLoaned.toISOString()).to.equal(testLoanedItem.time_loaned.toISOString());
+                        expect(timeReturn.toISOString()).to.equal(testLoanedItem.time_return.toISOString());
+                        expect(timeDue.toISOString()).to.equal(testLoanedItem.time_due.toISOString());
                     });
             });
     });
@@ -163,13 +191,9 @@ describe(`API endpoint ${endpoint}` , function (){
                     return (
                         item.name == testItem.name &&
                         item.owner == testItem.owner &&
-                        item.lender == test.lender &&
-                        item.borrower == testLoanedItem.borrower &&
-                        item.time_loaned == testLoanedItem.time_loaned
-
+                        item.borrower == testLoanedItem.borrower
                     );
                 });
-
                 return chai.request(appUrl)
                 .delete(endpoint + lastItem.id)
                 .then(function(delRes) {
