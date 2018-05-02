@@ -117,7 +117,7 @@ export default new Vuex.Store({
             });
         },
         updateItem({commit}, item) {
-            sendToApi(`${apiGetUsers}/${item.id}`, 'PUT', item, this.state.isServerSync)
+            sendToApi(`${apiGetItems}/${item.id}`, 'PUT', item, this.state.isServerSync)
             .then(res => {
                 console.info(res);
                 commit('UPDATEITEM', item);
