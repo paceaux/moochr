@@ -167,7 +167,7 @@
     grid-column-gap: 5px;
     grid-row-gap: 5px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows:1fr 1fr 1fr;
+    grid-template-rows:8rem 14rem 1fr;
     grid-template-areas: "about about" "owner loan" "footer footer"
 }
 
@@ -184,18 +184,10 @@
 .itemCreate__fieldset--itemInfo .itemCreate__field {
     min-height: 3em;
 }
-
-.itemCreate__field--name {  
-    
-}
-
-.itemCreate__field--category {
-}
-
-itemCreate__field--model {
-}
-
-.itemCreate__field--serial {
+.itemCreate__fieldOutput {
+    display: inline-block;
+    width: 100%;
+    min-height: 3.5rem;
 }
 
 .itemCreate__fieldset--borrow {
