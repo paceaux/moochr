@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 const apiGetUsers = 'http://localhost:3000/api/v1/user';
 const apiGetCategories = 'http://localhost:3000/api/v1/category';
+const apiGetItems = 'http://localhost:3000/api/v1/item';
 const isServerSync = true;
 
 function sendToApi (url, type, data, shouldAjax =  isServerSync) {
@@ -33,10 +34,12 @@ export default new Vuex.Store({
         todos: [],
         users: [],
         categories: [],
+        items: [],
         isServerSync
     },
     getters: {
         userIndexById: state => (id) => state.users.findIndex(user => user.id == id),
+        itemIndexById: state => (id) => state.items.findIndex(item => item.id == id),
         categoryIndexById: state => (id) => state.categories.findIndex(category => category.id == id)
     },
     mutations: {
@@ -49,6 +52,16 @@ export default new Vuex.Store({
         },
         DELETEUSER(state,userIndex) {
             state.users.splice(userIndex,1);
+        },
+        ADDITEM(state, item) {
+            state.items.push(item);
+        },
+        UPDATEITEM(state, item) {
+            const itemIndex = this.getters.itemIndexById(item.id);
+            Vue.set(state.items, itemIndex, item);
+        },
+        DELETEITEM(state, itemIndex) {
+            state.items.splice(itemIndex, 1);
         },
         ADDCATEGORY(state,category) {
             state.categories.push(category);
@@ -89,6 +102,35 @@ export default new Vuex.Store({
             .then(res => {
                 const userIndex = this.getters.userIndexById(userId);
                 commit('DELETEUSER', userIndex);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
+        },
+        addItem({commit}, item) {
+            sendToApi(apiGetItems, 'POST', item, this.state.isServerSync)
+            .then(res => {
+                commit('ADDITEM', res);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
+        },
+        updateItem({commit}, item) {
+            sendToApi(`${apiGetUsers}/${item.id}`, 'PUT', item, this.state.isServerSync)
+            .then(res => {
+                console.info(res);
+                commit('UPDATEITEM', item);
+            })
+            .catch(err => {
+                console.warn(err);
+            });
+        },
+        deleteItem({commit, store}, itemId) {
+            sendToApi(`${apiGetUsers}/${itemId}`,'DELETE', undefined, this.state.isServerSync)
+            .then(res => {
+                const itemIndex = this.getters.itemIndexById(itemId);
+                commit('DELETEITEM', itemIndex);
             })
             .catch(err => {
                 console.warn(err);
