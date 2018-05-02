@@ -10,7 +10,7 @@
         <td class="itemTable__cell" headers="owner">
             <span v-show="!isEditable">{{item.owner}}</span>
                 <select v-show="isEditable" v-model="item.owner">
-                    <option>Pick a Parent</option>
+                    <option>Pick an owner</option>
                     <option v-for="owner in owners"
                     :key="owner.id"
                     :owner="owner"
@@ -18,6 +18,14 @@
                 </select>
         </td>
         <td class="itemTable__cell" headers="borrower">
+            <span v-show="!isEditable">{{item.borrower}}</span>
+                <select v-show="isEditable" v-model="item.borrower">
+                    <option>Pick a borrower</option>
+                    <option v-for="borrower in borrowers"
+                    :key="borrower.id"
+                    :owner="borrower"
+                    :value="borrower.id">{{borrower.firstname}}</option>
+                </select>
         </td>
         <td class="itemTable__cell" headers="image">
         </td>
@@ -78,9 +86,11 @@ export default {
         borrowers() {
             const users = this.$store.state.users;
             let borrowers = users;
-            if (this.owner) {
+
+            if (this.item.owner) {
+
                 borrowers = users.filter(user => {
-                    user.id != this.owner.id;
+                    return user.id != this.item.owner;
                 });
             }
             return borrowers;

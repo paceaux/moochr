@@ -84,9 +84,11 @@ export default {
         borrowers() {
             const users = this.$store.state.users;
             let borrowers = users;
-            if (this.owner) {
+
+            if (this.item.owner) {
+
                 borrowers = users.filter(user => {
-                    user.id != this.owner.id;
+                    return user.id != this.item.owner;
                 });
             }
             return borrowers;
