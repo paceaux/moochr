@@ -127,7 +127,7 @@ export default new Vuex.Store({
             });
         },
         deleteItem({commit, store}, itemId) {
-            sendToApi(`${apiGetUsers}/${itemId}`,'DELETE', undefined, this.state.isServerSync)
+            sendToApi(`${apiGetItems}/${itemId}`,'DELETE', undefined, this.state.isServerSync)
             .then(res => {
                 const itemIndex = this.getters.itemIndexById(itemId);
                 commit('DELETEITEM', itemIndex);
