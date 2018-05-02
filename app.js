@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const users = require('./api/user/index');
 const categoryCrud = require('./api/category/index');
+const itemCrud = require('./api/item/index');
 
 
 // uncomment after placing your favicon in /public
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', users);
 app.use('/', categoryCrud);
+app.use('/', itemCrud);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
