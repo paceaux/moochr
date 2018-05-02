@@ -19,7 +19,6 @@ const testItem = {
 
 const testUpdatedItem = {
     name: "circular saw",
-    owner: "4",
     model_number: "53234 bb12",
     serial_number: "23454321",
     value: 75.89,
