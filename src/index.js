@@ -20,6 +20,7 @@ new Vue({
     beforeCreate() {
         this.$store.dispatch('requestUsers');
         this.$store.dispatch('requestCategories');
+        this.$store.dispatch('requestItems');
     },
     mount() {
 
