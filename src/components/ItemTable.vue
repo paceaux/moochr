@@ -5,18 +5,18 @@
             <thead class="itemTable__head">
                 <tr class="itemTable__headingHeaderRow">
                     <th class="itemTable__heading" id="id">id</th>
-                    <th class="itemTable__heading" id="name">name</th>
-                    <th class="itemTable__heading" id="category">category</th>
-                    <th class="itemTable__heading" id="is_loanable">is_loanable</th>
-                    <th class="itemTable__heading" id="owner">owner</th>
-                    <th class="itemTable__heading" id="borrower">borrower</th>
-                    <th class="itemTable__heading" id="image">image</th>
-                    <th class="itemTable__heading" id="model_number">model_number</th>
-                    <th class="itemTable__heading" id="serial_number">serial_number</th>
-                    <th class="itemTable__heading" id="time_due">time_due</th>
-                    <th class="itemTable__heading" id="time_loaned">time_loaned</th>
-                    <th class="itemTable__heading" id="time_return">time_return</th>
-                    <th class="itemTable__heading" id="value">serial_number</th>
+                    <th class="itemTable__heading" id="name">Name</th>
+                    <th class="itemTable__heading" id="category">Category</th>
+                    <th class="itemTable__heading" id="is_loanable">Loanable?</th>
+                    <th class="itemTable__heading" id="owner">Owner</th>
+                    <th class="itemTable__heading" id="borrower">Borrower</th>
+                    <th class="itemTable__heading" id="image">Image</th>
+                    <th class="itemTable__heading" id="model_number">Model</th>
+                    <th class="itemTable__heading" id="serial_number">Serial</th>
+                    <th class="itemTable__heading" id="time_due">Due By</th>
+                    <th class="itemTable__heading" id="time_loaned">Loaned</th>
+                    <th class="itemTable__heading" id="time_return">Returned On</th>
+                    <th class="itemTable__heading" id="value">Value</th>
                 </tr>
             </thead>
             <tbody class="itemTable__body" v-if="items.length">
