@@ -39,15 +39,15 @@ const Item = sequelize.define('item', {
             allowNull: true
         },
         time_due: {
-            type: Sequelize.TIME,
+            type: Sequelize.DATE,
             allowNull: true
         },
         time_loaned: {
-            type: Sequelize.TIME,
+            type: Sequelize.DATE,
             allowNull: true,
         },
         time_return: {
-            type: Sequelize.TIME,
+            type: Sequelize.DATE,
             allowNull: true
         },
         value: {
