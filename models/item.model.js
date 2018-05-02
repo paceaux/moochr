@@ -14,13 +14,6 @@ const Item = sequelize.define('item', {
             allowNull: false,
             defaultValue: false
         },
-        lender: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            defaultValue() {
-                return this.owner;
-            }
-        },
         name: {
             type: Sequelize.TEXT,
             allowNull: false,
