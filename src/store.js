@@ -39,10 +39,8 @@ export default new Vuex.Store({
     },
     getters: {
         userIndexById: state => (id) => state.users.findIndex(user => user.id == id),
-        userById: state => (id) => state.users.find(user => user.id == id),
         itemIndexById: state => (id) => state.items.findIndex(item => item.id == id),
         categoryIndexById: state => (id) => state.categories.findIndex(category => category.id == id),
-        categoryById: state => (id) => state.categories.find(id => category.id == id)
     },
     mutations: {
         ADDUSER(state,user) {
