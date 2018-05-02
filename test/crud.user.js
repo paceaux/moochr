@@ -58,7 +58,6 @@ describe(`API endpoint ${endpoint}` , function (){
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object').to.have.any.keys('id', 'firstname', 'lastname', 'email', 'city');
-                console.log(res);
             });
     });
 
