@@ -6,6 +6,7 @@
                 <tr class="itemTable__headingHeaderRow">
                     <th class="itemTable__heading" id="id">id</th>
                     <th class="itemTable__heading" id="name">name</th>
+                    <th class="itemTable__heading" id="category">category</th>
                     <th class="itemTable__heading" id="is_loanable">is_loanable</th>
                     <th class="itemTable__heading" id="owner">owner</th>
                     <th class="itemTable__heading" id="borrower">borrower</th>

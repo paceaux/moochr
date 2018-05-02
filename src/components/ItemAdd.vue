@@ -7,6 +7,17 @@
                 <input id="name" v-model="item.name" type="text"/>
             </label>
 
+            <label for="category" class="itemCreate__field">
+                <span class="itemCreate__fieldLabel">category</span>
+                <select id="owner" v-model="item.category">
+                    <option>Pick a Category</option>
+                    <option v-for="category in categories"
+                    :key="category.id"
+                    :category="category"
+                    :value="category.id">{{category.name}}</option>
+                </select>
+            </label>
+
             <label for="is_loanable" class="itemCreate__field">
                 <span class="itemCreate__fieldLabel">isLoanable</span>
                 <input id="is_loanable" v-model="item.is_loanable" type="checkbox" />
@@ -92,6 +103,9 @@ export default {
                 });
             }
             return borrowers;
+        },
+        categories() {
+            return this.$store.state.categories;
         },
         dateMin() {
             const now = new Date();
