@@ -44,11 +44,15 @@
 
             <label for="is_loanable" class="itemCreate__field itemCreate__field--loanable">
                 <span class="itemCreate__fieldLabel">isLoanable</span>
-                <input id="is_loanable" v-model="item.is_loanable" type="checkbox" />
+                <input id="is_loanable" v-model="item.is_loanable" type="checkbox"  />
             </label>
+
+            <output class="itemCreate__fieldOutput itemCreate__fieldOutput--owner" >
+                <UserCard v-if="item.owner" :user="getOwner(item.owner)" :hideAddress="true"></UserCard>
+            </output>
         </fieldset>
 
-        <fieldset class="itemCreate__fieldset itemCreate__fieldset--borrow">
+        <fieldset class="itemCreate__fieldset itemCreate__fieldset--borrow" v-if="isShowingBorrow">
             <legend>Borrowing the Item </legend>
 
             <label for="borrower" class="itemCreate__field">
@@ -58,9 +62,13 @@
                     <option v-for="borrower in borrowers"
                     :key="borrower.id"
                     :borrower="borrower"
-                    :value="borrower.id">{{borrower.firstname}}</option>
+                    :value="borrower.id">{{borrower.firstname}} {{borrower.lastname}}</option>
                 </select>
             </label>
+
+            <output class="itemCreate__fieldOutput itemCreate__fieldOutput--borrower" >
+                    <UserCard v-if="item.borrower" :user="getOwner(item.borrower)" :hideAddress="true"></UserCard>
+            </output>
 
             <label for="time_loaned" class="itemCreate__field">
                 <span class="itemCreate__fieldLabel">When is it loaned</span>
@@ -83,8 +91,11 @@
     </form>
 </template>
 <script>
-
+import UserCard from './UserCard.vue';
 export default {
+    components: {
+        UserCard
+    },
     computed: {
         items() {
             return this.$store.state.items;
@@ -110,6 +121,9 @@ export default {
         dateMin() {
             const now = new Date();
             return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+        },
+        isShowingBorrow() {
+            return this.item.is_loanable;
         },
         timeDueMin(){
             const time = new Date(this.item.time_loaned);
@@ -138,6 +152,15 @@ export default {
 
     },
     methods: {
+        getOwner(id) {
+            let owner;
+
+            if (this.item.owner) {
+                owner = this.$store.state.users.find(user => user.id == id);
+            }
+
+            return owner;
+        },
         addContent() {
             this.$store.dispatch('addItem',this.item);
             this.item = {
