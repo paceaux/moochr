@@ -4,27 +4,37 @@
         <td class="itemTable__cell" headers="name">
             <input :disabled="!isEditable" v-model="item.name" type="text"/>
         </td>
+        <td class="itemTable__cell" headers="category">
+            <span v-show="!isEditable">{{categoryName(item.category)}}</span>
+                <select v-show="isEditable" v-model="item.category">
+                    <option>Pick a Category</option>
+                    <option v-for="category in categories"
+                    :key="category.id"
+                    :category="category"
+                    :value="category.id">{{category.name}}</option>
+                </select>
+        </td>
         <td class="itemTable__cell" headers="is_loanable">
             <input :disabled="!isEditable" v-model="item.is_loanable" type="checkbox" />
         </td>
         <td class="itemTable__cell" headers="owner">
-            <span v-show="!isEditable">{{item.owner}}</span>
+            <span v-show="!isEditable">{{userName(item.owner)}}</span>
                 <select v-show="isEditable" v-model="item.owner">
                     <option>Pick an owner</option>
                     <option v-for="owner in owners"
                     :key="owner.id"
                     :owner="owner"
-                    :value="owner.id">{{owner.firstname}}</option>
+                    :value="owner.id">{{userName(item.owner)}}</option>
                 </select>
         </td>
         <td class="itemTable__cell" headers="borrower">
-            <span v-show="!isEditable">{{item.borrower}}</span>
+            <span v-show="!isEditable">{{userName(item.borrower)}}</span>
                 <select v-show="isEditable" v-model="item.borrower">
-                    <option>Pick a borrower</option>
+                    <option value=null>Pick a borrower</option>
                     <option v-for="borrower in borrowers"
                     :key="borrower.id"
-                    :owner="borrower"
-                    :value="borrower.id">{{borrower.firstname}}</option>
+                    :borrower="borrower"
+                    :value="borrower.id">{{userName(item.borrower)}}</option>
                 </select>
         </td>
         <td class="itemTable__cell" headers="image">
@@ -95,6 +105,9 @@ export default {
             }
             return borrowers;
         },
+        categories(){
+            return this.$store.state.categories;
+        }
 
     },
     methods: {
@@ -104,6 +117,21 @@ export default {
         },
         toggleEdit() {
             this.isEditable = !this.isEditable;
+        },
+        categoryName(id) {
+            const category =  this.$store.state.categories.find(category => category.id == id);
+
+            return category ? category.name : '';
+        },
+        userName(id) {
+            console.log(id);
+            if (!id) return '';
+            const user = this.$store.state.users.find(user => user.id == id);
+            const first = user && user.firstname ? user.firstname : '';
+            const last = user && user.lastname ? user.lastname : '';
+
+            return `${first} ${last}`;
+
         }
     }
 }
