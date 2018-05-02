@@ -186,5 +186,16 @@ export default new Vuex.Store({
                 console.warn(err);
             });
         },
+        requestItems({commit}) {
+            sendToApi(apiGetItems, 'GET')
+            .then(items => {
+                items.forEach(item => {
+                    commit('ADDITEM', item);
+                });
+            })
+            .catch(err=> {
+                console.warn(err);
+            });
+        },
     }
 });
