@@ -2,12 +2,12 @@
       <form class="itemCreate">
         <fieldset class="itemCreate__fieldset itemCreate__fieldset--itemInfo">
             <legend>About the Item </legend>
-            <label for="name" class="itemCreate__field">
+            <label for="name" class="itemCreate__field itemCreate__field--name">
                 <span class="itemCreate__fieldLabel">name</span>
                 <input id="name" v-model="item.name" type="text"/>
             </label>
 
-            <label for="category" class="itemCreate__field">
+            <label for="category" class="itemCreate__field itemCreate__field--category">
                 <span class="itemCreate__fieldLabel">category</span>
                 <select id="owner" v-model="item.category">
                     <option>Pick a Category</option>
@@ -18,24 +18,19 @@
                 </select>
             </label>
 
-            <label for="is_loanable" class="itemCreate__field">
-                <span class="itemCreate__fieldLabel">isLoanable</span>
-                <input id="is_loanable" v-model="item.is_loanable" type="checkbox" />
-            </label>
-
-            <label for="model_number" class="itemCreate__field">
+            <label for="model_number" class="itemCreate__field itemCreate__field--model">
                 <span class="itemCreate__fieldLabel">Model Number</span>
                 <input id="model_number" v-model="item.model_number" type="text" />
             </label>
 
-            <label for="serial_number" class="itemCreate__field">
+            <label for="serial_number" class="itemCreate__field itemCreate__field--serial">
                 <span class="itemCreate__fieldLabel">Serial Number</span>
                 <input id="serial_number" v-model="item.serial_number" type="text" />
             </label>
         </fieldset>
 
         <fieldset class="itemCreate__fieldset itemCreate__fieldset--owner">
-
+            <legend>Loaning the item </legend>
             <label for="owner" class="itemCreate__field">
                 <span class="itemCreate__fieldLabel">owner</span>
                 <select id="owner" v-model="item.owner">
@@ -46,10 +41,15 @@
                     :value="owner.id">{{owner.firstname}}</option>
                 </select>
             </label>
+
+            <label for="is_loanable" class="itemCreate__field itemCreate__field--loanable">
+                <span class="itemCreate__fieldLabel">isLoanable</span>
+                <input id="is_loanable" v-model="item.is_loanable" type="checkbox" />
+            </label>
         </fieldset>
 
-        <fieldset class="itemCreate__fieldset">
-            <legend>Loaning the Item </legend>
+        <fieldset class="itemCreate__fieldset itemCreate__fieldset--borrow">
+            <legend>Borrowing the Item </legend>
 
             <label for="borrower" class="itemCreate__field">
                 <span class="itemCreate__fieldLabel">Borrower</span>
