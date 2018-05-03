@@ -26,6 +26,10 @@ const Item = sequelize.define('item', {
             type: Sequelize.TEXT,
             allowNull: true
         },
+        category: {
+            type: Sequelize.ARRAY(Sequelize.TEXT),
+            allowNull: true
+        },
             /*
             couldn't figure out how to send blobs
             https://stackoverflow.com/questions/6196666/converting-image-to-binary-array-blob-with-html5

@@ -8,8 +8,12 @@
             <img v-if="item.image" :src="imgUrl" class="itemTable__cell__imgPreview" alt="Picture of item"/>
         </td>
         <td class="itemTable__cell" headers="category">
-            <span v-show="!isEditable">{{categoryName(item.category)}}</span>
-                <select v-show="isEditable" v-model="item.category">
+            <p v-show="!isEditable" v-if="item.category">
+                <span :key="val" v-for="(val, idx) in item.category">
+                    {{categoryName(val)}}<span v-if="idx < item.category.length -1 ">,</span>
+                </span>
+            </p>
+                <select v-show="isEditable" v-model="item.category" multiple>
                     <option>Pick a Category</option>
                     <option v-for="category in categories"
                     :key="category.id"
@@ -149,7 +153,7 @@ export default {
         }
     },
     mounted () {
-
+        console.log(this.item.category);
     }
 }
 </script>

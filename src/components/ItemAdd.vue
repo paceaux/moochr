@@ -9,7 +9,7 @@
 
             <label for="category" class="itemCreate__field itemCreate__field--category">
                 <span class="itemCreate__fieldLabel">category</span>
-                <select id="owner" v-model="item.category">
+                <select id="owner" v-model="item.category" multiple>
                     <option>Pick a Category</option>
                     <option v-for="category in categories"
                     :key="category.id"
@@ -141,6 +141,7 @@ export default {
             item: {
                 name: '',
                 is_loanable: false,
+                category: [],
                 owner: null,
                 borrower: null,
                 image: '',
@@ -174,9 +175,9 @@ export default {
             item: {
                 name: '',
                 is_loanable: false,
-                image: '',
-                owner: '',
-                borrower: '',
+                category: [],
+                owner: null,
+                borrower: null,
                 image: '',
                 model_number: '',
                 serial_number: '',
