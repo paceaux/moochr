@@ -11,7 +11,6 @@
                     <th class="itemTable__heading" id="is_loanable">Loanable?</th>
                     <th class="itemTable__heading" id="owner">Owner</th>
                     <th class="itemTable__heading" id="borrower">Borrower</th>
-                    <th class="itemTable__heading" id="image">Image</th>
                     <th class="itemTable__heading" id="model_number">Model</th>
                     <th class="itemTable__heading" id="serial_number">Serial</th>
                     <th class="itemTable__heading" id="time_due">Due By</th>
