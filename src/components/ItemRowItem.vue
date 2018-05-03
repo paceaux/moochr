@@ -4,6 +4,11 @@
         <td class="itemTable__cell" headers="name">
             <input :disabled="!isEditable" v-model="item.name" type="text"/>
         </td>
+        <td class="itemTable__cell" headers="image">
+            <div v-if="item.image">
+                <img :src="imgUrl" alt="Picture of item"/>
+            </div>
+        </td>
         <td class="itemTable__cell" headers="category">
             <span v-show="!isEditable">{{categoryName(item.category)}}</span>
                 <select v-show="isEditable" v-model="item.category">
@@ -28,7 +33,9 @@
                 </select>
         </td>
         <td class="itemTable__cell" headers="borrower">
-            <UserCard v-show="!isEditable" :user="getUserById(item.borrower)" :hideAddress="true" :hideContact="true"></UserCard>
+            <span v-if="item.borrower">
+                <UserCard v-show="!isEditable" :user="getUserById(item.borrower)" :hideAddress="true" :hideContact="true"></UserCard>
+            </span>
                 <select v-show="isEditable" v-model="item.borrower">
                     <option value=null>Pick a borrower</option>
                     <option v-for="borrower in borrowers"
@@ -111,7 +118,30 @@ export default {
         },
         categories(){
             return this.$store.state.categories;
+        },
+        // imgUrl(){
+            // const objUrl = window.URL.createObjectURL(new Blob(this.item.image.data));
+
+            // return objUrl;
+        // }
+        
+        imgUrl(){
+            const intArray = new Uint8Array(this.item.image.data);
+            const reducedArray = intArray.reduce((data, byte) => data + String.fromCharCode(byte), '');
+
+            const base64String = `data:image/png;base64, ${btoa(reducedArray)}`;
+
+
+            return base64String;
         }
+
+        // imgUrl(){
+        //     const arrayBuffer = new Uint8Array(this.item.image);
+        //     const blob  = new Blob([arrayBuffer], {type: "image/png"});
+
+        //     return window.URL.createObjectURL(blob);
+
+        // }
 
     },
     methods: {
@@ -141,6 +171,9 @@ export default {
             return `${first} ${last}`;
 
         }
+    },
+    mounted () {
+
     }
 }
 </script>
