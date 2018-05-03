@@ -154,6 +154,10 @@
     max-width: 6vw;
 }
 
+.itemTable__userCard.card--user {
+    border: none;
+}
+
 .itemTable__cell input {
     width: 100%;
 }
@@ -226,4 +230,31 @@
     border-radius: 3px;
     border: 2px solid #444;
     margin: .618rem 0;
+}
+
+.itemCreate__userCard.card--user {
+    border: none;
+}
+
+.card{
+    margin: .618em .618rem;
+}
+
+.card--user {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #444;
+    border-radius: 3px;
+}
+
+.card__contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .618rem;
+    width: 100%;
+}
+
+.card__street, .card__region, .card__country {
+    margin-bottom: 0;
 }
