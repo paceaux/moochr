@@ -120,29 +120,39 @@ export default {
             return this.$store.state.categories;
         },
         // imgUrl(){
-            // const objUrl = window.URL.createObjectURL(new Blob(this.item.image.data));
+        //     const objUrl = window.URL.createObjectURL(new Blob(this.item.image.data));
 
-            // return objUrl;
+        //     return objUrl;
         // }
-        
-        imgUrl(){
-            const intArray = new Uint8Array(this.item.image.data);
-            const reducedArray = intArray.reduce((data, byte) => data + String.fromCharCode(byte), '');
-
-            const base64String = `data:image/png;base64, ${btoa(reducedArray)}`;
-
-
-            return base64String;
-        }
 
         // imgUrl(){
-        //     const arrayBuffer = new Uint8Array(this.item.image);
+        //     const intArray = new Uint8Array(this.item.image.data);
+        //     const reducedArray = intArray.reduce((data, byte) => data + String.fromCharCode(byte), '');
+
+        //     const base64String = `data:image/png;base64,${btoa(reducedArray)}`;
+
+        //     return base64String;
+        // }
+
+        // imgUrl() {
+        //     return 'data:image/png;base64,' + btoa(
+        //         new Uint8Array(this.item.image)
+        //         .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        //     );
+        // }
+
+        // imgUrl(){
+        //     const arrayBuffer = new Uint8Array(this.item.image.data);
         //     const blob  = new Blob([arrayBuffer], {type: "image/png"});
 
         //     return window.URL.createObjectURL(blob);
 
         // }
 
+        imgUrl() {
+            console.log('this.item.image',this.item.image);
+            return this.item.image;
+        }
     },
     methods: {
         updateContent(evt) {

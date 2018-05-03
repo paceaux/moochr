@@ -174,6 +174,7 @@ export default {
             item: {
                 name: '',
                 is_loanable: false,
+                image: '',
                 owner: '',
                 borrower: '',
                 image: '',
@@ -197,18 +198,26 @@ export default {
 
         },
         createImage(file) {
-            const image = new Image();
-            const reader = new FileReader();
 
-            reader.onload = evt => {
-                this.itemPreviewImage = evt.target.result;
-                this.item.image = evt.target.result;
+            this.itemPreviewImage = window.URL.createObjectURL(file);
+
+            /*
+            couldn't figure out how to send blobs
+            https://stackoverflow.com/questions/6196666/converting-image-to-binary-array-blob-with-html5
+            */
+            create_blob(file, (blob_string) => {
+                this.item.image =blob_string;
+            });
+
+            function create_blob(file, callback) {
+                var reader = new FileReader();
+                reader.onload = function() { callback(reader.result) };
+                reader.readAsDataURL(file);
             }
-
-            reader.readAsDataURL(file);
         },
         removeImage () {
             this.itemPreviewImage = '';
+            this.item.image = '';
         }
     }
 }
