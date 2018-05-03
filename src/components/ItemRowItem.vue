@@ -53,13 +53,13 @@
             <input :disabled="!isEditable" v-model="item.serial_number" type="text" />
         </td>
         <td class="itemTable__cell" headers="time_due">
-            <input :disabled="!isEditable" v-model="item.time_due" :min="timeDueMin" type="datetime-local" />
+            <input :disabled="!isEditable" v-model="item.time_due" :min="timeDueMin" type="date" />
         </td>
         <td class="itemTable__cell" headers="time_loaned">
-            <input :disabled="!isEditable" v-model="item.time_loaned" :min="dateMin" type="datetime-local" />
+            <input :disabled="!isEditable" v-model="item.time_loaned" :min="dateMin" type="date" />
         </td>
         <td class="itemTable__cell" headers="time_return">
-            <input :disabled="!isEditable" v-model="item.time_return" :min="timeDueMin" type="datetime-local" />
+            <input :disabled="!isEditable" v-model="item.time_return" :min="timeDueMin" type="date" />
         </td>
         <td class="itemTable__cell" headers="value">
             <input :disabled="!isEditable" v-model="item.value" type="text" />
