@@ -1,6 +1,6 @@
 <template>
   <article class="card card--user" v-if="user">
-      <h2>{{name}}</h2>
+      <h2 class="card__name">{{name}}</h2>
       <div v-if="!hideContact" class="card__contact">
           <a v-if="user.email" class="card__email" :href="emailLink">{{user.email}}</a>
           <a v-if="user.phone" class="card__phone" :href="telLink">{{user.phone}}</a>
