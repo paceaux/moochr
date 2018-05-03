@@ -25,7 +25,7 @@
             <input :disabled="!isEditable" v-model="item.is_loanable" type="checkbox" />
         </td>
         <td class="itemTable__cell" headers="owner">
-            <UserCard v-show="!isEditable" :user="getUserById(item.owner)" :hideAddress="true" :hideContact="true"></UserCard>
+            <UserCard v-show="!isEditable" :user="getUserById(item.owner)" :hideAddress="true" :hideContact="true" class="itemTable__userCard"></UserCard>
                 <select v-show="isEditable" v-model="item.owner">
                     <option>Pick an owner</option>
                     <option v-for="owner in owners"
@@ -36,7 +36,7 @@
         </td>
         <td class="itemTable__cell" headers="borrower">
             <span v-if="item.borrower">
-                <UserCard v-show="!isEditable" :user="getUserById(item.borrower)" :hideAddress="true" :hideContact="true"></UserCard>
+                <UserCard v-show="!isEditable" :user="getUserById(item.borrower)" :hideAddress="true" :hideContact="true" class="itemTable__userCard"></UserCard>
             </span>
                 <select v-show="isEditable" v-model="item.borrower">
                     <option value=null>Pick a borrower</option>

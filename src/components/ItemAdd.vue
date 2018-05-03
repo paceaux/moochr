@@ -54,7 +54,7 @@
             </label>
 
             <output class="itemCreate__fieldOutput itemCreate__fieldOutput--owner" >
-                <UserCard v-if="item.owner" :user="getOwner(item.owner)" :hideAddress="true"></UserCard>
+                <UserCard v-if="item.owner" :user="getOwner(item.owner)" :hideAddress="true" class="itemCreate__userCard"></UserCard>
             </output>
         </fieldset>
 
@@ -73,7 +73,7 @@
             </label>
 
             <output class="itemCreate__fieldOutput itemCreate__fieldOutput--borrower" >
-                    <UserCard v-if="item.borrower" :user="getOwner(item.borrower)" :hideAddress="true"></UserCard>
+                    <UserCard v-if="item.borrower" :user="getOwner(item.borrower)" :hideAddress="true" class="itemCreate__userCard"></UserCard>
             </output>
 
             <label for="time_loaned" class="itemCreate__field">
