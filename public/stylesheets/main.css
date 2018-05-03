@@ -150,6 +150,10 @@
     padding: .25em;
 }
 
+.itemTable__cell__imgPreview {
+    max-width: 6vw;
+}
+
 .itemTable__cell input {
     width: 100%;
 }
@@ -215,4 +219,11 @@
 .itemCreate__submit {
     font-size: 1.25rem;
     padding: .618em;
+}
+
+.itemCreate__imgPreview {
+    width: 30vw;
+    border-radius: 3px;
+    border: 2px solid #444;
+    margin: .618rem 0;
 }

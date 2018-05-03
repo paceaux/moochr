@@ -31,7 +31,7 @@
             <label for="image" class="itemCreate__field itemCreate__field--image">
                 <span class="itemCreate__fieldLabel">Image</span>
                 <input id="file"  type="file" accept="image/*" @change="onFileChange"/>
-                <img v-if="itemPreviewImage" :src="itemPreviewImage" />
+                <img v-if="itemPreviewImage" class="itemCreate__imgPreview" :src="itemPreviewImage" />
             </label>
         </fieldset>
 
