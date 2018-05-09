@@ -1,6 +1,8 @@
 <template>
   <article class="card card--user" v-if="user">
-      <h2 class="card__name">{{name}}</h2>
+        <h2 class="card__name">
+          <router-link :to="{name: 'user', params: {id: user.id}}"> {{name}} </router-link>
+        </h2>
       <div v-if="!hideContact" class="card__contact">
           <a v-if="user.email" class="card__email" :href="emailLink">{{user.email}}</a>
           <a v-if="user.phone" class="card__phone" :href="telLink">{{user.phone}}</a>
@@ -35,12 +37,19 @@ export default {
         hideStreet: {
             type: Boolean,
             required: false
+        },
+        hideProfleLink: {
+            type: Boolean,
+            required: false
         }
     },
     data() {
         return {};
     },
     computed: {
+        id() {
+            return this.user.id;
+        },
         name() {
             const first = this.user.firstname ? this.user.firstname : '';
             const last = this.user.lastname ? this.user.lastname : '';

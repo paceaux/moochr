@@ -7,6 +7,7 @@ import CategoryAdd from '../components/CategoryAdd.vue';
 import ItemAdd from '../components/ItemAdd.vue';
 import ItemList from '../components/ItemTable.vue';
 import UserCards from '../components/UserCards.vue';
+import UserProfile from '../components/UserProfile.vue';
 
 const routes = [
     {path: '/addUser', component: UserAdd},
@@ -15,7 +16,8 @@ const routes = [
     {path: '/categoryList', component: CategoryList},
     {path: '/addItem', component: ItemAdd},
     {path: '/itemList', component: ItemList},
-    {path: '/users', component: UserCards}
+    {path: '/users', component: UserCards},
+    {path: '/user/:id', component: UserProfile, name: 'user'}
 ];
 
 const router = new VueRouter({
