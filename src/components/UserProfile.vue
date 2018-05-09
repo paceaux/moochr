@@ -1,6 +1,6 @@
 <template>
   <section class="UserProfile" v-if="user">
-      <UserCard :user="user"></UserCard>
+      <UserCard :user="user" :hideProfileLink="true"></UserCard>
   </section>
 </template>
 <script>

@@ -1,7 +1,10 @@
 <template>
   <article class="card card--user" v-if="user">
         <h2 class="card__name">
-          <router-link :to="{name: 'user', params: {id: user.id}}"> {{name}} </router-link>
+            <template v-if="!hideProfileLink">
+                <router-link :to="{name: 'user', params: {id: user.id}}"> {{name}} </router-link>
+            </template>
+            <template v-else>{{name}}</template>
         </h2>
       <div v-if="!hideContact" class="card__contact">
           <a v-if="user.email" class="card__email" :href="emailLink">{{user.email}}</a>
@@ -38,7 +41,7 @@ export default {
             type: Boolean,
             required: false
         },
-        hideProfleLink: {
+        hideProfileLink: {
             type: Boolean,
             required: false
         }
