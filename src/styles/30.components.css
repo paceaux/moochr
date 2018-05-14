@@ -1,0 +1,208 @@
+/*===============
+#COMPONENTS
+===============*/
+.userTable {
+    width: 100vw;
+}
+
+.userTable__head {
+    background-color: #dcdcdc;
+}
+.userTable__headingHeaderRow th{
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.userTable__headingHeader {
+    text-align: center;
+}
+
+.userTable__headingHeader--controls {
+    width: 4em;
+}
+
+.userTable__headingHeaderRow + .userTable__headingHeaderRow th {
+    font-size: .8em;
+}
+.userTable__body {
+    font-size: .75em;
+}
+
+.userTable__cell {
+    padding: .25em;
+}
+
+.userTable__cell input {
+    width: 100%;
+}
+
+.userTable #id,
+.userTable #state,
+.userTable #country {
+    width: 4ch;
+}
+
+.userCreate {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr 1fr;
+    grid-template-areas: "header header""name address" "contact address" "footer footer"
+}
+
+.userCreate__fieldset {
+    border: none;
+    background-color: rgb(245,245,245);
+}
+
+.userCreate__fieldset--name {
+    grid-area: name;
+}
+
+.userCreate__fieldset--contact {
+    grid-area: contact;
+}
+
+.userCreate__fieldset--address {
+    grid-area: address;
+}
+
+.userCreate__fieldset--controls {
+    grid-area: footer;
+}
+
+.userCreate__fieldsetLegend {
+    text-transform: capitalize;
+}
+.userCreate__field {
+    display: inline-block;
+    width: 49%;
+}
+
+.userCreate__fieldLabel {
+    text-transform: capitalize;
+    display: inline-block;
+    width: 5em;
+}
+
+.userCreate__submit {
+    font-size: 1.25rem;
+    padding: .618em;
+}
+
+.itemTable {
+    width: 100vw;
+}
+
+.itemTable__head {
+    background-color: #dcdcdc;
+}
+.itemTable__headingHeaderRow th{
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.itemTable__heading {
+    font-size: 1em;
+}
+
+.itemTable__headingHeader {
+    text-align: center;
+}
+
+.itemTable__headingHeader--controls {
+    width: 4em;
+}
+
+.itemTable__body {
+    font-size: .75em;
+}
+
+.itemTable__cell {
+    padding: .25em;
+}
+
+.itemTable__cell__imgPreview {
+    max-width: 6vw;
+}
+
+.itemTable__userCard.card--user {
+    border: none;
+}
+
+.itemTable__cell input {
+    width: 100%;
+}
+
+.itemTable__cell input[type="checkbox"] {
+    width: 1em;
+}
+
+.itemTable__cell input[type="datetime-local"] {
+    width: 22ch;
+}
+
+.itemCreate {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:1fr 14rem 4rem;
+    grid-template-areas: "about about" "owner loan" "footer footer"
+}
+
+.itemCreate__fieldset {
+    border: none;
+    background-color: rgb(245,245,245);
+}
+
+.itemCreate__fieldset--itemInfo {
+    grid-area: about;
+
+}
+
+.itemCreate__fieldset--itemInfo .itemCreate__field {
+    min-height: 3em;
+}
+.itemCreate__fieldOutput {
+    display: inline-block;
+    width: 100%;
+    min-height: 3.5rem;
+}
+
+.itemCreate__fieldset--borrow {
+    grid-area: loan;
+}
+
+.itemCreate__fieldset--controls {
+    grid-area: footer;
+}
+
+.itemCreate__fieldsetLegend {
+    text-transform: capitalize;
+}
+.itemCreate__field {
+    display: inline-block;
+    width: 49%;
+}
+
+.itemCreate__fieldLabel {
+    text-transform: capitalize;
+    display: inline-block;
+    width: 5em;
+}
+
+.itemCreate__submit {
+    font-size: 1.25rem;
+    padding: .618em;
+}
+
+.itemCreate__imgPreview {
+    width: 30vw;
+    border-radius: 3px;
+    border: 2px solid #444;
+    margin: .618rem 0;
+}
+
+.itemCreate__userCard.card--user {
+    border: none;
+}
