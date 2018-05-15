@@ -4,14 +4,6 @@
 /*
 Comment-A: rem for left-right, for consistent alignment.
    em for top/bottom, so the spacing is relative to font-size
-Comment-B: Color is a dark, dark gray rgb (55, 55, 55).
-    All grays and base line styles are multiples of this
-Comment-C:
-  #373737 -> base:      ->   rgb(55,55,55);
-  #6e6e6e -> base * 2   ->   rgb(110,110,110)
-  #a5a5a5 -> base * 3   ->   rgb(165,165,165)
-  #c1c1c1 -> base * 3.5 ->   rgb(192.5,192.5,192.5)
-  #dcdcdc -> base * 4   ->   rgb(220,220,220)
 Comment-D:
   Set the font-size w/ calc and use rem. This way, the font-size can scale up as the browser window gets larger, but it also doesn't get ridiculously hard to read when the browser window shrinks
 Comment-E:
@@ -19,7 +11,7 @@ Comment-E:
 */
 
 html {
-    color: #373737;
+    color: var(--textColor);
     /*Comment-B*/
     font-size: calc(.5vw + 1rem);
     /*Comment-D*/
@@ -129,7 +121,7 @@ html {
   =====*/
   
   hr {
-    color: #a5a5a5;
+    color: var(--colorNeutralLight);
     border-width: .0625em;
     border-style: solid;
     margin: 1.618em .618rem;
@@ -152,7 +144,7 @@ html {
   
   blockquote {
     background: rgba(165, 165, 165, .15);
-    border-left: 10px solid #dcdcdc;
+    border-left: 10px solid var(--colorNeutralLightest);
     /*Comment-C*/
     margin: 1.618em .618rem;
     /* Comment-A */
@@ -161,7 +153,7 @@ html {
   }
   
   blockquote::before {
-    color: #c1c1c1;
+    color: var(--colorNeutralLighter);
     /*Comment-C*/
     content: open-quote;
     font-size: 4em;
@@ -296,7 +288,7 @@ html {
   kbd {
     font-size: .75em;
     padding: .25ex .5ex;
-    border: 1px solid #c1c1c1;
+    border: 1px solid var(--colorNeutralLighter);
     border-radius: 3px;
   }
   
@@ -314,7 +306,7 @@ html {
   }
   
   samp {
-    border-left: 5px solid #c1c1c1;
+    border-left: 5px solid var(--colorNeutralLighter);
   }
   
   data {
@@ -325,7 +317,7 @@ html {
     font-size: .75em;
     line-height: 1.2;
     padding: .618em .618rem;
-    border: 1px solid #c1c1c1;
+    border: 1px solid var(--colorNeutralLighter);
     border-radius: 2px;
     overflow: scroll;
   }
@@ -402,19 +394,9 @@ html {
   =====*/
   
   
-  /*
-  rgb (110,165,220)
-  hsl(210, 61%, 65%)
-  #6ea5dc
-  
-  :hover
-   rgb(110,165,193)
-   hsl (200,40%,59%)
-   #6ea5c1
-  */
   
   a {
-    color: #6ea5dc;
+    color: var(--linkColor);
     text-decoration: none;
     border-bottom: 1px dotted transparent;
     transition: all .3s ease-in-out;
@@ -422,8 +404,8 @@ html {
   
   a:hover,
   a:focus {
-    color: #6ea5c1;
-    border-color: #6ea5c1;
+    color: var(--linkInterestColor);
+    border-color: var(--linkInterestColor);
     outline: none;
   }
   

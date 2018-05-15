@@ -1,3 +1,34 @@
 /*===============
 #settings
 ===============*/
+
+/*
+Neutral colors: 
+    Text Color is a dark, dark gray rgb (55, 55, 55).
+    All grays and base line styles are multiples of this
+  #373737 -> base:      ->   rgb(55,55,55);
+  #6e6e6e -> base * 2   ->   rgb(110,110,110)
+  #a5a5a5 -> base * 3   ->   rgb(165,165,165)
+  #c1c1c1 -> base * 3.5 ->   rgb(192.5,192.5,192.5)
+  #dcdcdc -> base * 4   ->   rgb(220,220,220)
+
+  Links:
+  #6EA5DC ->Base        ->   rgb (110,165,220)  hsl(210, 61%, 65%)
+  #6ea5c1 ->interest    ->   rgb(110,165,193)   hsl (200,40%,59%)
+
+
+*/
+
+:root {
+    --colorNeutralDarkest: rgb(26,26,26);
+    --colorNeutralDarker: rgb(55,55,55);
+    --colorNeutral: rgb(110,110,110);
+    --colorNeutralLight: rgb(165,165,165);
+    --colorNeutralLighter: rgb(192,192,192);
+    --colorNeutralLightest: rgb(220,220,220);
+    --colorCool: rgb(110,165,220);
+    --colorCoolLighter: rgb(110,165,192);
+    --textColor: var(--colorNeutralDarker);
+    --linkColor: var(--colorCool);
+    --linkInterestColor: var(--colorCoolLighter);
+}
