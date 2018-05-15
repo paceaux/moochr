@@ -1,7 +1,9 @@
 <template>
     <section class="cardDeck">
-        <h2>Items</h2>
-        <ItemCard v-for="item in items" :key="item.id" :item="item" :hideOwner="hideOwner"></ItemCard>
+        <h2 class="cardDeck__title">Items</h2>
+        <div class="cardDeck__list">
+            <ItemCard v-for="item in items" :key="item.id" :item="item" :hideOwner="hideOwner"></ItemCard>
+        </div>
     </section>
 </template>
 <script>

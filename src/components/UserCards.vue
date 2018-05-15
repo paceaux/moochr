@@ -1,7 +1,9 @@
 <template>
     <section class="cardDeck">
-        <h2>Moochers</h2>
-        <UserCard v-for="user in users" :key="user.id" :user="user"></UserCard>
+        <h2 class="cardDeck__title">Moochers</h2>
+        <div class="cardDeck__list">
+            <UserCard v-for="user in users" :key="user.id" :user="user"></UserCard>
+        </div>
     </section>
 </template>
 <script>
