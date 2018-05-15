@@ -1,6 +1,45 @@
 /*===============
 #OBJECTS
 ===============*/
+
+/*===============
+#TABLE
+===============*/
+.table {
+    width: 100vw;
+}
+
+.table__head {
+    background-color: var(--colorNeutralLightest)
+}
+
+.table__heading {
+    font-size: 1em;
+}
+
+.table__headingHeader {
+    text-align: center;
+}
+
+.table__headingHeader--controls {
+    width: 4em;
+}
+
+.table__body {
+    font-size: .75em;
+}
+
+.table__cell {
+    padding: .25em;
+}
+
+.table__cell__imgPreview {
+    max-width: 6vw;
+}
+
+/*===============
+#CARD
+===============*/
 .card{
     margin: .618em .618rem;
 }

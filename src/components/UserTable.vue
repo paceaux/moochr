@@ -1,29 +1,29 @@
 <template>
     <section class="users">
     <UserAdd></UserAdd>
-  <table class="userTable">
-      <thead class="userTable__head">
-          <tr class="userTable__headingHeaderRow userTable__headingHeaderRow--columnGroups">
-              <th class="userTable__headingHeader" id="id" rowspan="2">id</th>
-              <th class="userTable__headingHeader" id="name" colspan="2" v-on:dblclick="collapseColumn($event)">Name</th>
-              <th class="userTable__headingHeader" id="contact" colspan="2">Contact</th>
-              <th class="userTable__headingHeader" id="address" colspan="6">Address </th>
-              <td class="userTable__headingHeader userTable__headingHeader--controls" rowspan="2"></td>
+  <table class="table table--userTable">
+      <thead class="table__head">
+          <tr class="table__headingHeaderRow table__headingHeaderRow--columnGroups">
+              <th class="table__headingHeader" id="id" rowspan="2">id</th>
+              <th class="table__headingHeader" id="name" colspan="2" v-on:dblclick="collapseColumn($event)">Name</th>
+              <th class="table__headingHeader" id="contact" colspan="2">Contact</th>
+              <th class="table__headingHeader" id="address" colspan="6">Address </th>
+              <td class="table__headingHeader table__headingHeader--controls" rowspan="2"></td>
           </tr>
-          <tr class="userTable__headingHeaderRow">
-              <th class="userTable__heading" id="firstname">firstname</th>
-              <th class="userTable__heading" id="lastname">lastname</th>
-              <th class="userTable__heading" id="email">email</th>
-              <th class="userTable__heading" id="phone">phone</th>
-              <th class="userTable__heading" id="street1">street1</th>
-              <th class="userTable__heading" id="street2">street2</th>
-              <th class="userTable__heading" id="zip">zip</th>
-              <th class="userTable__heading" id="city">city</th>
-              <th class="userTable__heading" id="state">state</th>
-              <th class="userTable__heading" id="country">country</th>
+          <tr class="table__headingHeaderRow">
+              <th class="table__heading" id="firstname">firstname</th>
+              <th class="table__heading" id="lastname">lastname</th>
+              <th class="table__heading" id="email">email</th>
+              <th class="table__heading" id="phone">phone</th>
+              <th class="table__heading" id="street1">street1</th>
+              <th class="table__heading" id="street2">street2</th>
+              <th class="table__heading" id="zip">zip</th>
+              <th class="table__heading" id="city">city</th>
+              <th class="table__heading" id="state">state</th>
+              <th class="table__heading" id="country">country</th>
           </tr>
       </thead>
-      <tbody class="userTable__body" v-if="users.length">
+      <tbody class="table__body" v-if="users.length">
           <UserRowItem v-for="user in users" 
           :key="user.id"
           :user="user" 

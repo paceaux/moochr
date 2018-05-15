@@ -1,43 +1,22 @@
 /*===============
 #COMPONENTS
 ===============*/
-.userTable {
-    width: 100vw;
-}
 
-.userTable__head {
-    background-color: var(--colorNeutralLightest)
-}
-.userTable__headingHeaderRow th{
+.table--userTable .table__headingHeaderRow th{
     border-bottom: 2px solid var(--colorNeutralLightest)
 }
 
-.userTable__headingHeader {
-    text-align: center;
-}
-
-.userTable__headingHeader--controls {
-    width: 4em;
-}
-
-.userTable__headingHeaderRow + .userTable__headingHeaderRow th {
+.table--userTable .table__headingHeaderRow + .table__headingHeaderRow th {
     font-size: .8em;
 }
-.userTable__body {
-    font-size: .75em;
-}
 
-.userTable__cell {
-    padding: .25em;
-}
-
-.userTable__cell input {
+.table--userTable input {
     width: 100%;
 }
 
-.userTable #id,
-.userTable #state,
-.userTable #country {
+.table--userTable #id,
+.table--userTable #state,
+.table--userTable #country {
     width: 4ch;
 }
 
@@ -90,54 +69,25 @@
     padding: .618em;
 }
 
-.itemTable {
-    width: 100vw;
-}
 
-.itemTable__head {
-    background-color: var(--colorNeutralLightest)
-}
-.itemTable__headingHeaderRow th{
+.table--itemTable .table__headingHeaderRow th{
     border-bottom: 2px solid var(--colorNeutralLightest)
 }
 
-.itemTable__heading {
-    font-size: 1em;
-}
 
-.itemTable__headingHeader {
-    text-align: center;
-}
-
-.itemTable__headingHeader--controls {
-    width: 4em;
-}
-
-.itemTable__body {
-    font-size: .75em;
-}
-
-.itemTable__cell {
-    padding: .25em;
-}
-
-.itemTable__cell__imgPreview {
-    max-width: 6vw;
-}
-
-.itemTable__userCard.card--user {
+.table--itemTable .table__userCard.card--user {
     border: none;
 }
 
-.itemTable__cell input {
+.table--itemTable input {
     width: 100%;
 }
 
-.itemTable__cell input[type="checkbox"] {
+.table--itemTable input[type="checkbox"] {
     width: 1em;
 }
 
-.itemTable__cell input[type="datetime-local"] {
+.table--itemTable input[type="datetime-local"] {
     width: 22ch;
 }
 

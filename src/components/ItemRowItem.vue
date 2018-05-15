@@ -1,13 +1,13 @@
 <template>
-    <tr class="itemTable__itemRow">
-        <td class="itemTable__cell" headers="id">{{item.id}}</td>
-        <td class="itemTable__cell" headers="name">
+    <tr class="table__row">
+        <td class="table__cell" headers="id">{{item.id}}</td>
+        <td class="table__cell" headers="name">
             <input :disabled="!isEditable" v-model="item.name" type="text"/>
         </td>
-        <td class="itemTable__cell" headers="image">
-            <img v-if="item.image" :src="imgUrl" class="itemTable__cell__imgPreview" alt="Picture of item"/>
+        <td class="table__cell" headers="image">
+            <img v-if="item.image" :src="imgUrl" class="table__cell__imgPreview" alt="Picture of item"/>
         </td>
-        <td class="itemTable__cell" headers="category">
+        <td class="table__cell" headers="category">
             <p v-show="!isEditable" v-if="item.category">
                 <span :key="val" v-for="(val, idx) in item.category">
                     {{categoryName(val)}}<span v-if="idx < item.category.length -1 ">,</span>
@@ -21,10 +21,10 @@
                     :value="category.id">{{category.name}}</option>
                 </select>
         </td>
-        <td class="itemTable__cell" headers="is_loanable">
+        <td class="table__cell" headers="is_loanable">
             <input :disabled="!isEditable" v-model="item.is_loanable" type="checkbox" />
         </td>
-        <td class="itemTable__cell" headers="owner">
+        <td class="table__cell" headers="owner">
             <UserCard v-show="!isEditable" :user="getUserById(item.owner)" :hideAddress="true" :hideContact="true" class="itemTable__userCard"></UserCard>
                 <select v-show="isEditable" v-model="item.owner">
                     <option>Pick an owner</option>
@@ -34,7 +34,7 @@
                     :value="owner.id">{{userName(owner.id)}}</option>
                 </select>
         </td>
-        <td class="itemTable__cell" headers="borrower">
+        <td class="table__cell" headers="borrower">
             <span v-if="item.borrower">
                 <UserCard v-show="!isEditable" :user="getUserById(item.borrower)" :hideAddress="true" :hideContact="true" class="itemTable__userCard"></UserCard>
             </span>
@@ -46,25 +46,25 @@
                     :value="borrower.id">{{userName(borrower.id)}}</option>
                 </select>
         </td>
-        <td class="itemTable__cell" headers="model_number">
+        <td class="table__cell" headers="model_number">
             <input :disabled="!isEditable" v-model="item.model_number" type="text" />
         </td>
-        <td class="itemTable__cell" headers="serial_number">
+        <td class="table__cell" headers="serial_number">
             <input :disabled="!isEditable" v-model="item.serial_number" type="text" />
         </td>
-        <td class="itemTable__cell" headers="time_due">
+        <td class="table__cell" headers="time_due">
             <input :disabled="!isEditable" v-model="item.time_due" :min="timeDueMin" type="date" />
         </td>
-        <td class="itemTable__cell" headers="time_loaned">
+        <td class="table__cell" headers="time_loaned">
             <input :disabled="!isEditable" v-model="item.time_loaned" :min="dateMin" type="date" />
         </td>
-        <td class="itemTable__cell" headers="time_return">
+        <td class="table__cell" headers="time_return">
             <input :disabled="!isEditable" v-model="item.time_return" :min="timeDueMin" type="date" />
         </td>
-        <td class="itemTable__cell" headers="value">
+        <td class="table__cell" headers="value">
             <input :disabled="!isEditable" v-model="item.value" type="text" />
         </td>
-        <td class="itemTable__cell">
+        <td class="table__cell">
             <button v-on:click="toggleEdit">edit</button>
             <button v-show="isEditable" @click="updateContent()">save</button>
             <button @click="$emit('remove',item.id)">Delete</button>

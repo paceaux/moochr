@@ -1,37 +1,37 @@
 <template>
-    <tr class="userTable__userRow">
-        <td class="userTable__cell" headers="id id">{{user.id}}</td>
-        <td class="userTable__cell" headers="firstname name">
+    <tr class="table__row">
+        <td class="table__cell" headers="id id">{{user.id}}</td>
+        <td class="table__cell" headers="firstname name">
             <input :disabled="!isEditable" v-model="user.firstname" type="text"/>
         </td>
-        <td class="userTable__cell" headers="lastname name">
+        <td class="table__cell" headers="lastname name">
             <input :disabled="!isEditable" v-model="user.lastname" type="text" />
         </td>
-        <td class="userTable__cell" headers="email contact">
+        <td class="table__cell" headers="email contact">
             <input :disabled="!isEditable" v-model="user.email" type="email"/>
         </td>
-        <td class="userTable__cell" headers="phone contact">
+        <td class="table__cell" headers="phone contact">
             <input :disabled="!isEditable" v-model="user.phone" type="tel"/>
         </td>
-        <td class="userTable__cell" headers="street1 address">
+        <td class="table__cell" headers="street1 address">
             <input :disabled="!isEditable" v-model="user.street1" type="text"/>
         </td>
-        <td class="userTable__cell" headers="street2 address">
+        <td class="table__cell" headers="street2 address">
             <input :disabled="!isEditable" v-model="user.street2" type="text"/>
         </td>
-        <td class="userTable__cell" headers="zip address">
+        <td class="table__cell" headers="zip address">
             <input :disabled="!isEditable" v-model="user.zip" type="text"/>
         </td>
-        <td class="userTable__cell" headers="city address">
+        <td class="table__cell" headers="city address">
             <input :disabled="!isEditable" v-model="user.city" type="text"/>
         </td>
-        <td class="userTable__cell" headers="state address">
+        <td class="table__cell" headers="state address">
             <input :disabled="!isEditable" v-model="user.state" type="text"/>
         </td>
-        <td class="userTable__cell" headers="country address">
+        <td class="table__cell" headers="country address">
             <input :disabled="!isEditable" v-model="user.country" type="text"/>
         </td>
-        <td class="userTable__cell">
+        <td class="table__cell">
             <button v-on:click="toggleEdit">edit</button>
             <button v-show="isEditable" @click="updateContent()">save</button>
             <button @click="$emit('remove',user.id)">Delete</button>
