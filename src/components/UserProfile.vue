@@ -1,14 +1,17 @@
 <template>
   <section class="UserProfile" v-if="user">
       <UserCard :user="user" :hideProfileLink="true"></UserCard>
+      <ItemCards :filteredItems="UsersItems" :hideOwner="true"></ItemCards>
   </section>
 </template>
 <script>
 import UserCard from './UserCard.vue';
+import ItemCards from './ItemCards.vue';
 
 export default {
     components: {
-        UserCard
+        UserCard,
+        ItemCards
     },
     props: {
 
@@ -27,6 +30,9 @@ export default {
             }
 
             return user;
+        },
+        UsersItems () {
+            return this.$store.state.items.filter(item=> item.owner == this.user.id);
         }
     }
 }
