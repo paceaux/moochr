@@ -55,6 +55,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: `stylesheets/${bundleName}.bundle.css`,
         }),
-        new CleanWebpackPlugin('public')
+        new CleanWebpackPlugin('public',{
+            exclude: ['index.html']
+        })
     ]
 };
