@@ -48,6 +48,10 @@
     margin: .618em .618rem;
 }
 
+.card__text{
+    margin-bottom: 0;
+}
+
 .card--user {
     display: flex;
     flex-direction: column;
