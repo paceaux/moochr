@@ -1,14 +1,14 @@
 <template>
-      <form class="itemCreate">
-        <fieldset class="itemCreate__fieldset itemCreate__fieldset--itemInfo">
+      <form class="form form--itemCreate">
+        <fieldset class="form__fieldset form__fieldset--itemInfo">
             <legend>About the Item </legend>
-            <label for="name" class="itemCreate__field itemCreate__field--name">
-                <span class="itemCreate__fieldLabel">name</span>
+            <label for="name" class="form__field form__field--name">
+                <span class="form__fieldLabel">name</span>
                 <input id="name" v-model="item.name" type="text"/>
             </label>
 
-            <label for="category" class="itemCreate__field itemCreate__field--category">
-                <span class="itemCreate__fieldLabel">category</span>
+            <label for="category" class="form__field form__field--category">
+                <span class="form__fieldLabel">category</span>
                 <select id="owner" v-model="item.category" multiple>
                     <option>Pick a Category</option>
                     <option v-for="category in categories"
@@ -18,27 +18,27 @@
                 </select>
             </label>
 
-            <label for="model_number" class="itemCreate__field itemCreate__field--model">
-                <span class="itemCreate__fieldLabel">Model Number</span>
+            <label for="model_number" class="form__field form__field--model">
+                <span class="form__fieldLabel">Model Number</span>
                 <input id="model_number" v-model="item.model_number" type="text" />
             </label>
 
-            <label for="serial_number" class="itemCreate__field itemCreate__field--serial">
-                <span class="itemCreate__fieldLabel">Serial Number</span>
+            <label for="serial_number" class="form__field form__field--serial">
+                <span class="form__fieldLabel">Serial Number</span>
                 <input id="serial_number" v-model="item.serial_number" type="text" />
             </label>
 
-            <label for="image" class="itemCreate__field itemCreate__field--image">
-                <span class="itemCreate__fieldLabel">Image</span>
+            <label for="image" class="form__field form__field--image">
+                <span class="form__fieldLabel">Image</span>
                 <input id="file"  type="file" accept="image/*" @change="onFileChange"/>
-                <img v-if="itemPreviewImage" class="itemCreate__imgPreview" :src="itemPreviewImage" />
+                <img v-if="itemPreviewImage" class="form__imgPreview" :src="itemPreviewImage" />
             </label>
         </fieldset>
 
-        <fieldset class="itemCreate__fieldset itemCreate__fieldset--owner">
+        <fieldset class="form__fieldset form__fieldset--owner">
             <legend>Loaning the item </legend>
-            <label for="owner" class="itemCreate__field">
-                <span class="itemCreate__fieldLabel">owner</span>
+            <label for="owner" class="form__field">
+                <span class="form__fieldLabel">owner</span>
                 <select id="owner" v-model="item.owner">
                     <option>Pick an owner</option>
                     <option v-for="owner in owners"
@@ -48,21 +48,21 @@
                 </select>
             </label>
 
-            <label for="is_loanable" class="itemCreate__field itemCreate__field--loanable">
-                <span class="itemCreate__fieldLabel">isLoanable</span>
+            <label for="is_loanable" class="form__field form__field--loanable">
+                <span class="form__fieldLabel">isLoanable</span>
                 <input id="is_loanable" v-model="item.is_loanable" type="checkbox"  />
             </label>
 
-            <output class="itemCreate__fieldOutput itemCreate__fieldOutput--owner" >
-                <UserCard v-if="item.owner" :user="getOwner(item.owner)" :hideAddress="true" class="itemCreate__userCard"></UserCard>
+            <output class="form__fieldOutput form__fieldOutput--owner" >
+                <UserCard v-if="item.owner" :user="getOwner(item.owner)" :hideAddress="true" class="form__userCard"></UserCard>
             </output>
         </fieldset>
 
-        <fieldset class="itemCreate__fieldset itemCreate__fieldset--borrow" v-if="isShowingBorrow">
+        <fieldset class="form__fieldset form__fieldset--borrow" v-if="isShowingBorrow">
             <legend>Borrowing the Item </legend>
 
-            <label for="borrower" class="itemCreate__field">
-                <span class="itemCreate__fieldLabel">Borrower</span>
+            <label for="borrower" class="form__field">
+                <span class="form__fieldLabel">Borrower</span>
                 <select id="borrower" v-model="item.borrower">
                     <option>Pick an borrower</option>
                     <option v-for="borrower in borrowers"
@@ -72,27 +72,27 @@
                 </select>
             </label>
 
-            <output class="itemCreate__fieldOutput itemCreate__fieldOutput--borrower" >
-                    <UserCard v-if="item.borrower" :user="getOwner(item.borrower)" :hideAddress="true" class="itemCreate__userCard"></UserCard>
+            <output class="form__fieldOutput form__fieldOutput--borrower" >
+                    <UserCard v-if="item.borrower" :user="getOwner(item.borrower)" :hideAddress="true" class="form__userCard"></UserCard>
             </output>
 
-            <label for="time_loaned" class="itemCreate__field">
-                <span class="itemCreate__fieldLabel">When is it loaned</span>
+            <label for="time_loaned" class="form__field">
+                <span class="form__fieldLabel">When is it loaned</span>
                 <input id="time_loaned" v-model="item.time_loaned" :min="dateMin" type="date" />
             </label>
 
-            <label for="time_due" class="itemCreate__field">
-                <span class="itemCreate__fieldLabel">When is it due back</span>
+            <label for="time_due" class="form__field">
+                <span class="form__fieldLabel">When is it due back</span>
                 <input for="time_due" v-model="item.time_due" :min="dateMin" type="date" />
             </label>
 
-            <label for="time_return" class="itemCreate__field">
-                <span class="itemCreate__fieldLabel">When did you get it back</span>
+            <label for="time_return" class="form__field">
+                <span class="form__fieldLabel">When did you get it back</span>
                 <input id="time_return" v-model="item.time_return" :min="dateMin" type="date" />
             </label>
         </fieldset>
-        <fieldset class="itemCreate__fieldset itemCreate__fieldset--controls">
-            <button class="itemCreate__submit" v-on:click="addContent(item)">save</button>
+        <fieldset class="form__fieldset form__fieldset--controls">
+            <button class="form__submit" v-on:click="addContent(item)">save</button>
         </fieldset>
     </form>
 </template>

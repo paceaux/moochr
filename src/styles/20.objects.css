@@ -62,3 +62,47 @@
 .card__street, .card__region, .card__country {
     margin-bottom: 0;
 }
+
+/*===============
+#FORM
+===============*/
+.form {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.form__fieldsetLegend {
+    text-transform: capitalize;
+}
+
+.form__fieldset {
+    border: none;
+    background-color: var(--fieldsetBackground);
+}
+
+.form__field {
+    display: inline-block;
+    width: 49%;
+}
+
+.form__fieldLabel {
+    text-transform: capitalize;
+    display: inline-block;
+    width: 5em;
+}
+
+.form__submit {
+    font-size: 1.25rem;
+    padding: .618em;
+}
+
+.form__fieldOutput {
+    display: inline-block;
+    width: 100%;
+    min-height: 3.5rem;
+}
+
+.form__fieldset--controls {
+    grid-area: footer;
+}

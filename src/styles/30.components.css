@@ -20,55 +20,27 @@
     width: 4ch;
 }
 
-.userCreate {
-    display: grid;
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
+.form--userCreate {
     grid-template-columns: 1fr 1fr;
     grid-template-rows:1fr 1fr 1fr 1fr;
     grid-template-areas: "header header""name address" "contact address" "footer footer"
 }
 
-.userCreate__fieldset {
-    border: none;
-    background-color: var(--fieldsetBackground);
-}
-
-.userCreate__fieldset--name {
+.form--userCreate .form__fieldset--name {
     grid-area: name;
 }
 
-.userCreate__fieldset--contact {
+.form--userCreate .form__fieldset--contact {
     grid-area: contact;
 }
 
-.userCreate__fieldset--address {
+.form--userCreate .form__fieldset--address {
     grid-area: address;
 }
 
-.userCreate__fieldset--controls {
+.form--userCreate .form__fieldset--controls {
     grid-area: footer;
 }
-
-.userCreate__fieldsetLegend {
-    text-transform: capitalize;
-}
-.userCreate__field {
-    display: inline-block;
-    width: 49%;
-}
-
-.userCreate__fieldLabel {
-    text-transform: capitalize;
-    display: inline-block;
-    width: 5em;
-}
-
-.userCreate__submit {
-    font-size: 1.25rem;
-    padding: .618em;
-}
-
 
 .table--itemTable .table__headingHeaderRow th{
     border-bottom: 2px solid var(--colorNeutralLightest)
@@ -91,68 +63,36 @@
     width: 22ch;
 }
 
-.itemCreate {
-    display: grid;
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
+.form--itemCreate {
     grid-template-columns: 1fr 1fr;
     grid-template-rows:1fr 14rem 4rem;
     grid-template-areas: "about about" "owner loan" "footer footer"
 }
 
-.itemCreate__fieldset {
-    border: none;
-    background-color: var(--fieldsetBackground);
-}
-
-.itemCreate__fieldset--itemInfo {
+.form--itemCreate .form__fieldset--itemInfo {
     grid-area: about;
 
 }
 
-.itemCreate__fieldset--itemInfo .itemCreate__field {
+.form--itemCreate .form__fieldset--itemInfo .itemCreate__field {
     min-height: 3em;
 }
-.itemCreate__fieldOutput {
-    display: inline-block;
-    width: 100%;
-    min-height: 3.5rem;
-}
 
-.itemCreate__fieldset--borrow {
+.form--itemCreate .form__fieldset--borrow {
     grid-area: loan;
 }
 
-.itemCreate__fieldset--controls {
+.form--itemCreate .form__fieldset--controls {
     grid-area: footer;
 }
 
-.itemCreate__fieldsetLegend {
-    text-transform: capitalize;
-}
-.itemCreate__field {
-    display: inline-block;
-    width: 49%;
-}
-
-.itemCreate__fieldLabel {
-    text-transform: capitalize;
-    display: inline-block;
-    width: 5em;
-}
-
-.itemCreate__submit {
-    font-size: 1.25rem;
-    padding: .618em;
-}
-
-.itemCreate__imgPreview {
+.form--itemCreate .form__imgPreview {
     width: 30vw;
     border-radius: 3px;
     border: 2px solid var(--colorNeutralDarker);
     margin: .618rem 0;
 }
 
-.itemCreate__userCard.card--user {
+.form--itemCreate .form__userCard.card--user {
     border: none;
 }
