@@ -5,9 +5,9 @@
       </figure>
         <div class="card__info">
             <h2 v-if="item.name" class="card__name">{{item.name}}</h2>
-            <p v-if="item.model_number" class="card__model">Model: {{item.model_number}}</p>
-            <p v-if="item.serial_number" class="card__serial">Serial: {{item.serial_number}}</p>
-            <p v-if="item.value && !hideValue" class="card__value">Value: {{item.value}}</p>
+            <p v-if="item.model_number" class="card__text">Model: {{item.model_number}}</p>
+            <p v-if="item.serial_number" class="card__text">Serial: {{item.serial_number}}</p>
+            <p v-if="item.value && !hideValue" class="card__text">Value: {{item.value}}</p>
         </div>
         <div class="card__owner" v-if="item.owner && !hideOwner">
             <h3 class="card__sectionTitle">Owned By:</h3>
@@ -16,8 +16,8 @@
         <div class="card__borrower" v-if="item.borrower && !hideBorrower">
             <h3 class="card__sectionTitle">Borrowed By: </h3>
             <UserCard class="card__borrower" :user="itemBorrower" :hideAddress="true"></UserCard>
-            <p v-if="item.time_loaned">Loaned on:<time datetime="item.time_loaned">{{loanedOn}}</time></p>
-            <p v-if="item.time_return">due on:<time datetime="item.time_return">{{dueOn}}</time></p>
+            <p class="card__text" v-if="item.time_loaned">Loaned on:<time datetime="item.time_loaned">{{loanedOn}}</time></p>
+            <p class="card__text" v-if="item.time_return">Due on:<time datetime="item.time_return">{{dueOn}}</time></p>
         </div>
   </article>
 </template>

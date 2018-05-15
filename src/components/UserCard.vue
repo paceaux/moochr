@@ -7,18 +7,18 @@
             <template v-else>{{name}}</template>
         </h2>
       <div v-if="!hideContact" class="card__contact">
-          <a v-if="user.email" class="card__email" :href="emailLink">{{user.email}}</a>
-          <a v-if="user.phone" class="card__phone" :href="telLink">{{user.phone}}</a>
+          <a v-if="user.email" class="card__text" :href="emailLink">{{user.email}}</a>
+          <a v-if="user.phone" class="card__text" :href="telLink">{{user.phone}}</a>
       </div>
       <div v-if="!hideAddress" class="card__address">
-          <p v-if="user.street1 && !hideStreet" class="card__street">{{user.street1}}</p>
-          <p v-if="user.street2 && !hideStreet" class="card__street">{{user.street2}}</p>
-          <p class="card__region">
+          <p v-if="user.street1 && !hideStreet" class="card__text">{{user.street1}}</p>
+          <p v-if="user.street2 && !hideStreet" class="card__text">{{user.street2}}</p>
+          <p class="card__text">
             <span v-if="user.city">{{user.city}}</span>
             <span v-if="user.state">{{user.state}}</span>
             <span v-if="user.zip">{{user.zip}}</span>
           </p>
-          <p v-if="user.country" class="card__country">{{user.country}}</p>
+          <p v-if="user.country" class="card__text">{{user.country}}</p>
       </div>
   </article>
 </template>
