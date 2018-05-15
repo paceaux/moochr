@@ -31,4 +31,7 @@ Neutral colors:
     --textColor: var(--colorNeutralDarker);
     --linkColor: var(--colorCool);
     --linkInterestColor: var(--colorCoolLighter);
+
+    --headingFont: Helvetica, Arial, sans-serif;
+    --paragraphFont: Noto Sans, Verdana, sans-serif;
 }

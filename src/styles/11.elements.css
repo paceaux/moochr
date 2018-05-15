@@ -11,6 +11,7 @@ Comment-E:
 */
 
 html {
+    font-family: var(--paragraphFont);
     color: var(--textColor);
     /*Comment-B*/
     font-size: calc(.5vw + 1rem);
@@ -51,7 +52,7 @@ html {
   h5,
   h6,
   legend {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: var(--headingFont);
     font-weight: bold;
     line-height: 1.2;
     margin-bottom: calc(1.618vmin - 1vmax + .35em);
@@ -435,7 +436,7 @@ html {
   }
   
   th {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: var(--headingFont);
     font-weight: bold;
     font-size: 1.3em; /*treat th in a body as h4*/
   }
@@ -456,5 +457,5 @@ html {
     padding: .25em .5rem;
   }
   label {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: var(--headingFont);
   }
