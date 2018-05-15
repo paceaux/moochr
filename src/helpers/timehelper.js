@@ -18,7 +18,7 @@ export default {
 
         switch (lastChar) {
             case '1':
-                if (int === 1 || int == 11)  suffix = 'st';
+                if (int === 1 || (int !== 11 && intString.length > 1))  suffix = 'st';
                 break;
             case '2':
                 suffix = 'nd';
@@ -31,5 +31,13 @@ export default {
         }
 
         return intString + suffix;
+    },
+    getTextDate(timestring) {
+        const time = new Date(timestring);
+        const month = time.getMonth();
+        const date = time.getDate();
+        const year = time.getFullYear();
+
+        return `The ${this.getOrdinalDate(date)} of ${this.getMonthOfYear(month)}, ${year}`;
     }
 };
