@@ -2,7 +2,12 @@
 #COMPONENTS
 ===============*/
 
-.table--userTable .table__headingHeaderRow th{
+
+/*=====
+#USERTABLE
+=====*/
+
+.table--userTable .table__headingHeaderRow th {
     border-bottom: 2px solid var(--colorNeutralLightest)
 }
 
@@ -19,6 +24,11 @@
 .table--userTable #country {
     width: 4ch;
 }
+
+
+/*=====
+#USERFORM
+=====*/
 
 .form--userCreate {
     grid-template-columns: 1fr 1fr;
@@ -38,7 +48,12 @@
     grid-area: address;
 }
 
-.table--itemTable .table__headingHeaderRow th{
+
+/*=====
+#ITEMTABLE
+=====*/
+
+.table--itemTable .table__headingHeaderRow th {
     border-bottom: 2px solid var(--colorNeutralLightest)
 }
 
@@ -59,6 +74,10 @@
     width: 22ch;
 }
 
+
+/*=====
+#ITEMFORM
+=====*/
 .form--itemCreate {
     grid-template-columns: 1fr 1fr;
     grid-template-rows:1fr 14rem 4rem;
