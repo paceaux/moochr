@@ -34,4 +34,6 @@ Neutral colors:
 
     --headingFont: Helvetica, Arial, sans-serif;
     --paragraphFont: Noto Sans, Verdana, sans-serif;
+
+    --fieldsetBackground: rgb(245,245,245);
 }

@@ -6,10 +6,10 @@
 }
 
 .userTable__head {
-    background-color: #dcdcdc;
+    background-color: var(--colorNeutralLightest)
 }
 .userTable__headingHeaderRow th{
-    border-bottom: 2px solid #dcdcdc;
+    border-bottom: 2px solid var(--colorNeutralLightest)
 }
 
 .userTable__headingHeader {
@@ -52,7 +52,7 @@
 
 .userCreate__fieldset {
     border: none;
-    background-color: rgb(245,245,245);
+    background-color: var(--fieldsetBackground);
 }
 
 .userCreate__fieldset--name {
@@ -95,10 +95,10 @@
 }
 
 .itemTable__head {
-    background-color: #dcdcdc;
+    background-color: var(--colorNeutralLightest)
 }
 .itemTable__headingHeaderRow th{
-    border-bottom: 2px solid #dcdcdc;
+    border-bottom: 2px solid var(--colorNeutralLightest)
 }
 
 .itemTable__heading {
@@ -152,7 +152,7 @@
 
 .itemCreate__fieldset {
     border: none;
-    background-color: rgb(245,245,245);
+    background-color: var(--fieldsetBackground);
 }
 
 .itemCreate__fieldset--itemInfo {
@@ -199,7 +199,7 @@
 .itemCreate__imgPreview {
     width: 30vw;
     border-radius: 3px;
-    border: 2px solid #444;
+    border: 2px solid var(--colorNeutralDarker);
     margin: .618rem 0;
 }
 
