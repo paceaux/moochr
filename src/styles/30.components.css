@@ -38,10 +38,6 @@
     grid-area: address;
 }
 
-.form--userCreate .form__fieldset--controls {
-    grid-area: footer;
-}
-
 .table--itemTable .table__headingHeaderRow th{
     border-bottom: 2px solid var(--colorNeutralLightest)
 }
@@ -71,7 +67,6 @@
 
 .form--itemCreate .form__fieldset--itemInfo {
     grid-area: about;
-
 }
 
 .form--itemCreate .form__fieldset--itemInfo .itemCreate__field {
@@ -80,10 +75,6 @@
 
 .form--itemCreate .form__fieldset--borrow {
     grid-area: loan;
-}
-
-.form--itemCreate .form__fieldset--controls {
-    grid-area: footer;
 }
 
 .form--itemCreate .form__imgPreview {
