@@ -9,11 +9,11 @@
             <p v-if="item.serial_number" class="card__text">Serial: {{item.serial_number}}</p>
             <p v-if="item.value && !hideValue" class="card__text">Value: {{item.value}}</p>
         </div>
-        <div class="card__section" v-if="item.owner && !hideOwner">
+        <div class="card__section" v-if="!hideOwner && itemOwner">
             <h3 class="card__sectionTitle">Owned By:</h3>
             <UserCard class="card__owner" :user="itemOwner" :hideAddress="true"></UserCard>
         </div>
-        <div class="card__section" v-if="item.borrower && !hideBorrower">
+        <div class="card__section" v-if="!hideBorrower && itemBorrower">
             <h3 class="card__sectionTitle">Borrowed By: </h3>
             <UserCard class="card__borrower" :user="itemBorrower" :hideAddress="true"></UserCard>
             <p class="card__text" v-if="item.time_loaned">Loaned on:<time datetime="item.time_loaned">{{loanedOn}}</time></p>
@@ -56,9 +56,11 @@ export default {
     },
     computed: {
         itemOwner() {
+            if (!this.item.owner) return null;
             return this.$store.getters.userById(this.item.owner);
         },
         itemBorrower() {
+            if (!this.item.borrower) return null;
             return this.$store.getters.userById(this.item.borrower);
         },
         categoryName() {
@@ -71,7 +73,7 @@ export default {
         }
     },
     beforeCreate() {
-        console.log(this);
+
     }
 }
 </script>
