@@ -7,7 +7,7 @@
             <h2 v-if="item.name" class="card__name">{{item.name}}</h2>
             <p v-if="item.model_number" class="card__text">Model: {{item.model_number}}</p>
             <p v-if="item.serial_number" class="card__text">Serial: {{item.serial_number}}</p>
-            <p v-if="item.value && !hideValue" class="card__text">Value: {{item.value}}</p>
+            <p v-if="item.value && !hideValue" class="card__text">Value: {{itemValue}}</p>
         </div>
         <div class="card__section" v-if="!hideOwner && itemOwner">
             <h3 class="card__sectionTitle">Owned By:</h3>
@@ -23,6 +23,7 @@
 </template>
 <script>
 import TimeHelper from '../helpers/timehelper';
+import FormatHelper from '../helpers/formathelper';
 import UserCard from './UserCard.vue';
 export default {
     components: {
@@ -70,6 +71,9 @@ export default {
         },
         dueOn() {
             return TimeHelper.getTextDate(this.item.time_due);
+        },
+        itemValue() {
+            return FormatHelper.getCurrency(this.item.value);
         }
     },
     beforeCreate() {
