@@ -58,9 +58,9 @@
     width: 100%;
 }
 
-.card__borrower,
-.card__owner {
+.card__section {
     font-size: .8em;
+    margin-top: .618rem;
 }
 
 .card--user {
