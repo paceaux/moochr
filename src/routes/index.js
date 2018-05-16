@@ -8,6 +8,7 @@ import ItemAdd from '../components/ItemAdd.vue';
 import ItemList from '../components/ItemTable.vue';
 import UserCards from '../components/UserCards.vue';
 import UserProfile from '../components/UserProfile.vue';
+import ItemCards from '../components/ItemCards.vue';
 
 const routes = [
     {path: '/addUser', component: UserAdd},
@@ -17,7 +18,8 @@ const routes = [
     {path: '/addItem', component: ItemAdd},
     {path: '/itemList', component: ItemList},
     {path: '/users', component: UserCards},
-    {path: '/user/:id', component: UserProfile, name: 'user'}
+    {path: '/user/:id', component: UserProfile, name: 'user'},
+    {path: '/items/', component: ItemCards},
 ];
 
 const router = new VueRouter({
