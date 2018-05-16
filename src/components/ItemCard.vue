@@ -1,7 +1,7 @@
 <template>
   <article class="card card--item" v-if="item">
       <figure class="card__media">
-          <img v-if="item.image" :src="item.image" />
+          <img class="card__media__image" v-if="item.image" :src="item.image" />
       </figure>
         <div class="card__info">
             <h2 v-if="item.name" class="card__name">{{item.name}}</h2>
