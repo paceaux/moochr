@@ -1,26 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import UserAdd from '../components/UserAdd.vue';
-import UserList from '../components/UserTable.vue';
-import CategoryList from '../components/CategoryTable.vue';
-import CategoryAdd from '../components/CategoryAdd.vue';
-import ItemAdd from '../components/ItemAdd.vue';
-import ItemList from '../components/ItemTable.vue';
+
+import AdminRoutes from './admin';
 import UserCards from '../components/UserCards.vue';
 import UserProfile from '../components/UserProfile.vue';
 import ItemCards from '../components/ItemCards.vue';
 
 const routes = [
-    {path: '/addUser', component: UserAdd},
-    {path: '/userList', component: UserList},
-    {path: '/addCategory', component: CategoryAdd},
-    {path: '/categoryList', component: CategoryList},
-    {path: '/addItem', component: ItemAdd},
-    {path: '/itemList', component: ItemList},
+
     {path: '/users', component: UserCards},
     {path: '/user/:id', component: UserProfile, name: 'user'},
     {path: '/items/', component: ItemCards},
 ];
+
+routes.push(...AdminRoutes);
 
 const router = new VueRouter({
     routes
