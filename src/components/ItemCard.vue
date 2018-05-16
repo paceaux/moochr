@@ -1,13 +1,27 @@
 <template>
   <article class="card card--item" v-if="item">
       <figure class="card__media">
-          <img class="card__media__image" v-if="item.image" :src="item.image" />
+          <img class="card__media__image" v-if="item.image" :src="item.image" alt="item.name" />
       </figure>
         <div class="card__info">
             <h2 v-if="item.name" class="card__name">{{item.name}}</h2>
-            <p v-if="item.model_number" class="card__text">Model: {{item.model_number}}</p>
-            <p v-if="item.serial_number" class="card__text">Serial: {{item.serial_number}}</p>
-            <p v-if="item.value && !hideValue" class="card__text">Value: {{itemValue}}</p>
+            <table class="card__infoTable">
+                <tbody>
+                    <tr v-if="item.model_number">
+                        <th id="itemModel">Model: </th>
+                        <td headers="itemModel">{{item.model_number}}</td>
+                    </tr>
+                    <tr v-if="item.serial_number">
+                        <th id="itemSerial">Serial:</th>
+                        <td headers="itemSerial">{{item.serial_number}}</td>
+                    </tr>
+                    <tr v-if="item.value && !hideValue">
+                        <th id="itemValue">Value: </th>
+                        <td headers="itemValue">{{itemValue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
         <div class="card__section" v-if="!hideOwner && itemOwner">
             <h3 class="card__sectionTitle">Owned By:</h3>
