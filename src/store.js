@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-const apiGetUsers = 'http://localhost:3000/api/v1/user';
-const apiGetCategories = 'http://localhost:3000/api/v1/category';
-const apiGetItems = 'http://localhost:3000/api/v1/item';
+const apiGetUsers = '/api/v1/user';
+const apiGetCategories = '/api/v1/category';
+const apiGetItems = '/api/v1/item';
 const isServerSync = true;
 
 function sendToApi (url, type, data, shouldAjax =  isServerSync) {
