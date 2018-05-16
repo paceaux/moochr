@@ -52,6 +52,17 @@
     margin-bottom: 0;
 }
 
+.card__media {}
+
+.card__media__image {
+    width: 100%;
+}
+
+.card__borrower,
+.card__owner {
+    font-size: .8em;
+}
+
 .card--user {
     display: flex;
     flex-direction: column;
