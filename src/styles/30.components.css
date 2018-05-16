@@ -158,3 +158,47 @@
     border: none;
     border-top: 1px dotted var(--colorNeutralDarker);
 }
+
+/*=====
+#Header
+=====*/
+
+.appHeader {
+
+}
+
+.appHeader__adminNav {
+    position: fixed;
+    right: 0;
+    top: 0;
+    font-size: .8rem;
+    background: white;
+}
+
+.appHeader__mainNav {
+
+}
+
+.nav {
+    display: flex;
+}
+
+.nav--horizontal {
+    justify-content: flex-start;
+}
+
+.nav--vertical {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.nav__links {
+    display: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+}
+
+.nav__link {
+    margin: .25em;
+}
