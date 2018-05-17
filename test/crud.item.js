@@ -240,3 +240,56 @@ describe(`API endpoint ${endpoint}` , function (){
     });
 
 });
+
+describe(`API endpoint ${endpoint}?<field>=<value> `, function() {
+    it('should get items for one specific category', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?category=1')
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                res.body.forEach(item => {
+                    expect(item.category).to.contain('1');
+                });
+            });
+    });
+
+    it('should get items for multiple categories', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?category=1&category=2')
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                res.body.forEach(item => {
+                    expect(item.category).to.contain('1');
+                    expect(item.category).to.contain('2');
+                    expect(item.category).to.not.contain('3');
+                });
+            });
+    });
+
+    it('should get items for one specific user', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?owner=1')
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                res.body.forEach(item => {
+                    expect(item).to.have.property('owner', '1');
+                });
+            });
+    });
+
+    it('should get items that are loanable', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?is_loanable=true')
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                res.body.forEach(item => {
+                    expect(item).to.have.property('is_loanable', true);
+                });
+            });
+    });
+
+});
