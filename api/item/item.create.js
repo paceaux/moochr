@@ -4,7 +4,6 @@ const sequelize = require('../../db.config');
 const Item = require('../../models/item.model');
 
 module.exports = function postCb (req, res, next) {
-  console.log(req.body);
   sequelize
   .authenticate()
   .then(  () => {
