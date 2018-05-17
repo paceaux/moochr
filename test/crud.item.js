@@ -202,4 +202,29 @@ describe(`API endpoint ${endpoint}` , function (){
             });
     });
 
+    it('should get items for one specific category', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?category=1')
+            .then(function (res) {
+                expect(res).to.have.deep.property('id', 1);
+            });
+    });
+
+    it('should get items for multiple categories', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?category=1&category=2')
+            .then(function (res) {
+                expect(res).to.have.deep.property('id', 1);
+                expect(res).to.have.deep.property('id', 2);
+            });
+    });
+
+    it('should get items for one specific user', function() {
+        return chai.request(appUrl)
+            .get(endpoint + '?owner=1')
+            .then(function (res) {
+                expect(res).to.have.deep.property('id',1);
+            });
+    });
+
 });
