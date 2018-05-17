@@ -214,6 +214,7 @@ describe(`API endpoint ${endpoint}` , function (){
         return chai.request(appUrl)
             .get(endpoint + '?category=1&category=2')
             .then(function (res) {
+                expect(res).to.have.status(200);
                 expect(res).to.have.deep.property('id', 1);
                 expect(res).to.have.deep.property('id', 2);
             });
@@ -223,7 +224,11 @@ describe(`API endpoint ${endpoint}` , function (){
         return chai.request(appUrl)
             .get(endpoint + '?owner=1')
             .then(function (res) {
-                expect(res).to.have.deep.property('id',1);
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                res.body.forEach(item => {
+                    expect(item).to.have.property('owner', '1');
+                });
             });
     });
 
