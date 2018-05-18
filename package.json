@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "supervisor ./bin/www",
+    "start": "node ./bin/www",
+    "local": "supervisor -i node_modules,test --inspect ./bin/www",
     "postinstall": "node models/syncModels.js",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
