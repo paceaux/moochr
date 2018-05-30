@@ -1,20 +1,30 @@
-const express = require('express');
-const router = express.Router();
+const Router = require('koa-router');
+
+const router = new Router({
+    prefix: '/api/v1',
+});
+const create = require('./user.create.js');
+const read = require('./user.read.js');
+const update = require('./user.update.js');
+const del = require('./user.delete.js');
+
 const userApi = {
-  create: require('./user.create.js'),
-  read: require('./user.read.js'),
-  update: require('./user.update.js'),
-  delete: require('./user.delete.js')
+    create,
+    read,
+    update,
+    delete: del,
 };
-router.get('/', function(req, res, next) {
-  
-  res.header('Content-Type', 'text/html').sendFile('public/index.html');
+
+router.get('/', (ctx, next) => {
+    ctx.header('Content-Type', 'text/html').sendFile('public/index.html');
+    next();
 });
 
-router.post('/api/v1/user', userApi.create );
-router.get('/api/v1/user', userApi.read);
-router.get('/api/v1/user/:user_id', userApi.read);
-router.put('/api/v1/user/:user_id', userApi.update);
-router.delete('/api/v1/user/:user_id', userApi.delete);
+router.post('/user', userApi.create.one);
+router.get('/user', userApi.read.all);
+router.get('/users', userApi.read.all);
+router.get('/user/:user_id', userApi.read.byId);
+router.put('/user/:user_id', userApi.update.byId);
+router.delete('/user/:user_id', userApi.delete.byId);
 
 module.exports = router;

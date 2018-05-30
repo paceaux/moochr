@@ -1,34 +1,47 @@
 const crudOp = 'read';
-const Sequelize = require('sequelize');
 const sequelize = require('../../db.config');
 const User = require('../../models/user.model');
 
-module.exports = function readCb(req, res, next) {
-    const userId = req.params.user_id;
-        sequelize
-        .authenticate()
-        .then( ()=> {
-            if (userId) {
-                User
-                .findOne({
-                    where: {
-                        id: userId
-                    }
-                })
-                .then(user => res.send(user))
-                .catch(err => res.status(500).send({error: err, crudOp}));
-            } else {
-                User
-                .findAll()
-                .then(users => {
-                    res.send(users);
-                })
-                .catch(err => res.status(500).send({error: err, crudOp}));
-            }
+module.exports = {
+    byId: async (ctx, next) => {
+        await sequelize.authenticate();
+        const id = ctx.params.user_id;
 
-        })
-        .catch(err=> {
-            console.error('bad connect');
-            res.status(500).send({error:err, crudOp: 'connection'});
+        const result = await User.findOne({
+            where: {
+                id,
+            },
         });
- };
+
+        if (!id) {
+            ctx.type = 'application/json; charset=utf-8';
+            ctx.status = 400;
+            ctx.body = { err: 'No id provided', crudOp };
+        }
+
+        if (id && !result) {
+            ctx.type = 'application/json; charset=utf-8';
+            ctx.status = 404;
+            ctx.body = { err: 'Id was not found', crudOp };
+        }
+
+        if (id && result) {
+            ctx.body = result;
+        }
+
+        next();
+    },
+    all: async (ctx, next) => {
+        await sequelize.authenticate();
+
+        const result = await User.findAll();
+
+        if (Array.isArray(result)) {
+            ctx.body = result;
+        } else {
+            ctx.body = { err: result, crudOp };
+        }
+
+        next();
+    },
+};
