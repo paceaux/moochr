@@ -1,5 +1,4 @@
 const crudOp = 'update';
-const Sequelize = require('sequelize');
 const sequelize = require('../../db.config');
 const Category = require('../../models/category.model');
 
