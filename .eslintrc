@@ -1,6 +1,7 @@
 {
     "extends": "airbnb-base",
     "rules" : {
-        "indent": ["warn", 4]
+        "indent": ["warn", 4],
+        "arrow-parens": "off"
     }
 }
