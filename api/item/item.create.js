@@ -1,20 +1,21 @@
 const crudOp = 'create';
-const Sequelize = require('sequelize');
 const sequelize = require('../../db.config');
 const Item = require('../../models/item.model');
 
-module.exports = function postCb (req, res, next) {
-  sequelize
-  .authenticate()
-  .then(  () => {
-    return Item
-      .create(req.body)
-      .then(item => {
-        res.status(200).send(item.dataValues);
-      });
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).send({error: err, crudOp});
-  });
+module.exports = {
+    one: async (ctx, next) => {
+        await sequelize.authenticate();
+
+        try {
+            const result = await Item.create(ctx.request.body);
+
+            ctx.body = result;
+        } catch (err) {
+            ctx.status = 500;
+            ctx.body = { err, crudOp };
+        }
+
+
+        next();
+    },
 };

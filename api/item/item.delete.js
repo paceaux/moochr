@@ -1,31 +1,30 @@
 const crudOp = 'create';
-const Sequelize = require('sequelize');
 const sequelize = require('../../db.config');
 const Item = require('../../models/item.model');
 
-module.exports = function deleteCb(req,res, done) {
-    sequelize
-        .authenticate()
-        .then( () => {
-            Item.destroy({
+module.exports = {
+    byId: async (ctx, next) => {
+        await sequelize.authenticate();
+        const id = ctx.params.item_id;
+
+        try {
+            const result = await Item.destroy({
                 where: {
-                    id: req.params.item_id
-                }
-            })
-            .then((result) => {
-                if (result === 1) {
-                    res.status(200).json({result: "deleted"});
-                } else {
-                    res.status(404).json({result: "record not found"});
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                res.status(500).send({error: err, crudOp});
+                    id,
+                },
             });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send({error: err, crudOp: 'connection'});
-        });
+
+            if (result === 1) {
+                ctx.body = result;
+            } else {
+                ctx.body = { err: 'record not found', crudOp };
+                ctx.status = 404;
+            }
+        } catch (err) {
+            ctx.status = 500;
+            ctx.body = { err, crudOp };
+        }
+
+        next();
+    },
 };

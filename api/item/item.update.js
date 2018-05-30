@@ -1,34 +1,25 @@
 const crudOp = 'update';
-const Sequelize = require('sequelize');
 const sequelize = require('../../db.config');
 const Item = require('../../models/item.model');
 
-module.exports = function updateCb(req, res, done) {
-    sequelize
-        .authenticate()
-        .then( ()=> {
-            Item
-                .findOne({
-                    where: {
-                        id: req.params.item_id
-                    }
-                })
-                .then(result => {
-                    result
-                        .update(req.body)
-                        .then(updateResult => {
-                            res.send(updateResult);
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            res.status(500).send({error: err, crudOp});
-                        });
-                })
-                .catch(err => {
-                    res.status(404).send({error: err,crudOp: 'findOne'});
-                });
-        })
-        .catch(err => {
-            res.status(500).send({error: err, crudOp: 'connection'});
+module.exports = {
+    byId: async (ctx, next) => {
+        await sequelize.authenticate();
+        const id = ctx.params.item_id;
+
+        const item = await Item.findOne({
+            where: {
+                id,
+            },
         });
+
+        if (item) {
+            const result = await item.update(ctx.request.body);
+            ctx.body = result;
+        } else {
+            ctx.status = 404;
+            ctx.body = { err: 'Record not found', crudOp };
+        }
+        next();
+    },
 };
