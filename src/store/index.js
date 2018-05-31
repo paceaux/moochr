@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import categories from './modules/categories/index.js';
-import items from './modules/items/index.js';
-import users from './modules/users/index.js';
+import categories from './modules/categories/index';
+import items from './modules/items/index';
+import users from './modules/users/index';
 
 const isServerSync = true;
 
