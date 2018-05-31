@@ -37,7 +37,7 @@ export default {
     },
     data() {
         return {
-            allItems: this.$store.state.items
+            allItems: this.$store.state.items.items
         };
     },
     computed: {

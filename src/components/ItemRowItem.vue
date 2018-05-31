@@ -117,7 +117,7 @@ export default {
             return borrowers;
         },
         categories(){
-            return this.$store.state.categories;
+            return this.$store.state.categories.categories;
         },
         imgUrl() {
             console.log('this.item.image',this.item.image);
@@ -133,7 +133,7 @@ export default {
             this.isEditable = !this.isEditable;
         },
         categoryName(id) {
-            const category =  this.$store.state.categories.find(category => category.id == id);
+            const category =  this.$store.state.categories.categories.find(category => category.id == id);
 
             return category ? category.name : '';
         },

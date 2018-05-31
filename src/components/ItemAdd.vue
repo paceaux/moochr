@@ -122,7 +122,7 @@ export default {
             return borrowers;
         },
         categories() {
-            return this.$store.state.categories;
+            return this.$store.state.categories.categories;
         },
         dateMin() {
             const now = new Date();
