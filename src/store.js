@@ -1,13 +1,18 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-const apiGetUsers = '/api/v1/user';
-const apiGetCategories = '/api/v1/category';
-const apiGetItems = '/api/v1/item';
+const axios = require('axios');
+
+const apiGetUser = '/api/v1/user';
+const apiGetUsers = '/api/v1/users';
+const apiGetCategory = '/api/v1/category';
+const apiGetCategories = '/api/v1/categories';
+const apiGetItem = '/api/v1/item';
+const apiGetItems = '/api/v1/items';
 const isServerSync = true;
 
 function sendToApi(url, type, data, shouldAjax = isServerSync) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
         if (!shouldAjax) resolve(data);
         const xhr = new XMLHttpRequest();
         xhr.open(type, url);
@@ -81,7 +86,7 @@ export default new Vuex.Store({
     },
     actions: {
         addUser({ commit }, user) {
-            sendToApi(apiGetUsers, 'POST', user, this.state.isServerSync)
+            sendToApi(apiGetUser, 'POST', user, this.state.isServerSync)
                 .then(res => {
                     commit('ADDUSER', res);
                 })
@@ -90,7 +95,7 @@ export default new Vuex.Store({
                 });
         },
         updateUser({ commit }, user) {
-            sendToApi(`${apiGetUsers}/${user.id}`, 'PUT', user, this.state.isServerSync)
+            sendToApi(`${apiGetUser}/${user.id}`, 'PUT', user, this.state.isServerSync)
                 .then(res => {
                     console.info(res);
                     commit('UPDATEUSER', user);
@@ -100,7 +105,7 @@ export default new Vuex.Store({
                 });
         },
         deleteUser({ commit }, userId) {
-            sendToApi(`${apiGetUsers}/${userId}`, 'DELETE', undefined, this.state.isServerSync)
+            sendToApi(`${apiGetUser}/${userId}`, 'DELETE', undefined, this.state.isServerSync)
                 .then(() => {
                     const userIndex = this.getters.userIndexById(userId);
                     commit('DELETEUSER', userIndex);
@@ -110,7 +115,7 @@ export default new Vuex.Store({
                 });
         },
         addItem({ commit }, item) {
-            sendToApi(apiGetItems, 'POST', item, this.state.isServerSync)
+            sendToApi(apiGetItem, 'POST', item, this.state.isServerSync)
                 .then(res => {
                     commit('ADDITEM', res);
                 })
@@ -119,7 +124,7 @@ export default new Vuex.Store({
                 });
         },
         updateItem({ commit }, item) {
-            sendToApi(`${apiGetItems}/${item.id}`, 'PUT', item, this.state.isServerSync)
+            sendToApi(`${apiGetItem}/${item.id}`, 'PUT', item, this.state.isServerSync)
                 .then(res => {
                     console.info(res);
                     commit('UPDATEITEM', item);
@@ -129,7 +134,7 @@ export default new Vuex.Store({
                 });
         },
         deleteItem({ commit }, itemId) {
-            sendToApi(`${apiGetItems}/${itemId}`, 'DELETE', undefined, this.state.isServerSync)
+            sendToApi(`${apiGetItem}/${itemId}`, 'DELETE', undefined, this.state.isServerSync)
                 .then(() => {
                     const itemIndex = this.getters.itemIndexById(itemId);
                     commit('DELETEITEM', itemIndex);
@@ -139,16 +144,16 @@ export default new Vuex.Store({
                 });
         },
         addCategory({ commit }, category) {
-            sendToApi(apiGetCategories, 'POST', category, this.state.isServerSync)
+            axios.post(apiGetCategory, category)
                 .then(res => {
-                    this.commit('ADDCATEGORY', res);
+                    commit('ADDCATEGORY', res.data);
                 })
                 .catch(err => {
                     console.warn('error', err);
                 });
         },
         updateCategory({ commit }, category) {
-            sendToApi(`${apiGetCategories}/${category.id}`, 'PUT', category, this.state.isServerSync)
+            axios.put(`${apiGetCategory}/${category.id}`, category)
                 .then(() => {
                     commit('UPDATECATEGORY', category);
                 })
@@ -157,19 +162,21 @@ export default new Vuex.Store({
                 });
         },
         deleteCategory({ commit }, categoryId) {
-            sendToApi(`${apiGetCategories}/${categoryId}`, 'DELETE', undefined, this.state.isServerSync)
-                .then(() => {
-                    const catIndex = this.getters.categoryIndexById(categoryId);
-                    commit('DELETECATEGORY', catIndex);
+            axios.delete(`${apiGetCategory}/${categoryId}`)
+                .then((res) => {
+                    if (res.status === 200) {
+                        const catIndex = this.getters.categoryIndexById(categoryId);
+                        commit('DELETECATEGORY', catIndex);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
                 });
         },
         requestUsers({ commit }) {
-            sendToApi(apiGetUsers, 'GET')
-                .then(users => {
-                    users.forEach(user => {
+            axios.get(apiGetUsers)
+                .then(res => {
+                    res.data.forEach(user => {
                         commit('ADDUSER', user);
                     });
                 })
@@ -178,9 +185,9 @@ export default new Vuex.Store({
                 });
         },
         requestCategories({ commit }) {
-            sendToApi(apiGetCategories, 'GET')
-                .then(categories => {
-                    categories.forEach(category => {
+            axios.get(apiGetCategories)
+                .then(res => {
+                    res.data.forEach(category => {
                         commit('ADDCATEGORY', category);
                     });
                 })
@@ -189,9 +196,9 @@ export default new Vuex.Store({
                 });
         },
         requestItems({ commit }) {
-            sendToApi(apiGetItems, 'GET')
-                .then(items => {
-                    items.forEach(item => {
+            axios.get(apiGetItems)
+                .then(res => {
+                    res.data.forEach(item => {
                         commit('ADDITEM', item);
                     });
                 })
