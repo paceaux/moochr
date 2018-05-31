@@ -2,6 +2,12 @@
   "name": "moochr",
   "version": "0.0.0",
   "private": true,
+  "config": {
+    "ports" : {
+      "http": 3000,
+      "https": 3001
+    }
+  },
   "scripts": {
     "start": "node ./bin/www",
     "local": "supervisor -i node_modules,test --inspect ./bin/www",
