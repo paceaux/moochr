@@ -99,13 +99,13 @@ export default {
             return `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()}`;
         },
         items() {
-            return this.$store.state.items;
+            return this.$store.state.items.items;
         },
         owners() {
-            return this.$store.state.users;
+            return this.$store.state.users.users;
         },
         borrowers() {
-            const users = this.$store.state.users;
+            const users = this.owners;
             let borrowers = users;
 
             if (this.item.owner) {
@@ -140,11 +140,11 @@ export default {
         getUserById(id) {
             if (!id) return '';
             
-            return this.$store.state.users.find(user => user.id == id);
+            return this.$store.state.users.users.find(user => user.id == id);
         },
         userName(id) {
             if (!id) return '';
-            const user = this.$store.state.users.find(user => user.id == id);
+            const user = this.$store.state.users.users.find(user => user.id == id);
             const first = user && user.firstname ? user.firstname : '';
             const last = user && user.lastname ? user.lastname : '';
 

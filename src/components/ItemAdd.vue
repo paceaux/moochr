@@ -104,13 +104,13 @@ export default {
     },
     computed: {
         items() {
-            return this.$store.state.items;
+            return this.$store.state.items.items;
         },
         owners() {
-            return this.$store.state.users;
+            return this.$store.state.users.users;
         },
         borrowers() {
-            const users = this.$store.state.users;
+            const users = this.$store.state.users.users;
             let borrowers = users;
 
             if (this.item.owner) {
@@ -164,7 +164,7 @@ export default {
             let owner;
 
             if (this.item.owner) {
-                owner = this.$store.state.users.find(user => user.id == id);
+                owner = this.owners.find(user => user.id == id);
             }
 
             return owner;

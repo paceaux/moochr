@@ -16,7 +16,7 @@ export default {
     props: {},
     data() {
         return {
-            users: this.$store.state.users
+            users: this.$store.state.users.users
         };
     },
     computed: {
