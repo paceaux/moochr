@@ -86,29 +86,35 @@ export default new Vuex.Store({
     },
     actions: {
         addUser({ commit }, user) {
-            sendToApi(apiGetUser, 'POST', user, this.state.isServerSync)
+            axios.post(apiGetUser, user)
                 .then(res => {
-                    commit('ADDUSER', res);
+                    if (res.status === 200) {
+                        commit('ADDUSER', res.data);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
                 });
         },
         updateUser({ commit }, user) {
-            sendToApi(`${apiGetUser}/${user.id}`, 'PUT', user, this.state.isServerSync)
+            axios.put(`${apiGetUser}/${user.id}`, user)
                 .then(res => {
-                    console.info(res);
-                    commit('UPDATEUSER', user);
+                    if (res.status === 200) {
+                        console.info(res);
+                        commit('UPDATEUSER', user);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
                 });
         },
         deleteUser({ commit }, userId) {
-            sendToApi(`${apiGetUser}/${userId}`, 'DELETE', undefined, this.state.isServerSync)
-                .then(() => {
-                    const userIndex = this.getters.userIndexById(userId);
-                    commit('DELETEUSER', userIndex);
+            axios.delete(`${apiGetUser}/${userId}`)
+                .then(res => {
+                    if (res.status === 200) {
+                        const userIndex = this.getters.userIndexById(userId);
+                        commit('DELETEUSER', userIndex);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
@@ -128,7 +134,6 @@ export default new Vuex.Store({
         updateItem({ commit }, item) {
             axios.put(`${apiGetItem}/${item.id}`, item)
                 .then(res => {
-                    console.info(res);
                     if (res.status === 200) {
                         commit('UPDATEITEM', item);
                     }
