@@ -115,29 +115,35 @@ export default new Vuex.Store({
                 });
         },
         addItem({ commit }, item) {
-            sendToApi(apiGetItem, 'POST', item, this.state.isServerSync)
+            axios.post(apiGetItem, item)
                 .then(res => {
-                    commit('ADDITEM', res);
+                    if (res.status === 200) {
+                        commit('ADDITEM', res.data);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
                 });
         },
         updateItem({ commit }, item) {
-            sendToApi(`${apiGetItem}/${item.id}`, 'PUT', item, this.state.isServerSync)
+            axios.put(`${apiGetItem}/${item.id}`, item)
                 .then(res => {
                     console.info(res);
-                    commit('UPDATEITEM', item);
+                    if (res.status === 200) {
+                        commit('UPDATEITEM', item);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
                 });
         },
         deleteItem({ commit }, itemId) {
-            sendToApi(`${apiGetItem}/${itemId}`, 'DELETE', undefined, this.state.isServerSync)
-                .then(() => {
-                    const itemIndex = this.getters.itemIndexById(itemId);
-                    commit('DELETEITEM', itemIndex);
+            axios.delete(`${apiGetItem}/${itemId}`)
+                .then((res) => {
+                    if (res.status === 200) {
+                        const itemIndex = this.getters.itemIndexById(itemId);
+                        commit('DELETEITEM', itemIndex);
+                    }
                 })
                 .catch(err => {
                     console.warn(err);
@@ -146,7 +152,9 @@ export default new Vuex.Store({
         addCategory({ commit }, category) {
             axios.post(apiGetCategory, category)
                 .then(res => {
-                    commit('ADDCATEGORY', res.data);
+                    if (res.status === 200) {
+                        commit('ADDCATEGORY', res.data);
+                    }
                 })
                 .catch(err => {
                     console.warn('error', err);
