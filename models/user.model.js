@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 const bcrypt = require('bcrypt');
 
+// https://nodeontrain.xyz/tuts/secure_password/
 function hasSecurePassword(user, options, callback) {
     if (user.password != user.password_confirmation) {
         throw new Error("Password confirmation doesn't match Password");
