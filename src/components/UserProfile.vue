@@ -32,7 +32,7 @@ export default {
             return user;
         },
         UsersItems () {
-            return this.$store.state.items.filter(item=> item.owner == this.user.id);
+            return this.$store.state.items.items.filter(item=> item.owner == this.user.id);
         }
     }
 }
