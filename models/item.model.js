@@ -3,16 +3,17 @@ const sequelize = require('../db.config');
 const Category = require('./category.model');
 const User = require('./user.model');
 
-const Item = sequelize.define('item', {
+const Item = sequelize.define(
+    'item', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         is_loanable: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
-            defaultValue: false
+            defaultValue: false,
         },
         name: {
             type: Sequelize.TEXT,
@@ -24,31 +25,31 @@ const Item = sequelize.define('item', {
         },
         borrower: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         category: {
             type: Sequelize.ARRAY(Sequelize.TEXT),
-            allowNull: true
+            allowNull: true,
         },
-            /*
-            couldn't figure out how to send blobs
-            https://stackoverflow.com/questions/6196666/converting-image-to-binary-array-blob-with-html5
-            */
+        /*
+                couldn't figure out how to send blobs
+                https://stackoverflow.com/questions/6196666/converting-image-to-binary-array-blob-with-html5
+                */
         image: {
             type: Sequelize.TEXT,
             allowNull: true,
         },
         model_number: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         serial_number: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         time_due: {
             type: Sequelize.DATE,
-            allowNull: true
+            allowNull: true,
         },
         time_loaned: {
             type: Sequelize.DATE,
@@ -56,25 +57,23 @@ const Item = sequelize.define('item', {
         },
         time_return: {
             type: Sequelize.DATE,
-            allowNull: true
+            allowNull: true,
         },
         value: {
             type: Sequelize.FLOAT,
-            allowNull: true
+            allowNull: true,
         },
-
-
     },
     {
         tableName: 'items',
         underscored: true,
         updatedAt: false,
-        createdAt: 'timestamp'
-    }
+        createdAt: 'timestamp',
+    },
 );
 
 Item.belongsToMany(Category, {
-    through: 'CategoryItem'
+    through: 'CategoryItem',
 });
 
 Item.belongsTo(User);

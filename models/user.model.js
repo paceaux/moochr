@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 
-const User = sequelize.define('user', {
+const User = sequelize.define(
+    'user', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         firstname: {
             type: Sequelize.TEXT,
@@ -13,60 +14,60 @@ const User = sequelize.define('user', {
         },
         lastname: {
             type: Sequelize.TEXT,
-            allowNull: false
+            allowNull: false,
         },
         email: {
             type: Sequelize.TEXT,
             allowNull: false,
             set(val) {
                 this.setDataValue('email', val.toLowerCase().trim());
-            }
+            },
         },
         password: {
             type: Sequelize.VIRTUAL,
-            allowNull: true
+            allowNull: true,
         },
         phone: {
             type: Sequelize.TEXT,
             allowNull: true,
-            set (val) {
+            set(val) {
                 this.setDataValue('phone', val.replace(/\s/g, ''));
-            }
+            },
         },
         street1: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         street2: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         zip: {
             type: Sequelize.TEXT,
             allowNull: true,
             set(val) {
                 this.setDataValue('zip', val.trim());
-            }
+            },
         },
         city: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         state: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: true,
         },
         country: {
             type: Sequelize.TEXT,
-            allowNull: true
-        }
+            allowNull: true,
+        },
     },
     {
         tableName: 'users',
         underscored: true,
         updatedAt: false,
-        createdAt: 'timestamp'
-    }
+        createdAt: 'timestamp',
+    },
 );
 
 module.exports = User;

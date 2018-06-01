@@ -1,6 +1,3 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db.config');
-
 const Category = require('./category.model');
 const User = require('./user.model');
 const Item = require('./item.model');
@@ -11,7 +8,7 @@ Category
 
 User
     .sync()
-    .then( () => console.log('User Synchronized'));
+    .then(() => console.log('User Synchronized'));
 
 Item
     .sync()
