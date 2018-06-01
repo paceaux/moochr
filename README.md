@@ -30,18 +30,15 @@ There are three endpoints:
 * `user` : users
 * `item` : items that a user owns
 
-
-
-### `Using the API`
-All three APIs are identical in structure and usage. 
+All three APIs are identical in structure and usage. In the API below, replace `category` with the singular/plural of the other two endpoints, and you're good to go.
 
 |Endpoint|Verb|Result|
 | --- | ---| --- |
 `category` | POST | requires a JSON body. will create that category and return the created version
-`/category` | GET | Returns all categories|
+`/category` | GET | Returns array of all categories (needs to be deprecated) |
 `/category/:id` | GET | Returns category of that id |
-`/categories` | GET | Returns all categories |
-`/categories?field=value` | GET |  returns array of all matches
-`/category:id` : PUT | needs a JSON body, will update category by id
-`/category/:id` : DELETE | Deletes that category. Returns state
+`/categories` | GET | Returns array of categories |
+`/categories?field=value` | GET |  returns array of all matches. Search by any field and value. Exact matches, though.
+`/category:id` | PUT | needs a JSON body, returns updated category
+`/category/:id` | DELETE | Deletes that category. Returns state
 
