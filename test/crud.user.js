@@ -1,63 +1,67 @@
 const chai = require('chai');
-const expect = require('chai').expect;
+const { expect } = require('chai');
+const bcrypt = require('bcrypt');
+
 const appUrl = 'http://localhost:3000/api/v1';
 const endpoint = '/user/';
 
 chai.use(require('chai-http'));
 
 const testUser = {
-	firstname: "Test",
-	lastname: "Taco",
-	email: "test@whatevs.com",
-	phone: "8884645555",
-	street1: "street 1",
-	street2: "street 2",
-	city: "somewhere",
-	state: "TX",
-	country: "USA"
+    firstname: 'Test',
+    lastname: 'Taco',
+    email: 'test@whatevs.com',
+    password: 'foobar',
+    phone: '8884645555',
+    street1: 'street 1',
+    street2: 'street 2',
+    city: 'somewhere',
+    state: 'TX',
+    country: 'USA',
 };
 
 const testUpdatedUser = {
-	firstname: "Update Test",
-	lastname: "Taco",
-	email: "test@whatevs.com",
-	phone: "7774646666",
-	street1: "street 1",
-	street2: "street 2",
-	city: "somewhere else",
-	state: "IL",
-	country: "USA"
+    firstname: 'Update Test',
+    lastname: 'Taco',
+    email: 'test@whatevs.com',
+    password: 'barfoo',
+    phone: '7774646666',
+    street1: 'street 1',
+    street2: 'street 2',
+    city: 'somewhere else',
+    state: 'IL',
+    country: 'USA',
 };
 
-describe(`API endpoint ${endpoint}` , function (){
+describe(`API endpoint ${endpoint}`, function () {
     this.timeout(5000);
 
-    before(function () {
+    before(() => {
 
     });
 
-    after(function () {
+    after(() => {
 
     });
 
-    it('should return some users', function () {
-        return chai.request(appUrl)
+    it('should return some users', () =>
+         chai.request(appUrl)
             .get(endpoint)
-            .then(function(res) {
+            .then((res) => {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('array');
-            });
-    });
+            })
+    );
 
-    it('should add a user', function () {
+    it('should add a user', () => {
         return chai.request(appUrl)
             .post(endpoint)
             .send(testUser)
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
-                expect(res.body).to.be.an('object').to.have.any.keys('id', 'firstname', 'lastname', 'email', 'city');
+                expect(res.body).to.be.an('object').to.have.any.keys('id', 'firstname', 'lastname', 'email', 'city', 'password');
             });
     });
 
@@ -78,15 +82,47 @@ describe(`API endpoint ${endpoint}` , function (){
             return chai.request(appUrl)
                 .get(endpoint + addedUser.id)
                 .then(function (userRes) {
+                    const userData = userRes && userRes.body;
                     expect(userRes).to.have.status(200);
                     expect(userRes).to.be.json;
-                    expect(userRes.body).to.be.an('object');
-                    expect(userRes.body).to.include(testUser);
+                    expect(userData).to.have.property('firstname', testUser.firstname);
+                    expect(userData).to.have.property('lastname', testUser.lastname);
+                    expect(userData).to.have.property('email', testUser.email);
+                    expect(userData).to.have.property('phone', testUser.phone);
+                    expect(userData).to.have.property('city', testUser.city);
+                    expect(userData).to.have.property('country', testUser.country);
+                    expect(userData).to.have.property('password');
                 });
             });
     });
 
-    it('should update a user', function () {
+    it('Created user should have an encrypted password', function () {
+        return chai.request(appUrl)
+            .get(endpoint)
+            .then(function (res) {
+                const addedUser = res.body.find(usr => {
+                    return (
+                        usr.firstname == testUser.firstname &&
+                        usr.lastname == testUser.lastname &&
+                        usr.email == testUser.email &&
+                        usr.phone == testUser.phone &&
+                        usr.city == testUser.city &&
+                        usr.country == testUser.country
+                    );
+                });
+            return chai.request(appUrl)
+                .get(endpoint + addedUser.id)
+                .then(function (userRes) {
+                    const userData = userRes && userRes.body;
+                    expect(userRes).to.have.status(200);
+                    expect(userRes).to.be.json;
+                    const isSame = bcrypt.compareSync(testUser.password, userData.password);
+                    expect(isSame).to.be.true;
+                });
+            });
+    });
+
+    it('should update a user', () => {
         return chai.request(appUrl)
             .get(endpoint)
             .then(function (res) {
@@ -116,7 +152,36 @@ describe(`API endpoint ${endpoint}` , function (){
             });
     });
 
-    it('should delete a user', function () {
+    it('should update a user password', () => {
+        return chai.request(appUrl)
+            .get(endpoint)
+            .then(function (res) {
+                const addedUser = res.body.find(usr => {
+                    return (
+                        usr.firstname == testUpdatedUser.firstname &&
+                        usr.lastname == testUpdatedUser.lastname &&
+                        usr.email == testUpdatedUser.email &&
+                        usr.phone == testUpdatedUser.phone &&
+                        usr.city == testUpdatedUser.city &&
+                        usr.country == testUpdatedUser.country
+                    );
+                });
+
+                return chai.request(appUrl)
+                    .put(endpoint + addedUser.id)
+                    .send(testUpdatedUser)
+                    .then(function(updateRes) {
+                        const userData = updateRes && updateRes.body;
+                        expect(updateRes).to.have.status(200);
+                        expect(updateRes.body).to.be.an('object');
+                        expect(updateRes).to.be.json;
+                        const isSame = bcrypt.compareSync(testUpdatedUser.password, userData.password);
+                        expect(isSame).to.be.true;
+                    });
+            });
+    });
+
+    it('should delete a user', () => {
         return chai.request(appUrl)
             .get(endpoint)
             .then(function(res) {
@@ -138,5 +203,5 @@ describe(`API endpoint ${endpoint}` , function (){
                 });
             });
     });
-
 });
+
