@@ -2,18 +2,22 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 const bcrypt = require('bcrypt');
 
-// https://nodeontrain.xyz/tuts/secure_password/
-function hasSecurePassword(user, options, callback) {
-    if (user.password != user.password_confirmation) {
-        throw new Error("Password confirmation doesn't match Password");
-    }
-    bcrypt.hash(user.get('password'), 10, (err, hash) => {
-        if (err) return callback(err);
-        user.set('password_digest', hash);
-        return callback(null, options);
+/* 
+
+Originally tried this for passwords: https://nodeontrain.xyz/tuts/secure_password/
+That didn't work, so I tried something like this:
+https://gist.github.com/JesusMurF/9d206738aa54131a6e7ac88ab2d9084e
+
+*/
+function getHashedPassword(password) {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hash) => {
+            if (err) return reject(err);
+
+            return resolve(hash);
+        });
     });
 }
-
 const User = sequelize.define(
     'user', {
         id: {
@@ -36,21 +40,21 @@ const User = sequelize.define(
                 this.setDataValue('email', val.toLowerCase().trim());
             },
         },
-        password_digest: {
-            type: Sequelize.STRING,
-            validate: {
-                notEmpty: true,
-            },
-        },
+        /*
+The sequelize documentation has a virtual data type: http://docs.sequelizejs.com/variable/index.html#static-variable-DataTypes
+And the exact example they give is for passwords.
+But those rascals don't account for wanting to get an encrypted password asynchronously.
+When I wrapped that inside of a .then() callback, it didn't work.
+The whole rest endpoint became non responsive.
+I suspect bcrypt is not a thing to use as a setter.
+
+*/
         password: {
-            type: Sequelize.VIRTUAL,
+            type: Sequelize.TEXT,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
-        },
-        password_confirmation: {
-            type: Sequelize.VIRTUAL,
         },
         phone: {
             type: Sequelize.TEXT,
@@ -92,16 +96,17 @@ const User = sequelize.define(
             {
                 unique: true,
                 fields: ['email'],
-            }],
+            },
+        ],
         instanceMethods: {
-            authenticate(value) {
-                let result = false;
+            comparePassword: async function comparePassword(password) {
+                try {
+                    const isSame = await bcrypt.compare(password, this.password);
 
-                if (bcrypt.compareSync(value, this.password_digest)) {
-                    result = this;
+                    return isSame;
+                } catch (err) {
+                    throw err;
                 }
-
-                return result;
             },
         },
         tableName: 'users',
@@ -111,26 +116,18 @@ const User = sequelize.define(
     },
 );
 
-User.beforeCreate((user, options, callback) => {
-    const newUser = user;
-    newUser.email = user.email.toLowerCase();
+/*
+TODO: Try a better way of setting the password asynchronously.
+*/
 
-    if (newUser.password) {
-        hasSecurePassword(newUser, options, callback);
-    } else {
-        return callback(null, options);
-    }
+User.beforeCreate(async (user) => {
+    const hashedPassword = await getHashedPassword(user.password);
+    user.setDataValue('password', hashedPassword);
 });
 
-User.beforeUpdate((user, options, callback) => {
-    const newUser = user;
-    newUser.email = user.email.toLowerCase();
-
-    if (newUser.password) {
-        hasSecurePassword(newUser, options, callback);
-    } else {
-        return callback(null, options);
-    }
+User.beforeUpdate(async (user) => {
+    const hashedPassword = await getHashedPassword(user.password);
+    user.setDataValue('password', hashedPassword);
 });
 
 module.exports = User;
