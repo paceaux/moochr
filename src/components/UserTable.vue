@@ -6,6 +6,7 @@
           <tr class="table__headingHeaderRow table__headingHeaderRow--columnGroups">
               <th class="table__headingHeader" id="id" rowspan="2">id</th>
               <th class="table__headingHeader" id="name" colspan="2" v-on:dblclick="collapseColumn($event)">Name</th>
+            <th class="table__headingHeader" id="password"></th>
               <th class="table__headingHeader" id="contact" colspan="2">Contact</th>
               <th class="table__headingHeader" id="address" colspan="6">Address </th>
               <td class="table__headingHeader table__headingHeader--controls" rowspan="2"></td>
@@ -13,6 +14,7 @@
           <tr class="table__headingHeaderRow">
               <th class="table__heading" id="firstname">firstname</th>
               <th class="table__heading" id="lastname">lastname</th>
+              <th class="table__heading" id="password">password</th>
               <th class="table__heading" id="email">email</th>
               <th class="table__heading" id="phone">phone</th>
               <th class="table__heading" id="street1">street1</th>
