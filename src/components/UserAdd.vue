@@ -11,18 +11,7 @@
                 <span class="form__fieldLabel">lastname</span>
                 <input v-model="user.lastname" type="text" />
             </label>
-            <label for="password" class="form__field">
-                <span class="form__fieldLabel">password</span>
-                <input v-model="user.password" type="password" required v-on:keyup="calcPwdStrength()" v-on:blur="isShowingConfirm = true"/>
-                <meter min="0" max="4" low="2" high="3" v-bind:value="passwordStrength"></meter>
-            </label>
-            <label for="password" class="form__field" v-show="isShowingConfirm">
-                <span class="form__fieldLabel">confirm password</span>
-                <input v-model="passwordConfirm" type="password" required v-on:keyup="validatePasswords()" />
-                <span v-show="!hasPasswordMatch">Passwords do not match!</span>
-                <span v-show="hasPasswordMatch">Passwords match!</span>
-
-            </label>
+            <PasswordField v-bind:password="user.password" @passwordUpdate="onPasswordUpdate"></PasswordField>
         </fieldset>
         <fieldset class="form__fieldset form__fieldset--contact">
             <legend class="form__fieldsetLegend">contact</legend>
@@ -69,7 +58,13 @@
 </template>
 <script>
 import zxcvbn from 'zxcvbn';
+import PasswordField from './PasswordField.vue';
+
 export default {
+
+  components: {
+      PasswordField,
+  },
   data () {
       return {
           user: {
@@ -85,32 +80,24 @@ export default {
               state: '',
               country: ''
           },
-          passwordConfirm: '',
-          isShowingConfirm: false,
-          hasPasswordMatch: false,
-          passwordStrength: 0,
+
       };
   },
   props : {
 
   },
   computed: {
-      hasValidPassword() {
-          return (
-              this.hasPasswordMatch &&
-              this.passwordStrength > 2);
-      }
+
   },
   methods: {
-      validatePasswords() {
-          this.hasPasswordMatch = (this.user.password === this.passwordConfirm);
-      },
-      calcPwdStrength() {
-         const strength =  zxcvbn(this.user.password);
-         this.passwordStrength = strength.score;
+      onPasswordUpdate(password) {
+          console.log('onpasswordupdate');
+          console.log(this.user);
+          console.log(password);
+          this.user.password = password;
       },
       addContent() {
-        if (!this.hasValidPassword) return;
+          console.log('addContent',this.user);
         this.$store.dispatch('addUser', this.user);
         this.user = {
               firstname: '',
@@ -125,9 +112,6 @@ export default {
               state: '',
               country: ''
         };
-       this.passwordConfirm = '';
-       this.isShowingConfirm = false;
-       this.passwordStrength = 0;
        this.$router.push('/userList');
       }
   }

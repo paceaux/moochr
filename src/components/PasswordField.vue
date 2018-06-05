@@ -60,6 +60,10 @@ export default {
     methods: {
       validatePasswords() {
           this.hasPasswordMatch = (this.currentPassword === this.passwordConfirm);
+            console.log('validate passwords');
+          if (this.hasValidPassword) {
+              this.$emit('passwordUpdate',this.currentPassword);
+          }
       },
       calcPwdStrength() {
          const strength =  zxcvbn(this.currentPassword);
