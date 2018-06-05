@@ -91,13 +91,9 @@ export default {
   },
   methods: {
       onPasswordUpdate(password) {
-          console.log('onpasswordupdate');
-          console.log(this.user);
-          console.log(password);
           this.user.password = password;
       },
       addContent() {
-          console.log('addContent',this.user);
         this.$store.dispatch('addUser', this.user);
         this.user = {
               firstname: '',
