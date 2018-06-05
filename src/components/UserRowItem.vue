@@ -7,6 +7,9 @@
         <td class="table__cell" headers="lastname name">
             <input :disabled="!isEditable" v-model="user.lastname" type="text" />
         </td>
+        <td class="table__cell" headers="password">
+            <PasswordField v-bind:password="user.password" v-bind:isEditable="isEditable"></PasswordField>
+        </td>
         <td class="table__cell" headers="email contact">
             <input :disabled="!isEditable" v-model="user.email" type="email"/>
         </td>
@@ -40,7 +43,11 @@
 </template>
 <script>
 const isEditable = false;
+import PasswordField from './PasswordField.vue';
 export default {
+    components: {
+        PasswordField
+    },
     props: {
         user: {
             type: Object,
