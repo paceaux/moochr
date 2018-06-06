@@ -240,6 +240,10 @@
     margin: 1.618em auto;
 }
 
+.form--authenticate .form__fieldsetInfo {
+    flex-direction:column;
+}
+
 .form--authenticate .form__fieldLabel {
     color: var(--colorNeutral);
 }
