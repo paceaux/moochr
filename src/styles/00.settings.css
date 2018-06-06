@@ -26,11 +26,24 @@ Neutral colors:
     --colorNeutralLight: rgb(165,165,165);
     --colorNeutralLighter: rgb(192,192,192);
     --colorNeutralLightest: rgb(220,220,220);
+    --colorCoolDarkest: rgb(26,55,165);
+    --colorCoolDarker: rgb(55,110,192);
     --colorCool: rgb(110,165,220);
-    --colorCoolLighter: rgb(110,165,192);
+    --colorCoolLighter: rgb(110,192,220);
+    --colorCoolLightest: rgb(165,220,248);
+    --colorWarmDarkest: rgb(165,55,26);
+    --colorWarmDarker: rgb(192,110,55);
+    --colorWarm: rgb(220,165,110);
+    --colorWarmLighter: rgb(220,192,165);
+    --colorWarmLightest: rgb(255,220,192);
     --textColor: var(--colorNeutralDarker);
     --linkColor: var(--colorCool);
     --linkInterestColor: var(--colorCoolLighter);
+    --buttonNextColor: var(--colorCoolLighter);
+    --buttonNextInterestColor: var(--colorCoolLightest);
+    --notificationColor: var(--colorWarm);
+    --warningColor: var(--colorWarmDarker);
+    --errorColor: var(--colorWarmDarkest);
 
     --headingFont: Helvetica, Arial, sans-serif;
     --paragraphFont: Noto Sans, Verdana, sans-serif;
