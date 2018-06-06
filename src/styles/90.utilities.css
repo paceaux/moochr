@@ -1,3 +1,14 @@
 /*===============
 #UTILITIES
 ===============*/
+.notificationText {
+    color: var(--notificationColor) !important;
+}
+
+.warningText {
+    color: var(--warningColor) !important;
+}
+
+.errorText {
+    color: var(--errorColor) !important;
+}
