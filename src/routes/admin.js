@@ -8,10 +8,10 @@ import ItemList from '../components/ItemTable.vue';
 const basePath = '/admin';
 
 export default [
-    {path: `${basePath}/addUser`, component: UserAdd},
-    {path: `${basePath}/userList`, component: UserList},
-    {path: `${basePath}/addCategory`, component: CategoryAdd},
-    {path: `${basePath}/categoryList`, component: CategoryList},
-    {path: `${basePath}/addItem`, component: ItemAdd},
-    {path: `${basePath}/itemList`, component: ItemList},
+    { path: `${basePath}/addUser`, component: UserAdd },
+    { path: `${basePath}/userList`, component: UserList },
+    { path: `${basePath}/addCategory`, component: CategoryAdd },
+    { path: `${basePath}/categoryList`, component: CategoryList },
+    { path: `${basePath}/addItem`, component: ItemAdd },
+    { path: `${basePath}/itemList`, component: ItemList },
 ];

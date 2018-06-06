@@ -13,7 +13,7 @@ store.subscribe((mutation, state) => {
 });
 new Vue({
     el: '#VueMain',
-    components: {App},
+    components: { App },
     template: '<app />',
     store,
     router,
@@ -27,5 +27,5 @@ new Vue({
     },
     destroyed() {
 
-    }
+    },
 });

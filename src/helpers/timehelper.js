@@ -17,17 +17,17 @@ export default {
         let suffix = 'th';
 
         switch (lastChar) {
-            case '1':
-                if (int === 1 || (int !== 11 && intString.length > 1))  suffix = 'st';
-                break;
-            case '2':
-                suffix = 'nd';
-                break;
-            case '3':
-                suffix = 'rd';
-                break;
-            default:
-                break;
+        case '1':
+            if (int === 1 || (int !== 11 && intString.length > 1)) suffix = 'st';
+            break;
+        case '2':
+            suffix = 'nd';
+            break;
+        case '3':
+            suffix = 'rd';
+            break;
+        default:
+            break;
         }
 
         return intString + suffix;
@@ -39,5 +39,5 @@ export default {
         const year = time.getFullYear();
 
         return `The ${this.getOrdinalDate(date)} of ${this.getMonthOfYear(month)}, ${year}`;
-    }
+    },
 };

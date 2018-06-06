@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import AdminRoutes from './admin';
@@ -9,16 +8,16 @@ import LoginSection from '../components/LoginSection.vue';
 
 const routes = [
 
-    {path: '/users', component: UserCards},
-    {path: '/user/:id', component: UserProfile, name: 'user'},
-    {path: '/items/', component: ItemCards},
-    {path: '/login/', component: LoginSection },
+    { path: '/users', component: UserCards },
+    { path: '/user/:id', component: UserProfile, name: 'user' },
+    { path: '/items/', component: ItemCards },
+    { path: '/login/', component: LoginSection },
 ];
 
 routes.push(...AdminRoutes);
 
 const router = new VueRouter({
-    routes
+    routes,
 });
 
- export default router;
+export default router;
