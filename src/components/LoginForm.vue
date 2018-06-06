@@ -22,24 +22,52 @@
                     />
                     <output class="form__fieldInfo"></output>
                 </label>
-                <output class="form__fieldsetInfo"></output>
+                <output class="form__fieldsetInfo" v-if="errors.length">
+                    <p v-for="error in errors" v-bind:key="error" class="errorText">{{ error }}</p>
+                </output>
             </fieldset>
             <fieldset class="form__fieldset form__fieldset--controls">
-                <button class="form__submit">Log In</button>
+                <button class="form__submit" @submit="signIn">Log In</button>
             </fieldset>
         </form>
 </template>
 <script>
+import axios from 'axios';
+import Content from '../helpers/contenthelper'; // get webpack errors with import {ErrorMessages} from '../helpers/labelhelper';
+const { ErrorMessages } = Content;
+
 export default {
     components: {},
     data() {
         return {
-            email: '',
-            password: '',
+            email: null,
+            password: null,
+            errors: [],
         };
     },
     props: {},
-    computed: {},
-    methods: {}
+    computed: {
+
+    },
+    methods: {
+        submitUserData() {
+
+        },
+        resetFormData() {
+            this.email = null;
+            this.password = null;
+            this.errors.length = 0;
+        },
+        validateForm() {
+            this.errors.length = 0;
+            if (!this.email) this.errors.push(ErrorMessages.noEmail);
+            if (!this.password) this.errors.push(ErrorMessages.noPassword);
+        },
+        signIn(e) {
+            e.preventDefault();
+            this.validateForm();
+            this.submitUserData();
+        }
+    }
 }
 </script>
