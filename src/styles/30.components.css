@@ -202,3 +202,62 @@
 .nav__link {
     margin: .25em;
 }
+
+/*=====
+#LOGIN
+=====*/
+.form--authenticate {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 4rem 1fr 4rem;
+    grid-template-areas: "header header header" "content-l content-c content-r" "footer footer footer";
+}
+
+.form--authenticate .form__title {
+    grid-area: header;
+    color: var(--textColor);
+}
+
+.form--authenticate .form__fieldset {
+    display: flex;
+}
+
+.form--authenticate .form__fieldset--credentials {
+    grid-area: content-l / content-l / content-r / content-r;
+    border: 1px solid var(--colorNeutralLightest);
+}
+
+.form--authenticate .form__fieldset--controls {
+    grid-area: footer;
+    background: none;
+}
+
+.form--authenticate .form__field,
+.form--authenticate .form__fieldsetInfo {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: 400px;
+    max-width: 50vw;
+    margin: 1.618em auto;
+}
+
+.form--authenticate .form__fieldLabel {
+    color: var(--colorNeutral);
+}
+
+.form--authenticate .form__submit {
+    color: white;
+    width: 8rem;
+    background-color: var(--buttonNextColor);
+    border: 1px solid var(--buttonNextColor);
+    border-radius: .125em;
+    margin: 0 auto;
+    transition: .3s ease-in-out;
+}
+
+.form--authenticate .form__submit:hover,
+.form--authenticate .form__submit:focus,
+.form--authenticate .form__submit:active {
+    border-color: var(--buttonNextInterestColor);
+    border-radius: 2px;
+    outline: none;
+}
