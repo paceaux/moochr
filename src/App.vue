@@ -1,8 +1,8 @@
 <template>
-	<div id="MoochrApp">
+	<main id="MoochrApp">
 		<Intro/>
 		<router-view></router-view>
-	</div>
+	</main>
 </template>
 <script>
 import Intro from './components/Intro.vue';
@@ -11,6 +11,7 @@ import CategoryTable from './components/CategoryTable.vue';
 import ItemTable from './components/ItemTable.vue';
 import UserCards from './components/UserCards.vue';
 import UserProfile from './components/UserProfile.vue';
+import LoginSection from './components/LoginSection.vue';
 
 export default {
 	components: {
@@ -19,7 +20,8 @@ export default {
 		CategoryTable,
 		ItemTable,
 		UserCards,
-		UserProfile
+		UserProfile,
+		LoginSection,
 	}
 }
 </script>

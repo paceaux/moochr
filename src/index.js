@@ -14,7 +14,7 @@ store.subscribe((mutation, state) => {
 new Vue({
     el: '#VueMain',
     components: {App},
-    template: '<App />',
+    template: '<app />',
     store,
     router,
     beforeCreate() {
