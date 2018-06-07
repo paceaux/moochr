@@ -1,12 +1,12 @@
 const Category = require('./category.model');
-const User = require('./user.model');
+const UserInfo = require('./userInfo.model');
 const Item = require('./item.model');
 
 Category
     .sync()
     .then(() => console.log('Category Synchronized'));
 
-User
+UserInfo
     .sync()
     .then(() => console.log('User Synchronized'));
 
