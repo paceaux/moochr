@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 const bcrypt = require('bcrypt');
-const User = require('./user.model');
 
 /* 
 
@@ -19,20 +18,12 @@ function getHashedPassword(password) {
         });
     });
 }
-const UserInfo = sequelize.define(
-    'userinfo', {
+const User = sequelize.define(
+    'user', {
         id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.UUIDV1,
             primaryKey: true,
-            autoIncrement: true,
-        },
-        firstname: {
-            type: Sequelize.TEXT,
-            allowNull: false,
-        },
-        lastname: {
-            type: Sequelize.TEXT,
-            allowNull: false,
         },
         email: {
             type: Sequelize.TEXT,
@@ -57,40 +48,6 @@ I suspect bcrypt is not a thing to use as a setter.
                 notEmpty: true,
             },
         },
-        phone: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-            set(val) {
-                this.setDataValue('phone', val.replace(/\s/g, ''));
-            },
-        },
-        street1: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-        },
-        street2: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-        },
-        zip: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-            set(val) {
-                this.setDataValue('zip', val.trim());
-            },
-        },
-        city: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-        },
-        state: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-        },
-        country: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-        },
     },
     {
         indexes: [
@@ -110,27 +67,25 @@ I suspect bcrypt is not a thing to use as a setter.
                 }
             },
         },
-        tableName: 'userinfo',
+        tableName: 'users',
         underscored: true,
         updatedAt: false,
         createdAt: 'timestamp',
     },
 );
 
-UserInfo.hasOne(User, { as: 'user_id' });
-
 /*
 TODO: Try a better way of setting the password asynchronously.
 */
 
-UserInfo.beforeCreate(async (user) => {
+User.beforeCreate(async (user) => {
     const hashedPassword = await getHashedPassword(user.password);
     user.setDataValue('password', hashedPassword);
 });
 
-UserInfo.beforeUpdate(async (user) => {
+User.beforeUpdate(async (user) => {
     const hashedPassword = await getHashedPassword(user.password);
     user.setDataValue('password', hashedPassword);
 });
 
-module.exports = UserInfo;
+module.exports = User;
