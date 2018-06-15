@@ -8,6 +8,7 @@
                         class="form__fieldInput form__fieldInput--email"
                         type="email"
                         v-model="email"
+                        @focus="resetErrors"
                         required
                     />
                     <output class="form__fieldInfo"></output>
@@ -16,18 +17,19 @@
                     <span class="form__fieldLabel">Password</span>
                     <input
                         class="form__fieldInput form__fieldInput--email"
-                        type="text"
+                        type="password"
                         v-model="password"
+                        @focus="resetErrors"
                         required
                     />
                     <output class="form__fieldInfo"></output>
                 </label>
-                <output class="form__fieldsetInfo" v-if="errors.length">
+                <output class="form__fieldsetInfo" v-if="errors.length > 0">
                     <p v-for="error in errors" v-bind:key="error" class="errorText">{{ error }}</p>
                 </output>
             </fieldset>
             <fieldset class="form__fieldset form__fieldset--controls">
-                <button class="form__submit" @submit="signIn">Log In</button>
+                <button class="form__submit" @click="signIn">Log In</button>
             </fieldset>
         </form>
 </template>
@@ -51,23 +53,57 @@ export default {
     },
     methods: {
         submitUserData() {
+            if (this.errors.length) return;
+            const userData = {email: this.email, password: this.password};
+            //SEND DATA
 
         },
         resetFormData() {
             this.email = null;
             this.password = null;
+        },
+        resetErrors() {
             this.errors.length = 0;
         },
-        validateForm() {
+        validateEmail() {
+            const email = this.email;
+
+            return new Promise(function(resolve, reject) {
+                axios.post('/api/v1/auth/user', {email})
+                .then(res => {
+                    const isGoodRes = res.status == 200;
+                    if (!isGoodRes) reject();
+
+                    if (res.data && email in res.data) {
+                        resolve(true);
+                    }
+
+                    if (res.data && res.data.err) {
+                        resolve(false);
+                    }
+                })
+                .catch(err => {
+                    reject(false);
+                })
+            });
+        },
+
+        validateForm: async function() {
             this.errors.length = 0;
             if (!this.email) this.errors.push(ErrorMessages.noEmail);
             if (!this.password) this.errors.push(ErrorMessages.noPassword);
+            const isValidEmail = await this.validateEmail();
+
+            if (!isValidEmail) {
+                this.errors.push(ErrorMessages.noUserWithEmail);
+            }
+
         },
-        signIn(e) {
+        signIn: function(e) {
             e.preventDefault();
             this.validateForm();
             this.submitUserData();
-        }
     }
+    },
 }
 </script>
