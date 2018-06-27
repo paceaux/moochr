@@ -56,6 +56,15 @@ export default {
             if (this.errors.length) return;
             const userData = {email: this.email, password: this.password};
             //SEND DATA
+            axios
+                .post('/api/v1/auth/login', userData)
+                .then(res => {
+                    console.log('successful posting');
+                    console.log(res);
+                })
+                .catch(err => {
+
+                });
 
         },
         resetFormData() {
