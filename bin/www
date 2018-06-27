@@ -2,6 +2,7 @@
 
 const { config } = require('../package.json');
 
+const session = require('../api/auth/auth.session');
 const app = require('../app');
 const http = require('http');
 const fs = require('fs');
@@ -61,11 +62,15 @@ figure out how to get http to redirect to https
 alternatively, set this to always be https
 */
 
-server.listen(ports.http);
-server.on('error', onError);
-server.on('listening', listeningReporter);
+async function startApp() {
+    await session.init();
+    server.listen(ports.http);
+    server.on('error', onError);
+    server.on('listening', listeningReporter);
 
-securedServer.listen(ports.https);
-securedServer.on('error', onError);
-securedServer.on('listening', listeningReporter);
+    securedServer.listen(ports.https);
+    securedServer.on('error', onError);
+    securedServer.on('listening', listeningReporter);
+}
 
+startApp();
