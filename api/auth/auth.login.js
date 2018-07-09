@@ -43,7 +43,7 @@ module.exports = async function authenticate(ctx, next) {
         if (matches) {
             ctx.status = 201;
             ctx.body = serialize(user);
-            ctx.login(user);
+           await ctx.login(user);
         } else {
             ctx.status = 401;
             ctx.body = { errors: [{ title: 'password does not match', status: 401, crudOp }] };
