@@ -14,21 +14,40 @@
       <nav class="appHeader__mainNav nav nav--horizontal">
         <router-link class="nav__link" to="/users">Users</router-link>
         <router-link class="nav__link" to="/items">Items</router-link>
+        <a href="#" class="nav__link" v-if="!isLoggedOut" @click="logout">logout</a>
+        <router-link class="nav__link" to="login" v-if="isLoggedOut">Login</router-link>
       </nav>
   </header>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     props: {
 
     },
     data() {
       return {
-        isNavVisible: false
+        isNavVisible: false,
+        isLoggedOut: false,
       };
     },
     computed: {
 
+    },
+    methods: {
+      logout(evt) {
+        evt.preventDefault();
+        axios
+          .post('/api/v1/auth/logout')
+          .then(res => {
+            console.log('logged-out');
+            console.log(res);
+          })
+          .catch(err => {
+            console.warn(err);
+          });
+      }
     }
 }
 </script>

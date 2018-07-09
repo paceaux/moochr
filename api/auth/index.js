@@ -9,6 +9,8 @@ const read = require('./auth.read.js');
 const update = require('./auth.update.js');
 const del = require('./auth.delete.js');
 const login = require('./auth.login.js');
+const logout = require('./auth.logout.js');
+const status = require('./auth.status.js');
 
 
 const authApi = {
@@ -24,6 +26,8 @@ router.post('/auth/newuser', authApi.create.one);
 router.post('/auth/user', authApi.read.byJson);
 router.post('/auth/users', authApi.read.all);
 router.post('/auth/login', login);
+router.post('/auth/logout', logout);
+router.get('/auth/status', status);
 router.put('/auth/user', authApi.update.byJson);
 router.delete('/auth/user', authApi.delete.byJson);
 
