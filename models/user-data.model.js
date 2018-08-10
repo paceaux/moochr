@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 const bcrypt = require('bcrypt');
+const User = require('./user-auth.model');
 
 /* 
 
@@ -18,8 +19,8 @@ function getHashedPassword(password) {
         });
     });
 }
-const User = sequelize.define(
-    'user', {
+const UserData = sequelize.define(
+    'user_data', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -109,25 +110,27 @@ I suspect bcrypt is not a thing to use as a setter.
                 }
             },
         },
-        tableName: 'users',
+        tableName: 'user_data',
         underscored: true,
         updatedAt: false,
         createdAt: 'timestamp',
     },
 );
 
+UserData.hasOne(User);
+
 /*
 TODO: Try a better way of setting the password asynchronously.
 */
 
-User.beforeCreate(async (user) => {
+UserData.beforeCreate(async (user) => {
     const hashedPassword = await getHashedPassword(user.password);
     user.setDataValue('password', hashedPassword);
 });
 
-User.beforeUpdate(async (user) => {
+UserData.beforeUpdate(async (user) => {
     const hashedPassword = await getHashedPassword(user.password);
     user.setDataValue('password', hashedPassword);
 });
 
-module.exports = User;
+module.exports = UserData;

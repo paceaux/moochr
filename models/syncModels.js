@@ -1,15 +1,24 @@
 const Category = require('./category.model');
-const User = require('./user.model');
+const User = require('./user-data.model');
+const UserAuth = require('./user-auth.model');
 const Item = require('./item.model');
 
-Category
-    .sync()
-    .then(() => console.log('Category Synchronized'));
+async function createModels() {
+    await Category
+        .sync({ force: true })
+        .then(() => console.log('Category Synchronized'));
 
-User
-    .sync()
-    .then(() => console.log('User Synchronized'));
+    await User
+        .sync({ force: true })
+        .then(() => console.log('User Data Synchronized'));
 
-Item
-    .sync()
-    .then(() => console.log('Item Synchronized'));
+    await UserAuth
+        .sync({ force: true })
+        .then(() => console.log('User Synchronized'));
+
+    await Item
+        .sync({ force: true })
+        .then(() => console.log('Item Synchronized'));
+};
+
+createModels();

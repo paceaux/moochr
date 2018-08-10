@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 const Category = require('./category.model');
-const User = require('./user.model');
+const User = require('./user-data.model');
 
 const Item = sequelize.define(
     'item', {

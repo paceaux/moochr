@@ -1,6 +1,6 @@
 const crudOp = 'update';
 const sequelize = require('../../db.config');
-const User = require('../../models/user.model');
+const User = require('../../models/user-data.model');
 
 module.exports = {
     byId: async (ctx, next) => {
