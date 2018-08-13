@@ -67,7 +67,7 @@ I suspect bcrypt is not a thing to use as a setter.
                 }
             },
         },
-        tableName: 'user',
+        tableName: 'users',
         underscored: true,
         updatedAt: false,
         createdAt: 'timestamp',
