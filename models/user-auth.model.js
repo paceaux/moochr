@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db.config');
 const bcrypt = require('bcrypt');
-const UserData = require('./user-data.model');
 
 /* 
 
