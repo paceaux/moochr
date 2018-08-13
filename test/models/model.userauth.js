@@ -1,6 +1,5 @@
 const { expect } = require('chai');
 const UserAuth = require('../../models/user-auth.model');
-const sequelize = require('../../db.config');
 
 const TestUser1 = { email: 's@ellite.com', password: 'foobarbaz' };
 const TestUser1Update = { email: 'f@ellite.com' };
