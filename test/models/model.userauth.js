@@ -7,14 +7,14 @@ const TestUser1Update = { email: 'f@ellite.com' };
 describe('tests user auth model', () => {
     before((done) => {
         UserAuth.sync({ force: true })
-        .then(async () => {
-            await UserAuth.create(TestUser1);
+            .then(async () => {
+                await UserAuth.create(TestUser1);
 
-            done();
-        })
-        .catch(err => {
-            done(err);
-        });
+                done();
+            })
+            .catch(err => {
+                done(err);
+            });
     });
     it('I should find what I created', async () => {
         const user = await UserAuth.findOne({ where: { id: 1 } });
