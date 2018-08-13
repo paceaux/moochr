@@ -13,6 +13,7 @@ module.exports = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.passwo
     host: dbConfig.host,
     port: dbConfig.port,
     logging: false,
+    operatorsAliases: false,
 });
 /* Create Database
   Command:  CREATE DATABASE moochr;
