@@ -23,6 +23,12 @@ const category = sequelize.define(
         },
     },
     {
+        indexes: [
+            {
+                unique: true,
+                fields: ['slug', 'name'],
+            },
+        ],
         tableName: 'categories',
         underscored: true,
         updatedAt: 'last_updated',

@@ -62,15 +62,14 @@ describe('tests category auth model', () => {
     it('gets me two categories', async () => {
         const categories = await Category.findAll();
 
-        console.log(categories);
         expect(categories).to.be.an('array');
         expect(categories).to.have.lengthOf(2);
     });
 
     it('should delete by id', async () => {
         try {
-            const cat = await Category.destroy({ where: { id: [1, 2] } });
-            expect(cat).to.equal(2);
+            const cat = await Category.destroy({ where: { id: [1, 2, 3] } });
+            expect(cat).to.equal(1);
         } catch (err) {
             console.log(err);
         }
