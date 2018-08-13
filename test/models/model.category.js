@@ -69,7 +69,7 @@ describe('tests category auth model', () => {
     it('should delete by id', async () => {
         try {
             const cat = await Category.destroy({ where: { id: [1, 2, 3] } });
-            expect(cat).to.equal(1);
+            expect(cat).to.equal(2);
         } catch (err) {
             console.log(err);
         }

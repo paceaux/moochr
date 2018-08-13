@@ -54,7 +54,7 @@ describe('tests user auth model', () => {
 
     it('should delete by id', async () => {
         try {
-            const user = await UserAuth.destroy({ where: { id: 1 } });
+            const user = await UserAuth.destroy({ where: { id: [1, 2] } });
             expect(user).to.equal(1);
         } catch (err) {
             console.log(err);
