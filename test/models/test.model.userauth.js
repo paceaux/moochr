@@ -16,8 +16,16 @@ describe('tests user auth model', () => {
                 done(err);
             });
     });
+    after((done) => {
+        // deletes the one created when I tried to create a duplicate
+        UserAuth.findOne({ where: { id: 3 } })
+            .then(async (user) => {
+                await user.destroy();
+                done();
+            });
+    });
     it('I should find what I created', async () => {
-        const user = await UserAuth.findOne({ where: { id: 1 } });
+        const user = await UserAuth.findOne({ where: { email: TestUser1.email } });
 
         expect(user).to.have.property('id');
         expect(user).to.have.property('email', TestUser1.email);
