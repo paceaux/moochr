@@ -40,6 +40,14 @@ describe(`API endpoint ${endpoint}`, function endpointTest() {
                 expect(res.body).to.be.an('object').to.have.any.keys('id', 'email', 'password');
             }));
 
+    it('should should not let me add a duplicate a user', () =>
+        chai.request(appUrl)
+            .post(endpoint)
+            .send(testUser)
+            .then(res => {
+                expect(res).to.not.have.status(200);
+            }));
+
     it('should return one user if I request by id', () =>
         chai.request(appUrl)
             .get(endpoint)
@@ -57,29 +65,6 @@ describe(`API endpoint ${endpoint}`, function endpointTest() {
                         expect(userRes).to.be.json;
                         expect(userData).to.have.property('email', testUser.email);
                         expect(userData).to.have.property('password');
-                    });
-            }));
-
-    it('Created user should have an encrypted password', () =>
-        chai.request(appUrl)
-            .get(endpoint)
-            .then(res => {
-                const addedUser = res.body.find(usr =>
-                    (
-                        usr.email === testUser.email
-                    ));
-
-                return chai.request(appUrl)
-                    .get(endpoint + addedUser.id)
-                    .then(userRes => {
-                        const userData = userRes && userRes.body;
-
-                        expect(userRes).to.have.status(200);
-                        expect(userRes).to.be.json;
-
-                        const isSame = bcrypt.compareSync(testUser.password, userData.password);
-
-                        expect(isSame).to.be.true;
                     });
             }));
 
