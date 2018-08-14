@@ -117,7 +117,7 @@ I suspect bcrypt is not a thing to use as a setter.
     },
 );
 
-UserData.hasOne(User, { as: 'user_auth_info' });
+UserData.belongsTo(User, { as: 'user_auth' });
 
 /*
 TODO: Try a better way of setting the password asynchronously.
