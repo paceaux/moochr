@@ -19,14 +19,6 @@ const Item = sequelize.define(
             type: Sequelize.TEXT,
             allowNull: false,
         },
-        owner: {
-            type: Sequelize.STRING,
-            allowNull: false,
-        },
-        borrower: {
-            type: Sequelize.TEXT,
-            allowNull: true,
-        },
         category: {
             type: Sequelize.ARRAY(Sequelize.TEXT),
             allowNull: true,
@@ -55,6 +47,10 @@ const Item = sequelize.define(
             type: Sequelize.DATE,
             allowNull: true,
         },
+        borrower: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        },
         time_return: {
             type: Sequelize.DATE,
             allowNull: true,
@@ -65,6 +61,12 @@ const Item = sequelize.define(
         },
     },
     {
+        indexes: [
+            {
+                unique: true,
+                fields: ['id'],
+            },
+        ],
         tableName: 'items',
         underscored: true,
         updatedAt: false,
@@ -76,6 +78,8 @@ Item.belongsToMany(Category, {
     through: 'CategoryItem',
 });
 
-Item.belongsTo(User);
+Item.belongsTo(User, { foreignKey: { name: 'owner', allowNull: false } });
+// I should be able to tell it that the borrower is also a user. don't know what I'm doing wrong.
+// Item.belongsTo(User, { as: 'borrowing_person', foreignKey: { name: 'borrower', allowNull: true } });
 
 module.exports = Item;
