@@ -45,6 +45,8 @@ describe(`API endpoint ${endpoint}`, function endpointTest() {
             .post(endpoint)
             .send(testUser)
             .then(res => {
+                expect(res);
+                expect(res).to.be.json;
                 expect(res).to.not.have.status(200);
             }));
 
