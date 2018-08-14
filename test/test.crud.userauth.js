@@ -9,12 +9,12 @@ const endpoint = '/auth/';
 chai.use(require('chai-http'));
 
 const testUser = {
-    email: 'test@whatevs.com',
+    email: 'test-auth@crud.create.com',
     password: 'foobar',
 };
 
 const testUpdatedUser = {
-    email: 'test@whatevs.com',
+    email: 'test-auth@crud.update.com',
     password: 'barfoo',
 };
 
