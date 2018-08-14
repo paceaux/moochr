@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const UserAuth = require('../../models/user-auth.model');
 
-const TestUser1 = { email: 's@ellite.com', password: 'foobarbaz' };
-const TestUser1Update = { email: 'f@ellite.com' };
+const TestUser1 = { email: 'user-auth@testcom', password: 'foobarbaz' };
+const TestUser1Update = { email: 'user-auth@update.test.com' };
 
 describe('tests user auth model', () => {
     before((done) => {
