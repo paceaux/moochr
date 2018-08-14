@@ -3,7 +3,7 @@ const UserData = require('../../models/user-data.model');
 const User = require('../../models/user-auth.model');
 
 const TestUserModel = {
-    email: 'fooeyb@r.com',
+    email: 'test-user-data@usertest.com',
     password: 'foobar',
 };
 
@@ -41,6 +41,18 @@ describe('tests user data model', () => {
             })
             .catch(err => {
                 done(err);
+            });
+    });
+
+    after((done) => {
+        User
+            .findOne({ where: { email: TestUserModel.email } })
+            .then(user => {
+                user.destroy();
+                done();
+            })
+            .catch(err => {
+                done();
             });
     });
 
