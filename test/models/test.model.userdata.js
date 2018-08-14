@@ -74,6 +74,17 @@ describe('tests user data model', () => {
         expect(updatedUser).to.have.property('phone', TestUser1Update.phone);
     });
 
+    it('should throw a hissy fit if I add user data without a user', async () => {
+        try {
+            const newTestUser = Object.create(TestUser1);
+            newTestUser.user_auth_id = 99999;
+            const newUserData = await UserData.create(newTestUser);
+            console.log(newUserData);
+        } catch (err) {
+            expect(err);
+        }
+    });
+
     it('should delete by id', async () => {
         try {
             const user = await UserData.destroy({ where: { id: [1, 2] } });
