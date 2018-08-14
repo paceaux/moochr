@@ -10,8 +10,6 @@ const TestUserModel = {
 const TestUser1 = {
     firstname: 'Test',
     lastname: 'Taco',
-    email: 'test@whatevs.com',
-    password: 'foobar',
     phone: '8884645555',
     street1: 'street 1',
     street2: 'street 2',
@@ -23,8 +21,6 @@ const TestUser1 = {
 const TestUser1Update = {
     firstname: 'Update Test',
     lastname: 'Taco',
-    email: 'test@whatevs.com',
-    password: 'barfoo',
     phone: '7774646666',
     street1: 'street 1',
     street2: 'street 2',
@@ -47,13 +43,7 @@ describe('tests user data model', () => {
                 done(err);
             });
     });
-    after((done) => {
-        User.findOne({ where: { email: TestUserModel.email } })
-            .then(user => {
-                user.destroy();
-                done();
-            });
-    });
+
     it('I should find what I created', async () => {
         const user = await UserData.findOne({ where: { id: 1 } });
 
