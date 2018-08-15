@@ -47,10 +47,10 @@ const Item = sequelize.define(
             type: Sequelize.DATE,
             allowNull: true,
         },
-        borrower: {
-            type: Sequelize.INTEGER,
-            allowNull: true,
-        },
+        // borrower: {
+        //     type: Sequelize.INTEGER,
+        //     allowNull: true,
+        // },
         time_return: {
             type: Sequelize.DATE,
             allowNull: true,
@@ -80,6 +80,6 @@ Item.belongsToMany(Category, {
 
 Item.belongsTo(User, { foreignKey: { name: 'owner', allowNull: false } });
 // I should be able to tell it that the borrower is also a user. don't know what I'm doing wrong.
-// Item.belongsTo(User, { as: 'borrowing_person', foreignKey: { name: 'borrower', allowNull: true } });
+Item.belongsTo(User, { foreignKey: { name: 'borrower', allowNull: true } });
 
 module.exports = Item;

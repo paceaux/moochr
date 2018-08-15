@@ -27,6 +27,11 @@ const TestUserForItem = {
     password: 'foobar',
 };
 
+const TestUserForBorrower = {
+    email: 'user-item2@borrower.com',
+    password: 'foobar',
+};
+
 const TestUserDataForLoan = {
     firstname: 'test user',
     lastname: 'for item',
@@ -36,6 +41,12 @@ const TestUserDataForLoan = {
     city: 'somewhere',
     state: 'TX',
     country: 'USA',
+};
+
+const TestUserDataForBorrower = {
+    firstname: 'test user2',
+    lastname: 'for item 1',
+
 };
 
 const TestLoanedItem = {
@@ -96,8 +107,10 @@ describe('tests the item model', () => {
 
     it('should give the item an borrower', async () => {
         const item = await Item.findOne({ where: { id: 1 } });
+        const user = await User.create(TestUserForBorrower);
+        const userdata = await UserData.create({ user_auth_id: user.id, firstname: TestUserDataForBorrower.firstname, lastname: TestUserDataForBorrower.lastname });
         const testLoanedItem = TestLoanedItem;
-        testLoanedItem.borrower = 3;
+        testLoanedItem.borrower = userdata.id;
 
         const updatedItem = await item.update(testLoanedItem);
 
