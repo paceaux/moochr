@@ -10,7 +10,7 @@ const returnTime = new Date();
 
 const testItem = {
     name: "circular saw",
-    owner: "4",
+    owner: 4,
     model_number: "43234 aa12",
     serial_number: "01234321",
     value: 0,
