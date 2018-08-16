@@ -2,13 +2,14 @@ const chai = require('chai');
 const { expect } = require('chai');
 const bcrypt = require('bcrypt');
 const { it, describe } = require('mocha');
+const UserAuth = require('../models/user-auth.model');
 
 const appUrl = 'http://localhost:3000/api/v1';
 const endpoint = '/auth/';
 
 chai.use(require('chai-http'));
 
-const testUser = {
+const TestUser = {
     email: 'test-auth@crud.create.com',
     password: 'foobar',
 };
@@ -18,58 +19,29 @@ const testUpdatedUser = {
     password: 'barfoo',
 };
 
-describe(`API endpoint ${endpoint}`, function endpointTest() {
-    this.timeout(5000);
-
-    it.skip('should return some users', () =>
-        chai.request(appUrl)
-            .get(endpoint)
-            .then((res) => {
-                expect(res).to.have.status(200);
-                expect(res).to.be.json;
-                expect(res.body).to.be.an('array');
-            }));
-
+describe('endpoint is auth/register', ()=> {
     it('should add a user', () =>
         chai.request(appUrl)
             .post('/register')
-            .send(testUser)
+            .send(TestUser)
             .then(res => {
-                console.log(res);
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object').to.have.any.keys('id', 'email', 'password');
             }));
 
-    it.skip('should should not let me add a duplicate a user', () =>
+    it('should should not let me add a duplicate a user', () =>
         chai.request(appUrl)
             .post(endpoint)
-            .send(testUser)
+            .send(TestUser)
             .then(res => {
                 expect(res);
-                expect(res).to.be.json;
                 expect(res).to.not.have.status(200);
             }));
+});
 
-    it('should return one user if I request by id', () =>
-        chai.request(appUrl)
-            .get(endpoint)
-            .then((res) => {
-                const addedUser = res.body.find(usr =>
-                    (
-                        usr.email === testUser.email
-                    ));
-                return chai.request(appUrl)
-                    .get(endpoint + addedUser.id)
-                    .then((userRes) => {
-                        const userData = userRes && userRes.body;
-
-                        expect(userRes).to.have.status(200);
-                        expect(userRes).to.be.json;
-                        expect(userData).to.have.property('email', testUser.email);
-                        expect(userData).to.have.property('password');
-                    });
-            }));
+describe(`endpoint is auth/user`, function endpointTest() {
+    this.timeout(5000);
 
     it.skip('should update a user', () =>
         chai.request(appUrl)
@@ -77,7 +49,7 @@ describe(`API endpoint ${endpoint}`, function endpointTest() {
             .then((res) => {
                 const addedUser = res.body.find(usr =>
                     (
-                        usr.email === testUser.email
+                        usr.email === TestUser.email
                     ));
 
                 return chai.request(appUrl)
@@ -114,21 +86,17 @@ describe(`API endpoint ${endpoint}`, function endpointTest() {
                         expect(isSame).to.be.true;
                     });
             }));
+});
 
-    it.skip('should delete a user', () =>
-        chai.request(appUrl)
-            .get(endpoint)
-            .then((res) => {
-                const lastItem = res.body.find(usr =>
-                    (
-                        usr.email === testUpdatedUser.email
-                    ));
+describe('endpoint is auth/deleteuser', () => {
+    it('should delete a user', async () => {
+        const testUser = await UserAuth.find({ where: { email: TestUser.email } });
+        const deleteResponse = await chai.request(appUrl)
+            .delete('/auth/deleteuser')
+            .send({ id: testUser.id });
 
-                return chai.request(appUrl)
-                    .delete(endpoint + lastItem.id)
-                    .then((delRes) => {
-                        expect(delRes).to.have.status(200);
-                    });
-            }));
+        expect(deleteResponse);
+        expect(deleteResponse).to.have.status(200);
+    });
 });
 
