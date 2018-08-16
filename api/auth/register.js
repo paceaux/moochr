@@ -5,7 +5,6 @@ const User = require('../../models/user-auth.model');
 
 module.exports = async (ctx, next) => {
     await sequelize.authenticate();
-    console.log(ctx.request);
 
     try {
         const result = await User.create(ctx.request.body);
