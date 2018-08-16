@@ -5,7 +5,9 @@ const router = new Router({
 });
 
 const register = require('./register.js');
+const deleteuser = require('./delete.js');
 
 router.post('/register', register);
+router.delete('/auth/deleteuser', deleteuser);
 
 module.exports = router;
