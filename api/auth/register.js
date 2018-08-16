@@ -8,7 +8,7 @@ module.exports = async (ctx, next) => {
 
     try {
         const result = await User.create(ctx.request.body);
-        delete result.password;
+        if (result) delete result.password;
         ctx.body = result;
     } catch (err) {
         ctx.status = 500;
