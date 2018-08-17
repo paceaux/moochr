@@ -28,9 +28,11 @@ describe('endpoint is auth/register', ()=> {
             .post('/register')
             .send(TestUser)
             .then(res => {
-                expect(res).to.have.status(200);
+                expect(res).to.have.status(201);
                 expect(res).to.be.json;
-                expect(res.body).to.be.an('object').to.have.any.keys('id', 'email', 'password');
+                expect(res.body).to.be.an('object').to.have.any.keys('id', 'email');
+                expect(res.body).to.not.have.property('password');
+                expect(res.body).to.have.any.keys('token');
             }));
 
     it('should should not let me add a duplicate a user', () =>
