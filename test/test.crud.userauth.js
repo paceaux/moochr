@@ -46,7 +46,7 @@ describe('endpoint is auth/register', ()=> {
 describe(`endpoint is auth/user/:id`, function endpointTest() {
     this.timeout(5000);
 
-    it.skip('should update a user', async () => {
+    it('should update a user', async () => {
         const testUser = await UserAuth.find({ where: { email: TestUser.email } });
 
         const updateResult = await chai.request(appUrl)
@@ -75,7 +75,7 @@ describe(`endpoint is auth/user/:id`, function endpointTest() {
 
 describe('endpoint is auth/deleteuser', () => {
     it('should delete a user', async () => {
-        const testUser = await UserAuth.find({ where: { email: TestUser.email } });
+        const testUser = await UserAuth.find({ where: { email: TestUserUpdatedEmail.email } });
         const deleteResponse = await chai.request(appUrl)
             .delete('/auth/deleteuser')
             .send({ id: testUser.id });
