@@ -6,8 +6,7 @@ module.exports = (user) => {
 
     return jsonwebtoken.sign({
         data: userInfoWithoutPassword,
-        // exp in seconds
-        exp: Math.floor(Date.now() / 1000) - (60 * 60), // 60 seconds * 60 minutes = 1 hour
-    }, 'm00ch3r');
+        exp: Math.floor(Date.now() / 1000) - (60 * 120), // 60 seconds * 60 minutes = 2 hours
+    }, 'm00ch3r'); // TODO: DON'T HARDCODE THIS!
 };
 
