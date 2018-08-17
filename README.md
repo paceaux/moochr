@@ -48,8 +48,9 @@ Three apis are identical in structure and usage (user, item, category). In the A
 `/category/:id` | DELETE | Deletes that category. Returns state
 
 The authorization API is different. Intentionally
+
 |Endpoint|Verb|Result|
 | --- | ---| --- |
 `register` | POST | Requires a JSON body. will create a user and return the user (returned body doesn't contain password)
 `auth/user/:id` | PUT | Requires a JSON body. Will update the user. Can update the email or the password.
-`auth/user/:id` | DELETE| Json body optional. send `destroyData: true` to delete all the vestigial data.
+`auth/user/:id` | DELETE | Json body optional. send `destroyData: true` to delete all the vestigial data.
