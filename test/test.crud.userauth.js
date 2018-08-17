@@ -14,8 +14,11 @@ const TestUser = {
     password: 'foobar',
 };
 
-const testUpdatedUser = {
+const TestUserUpdatedEmail = {
     email: 'test-auth@crud.update.com',
+};
+
+const TestUserUpdatedPassword = {
     password: 'barfoo',
 };
 
@@ -40,52 +43,34 @@ describe('endpoint is auth/register', ()=> {
             }));
 });
 
-describe(`endpoint is auth/user`, function endpointTest() {
+describe(`endpoint is auth/user/:id`, function endpointTest() {
     this.timeout(5000);
 
-    it.skip('should update a user', () =>
-        chai.request(appUrl)
-            .get(endpoint)
-            .then((res) => {
-                const addedUser = res.body.find(usr =>
-                    (
-                        usr.email === TestUser.email
-                    ));
+    it.skip('should update a user', async () => {
+        const testUser = await UserAuth.find({ where: { email: TestUser.email } });
 
-                return chai.request(appUrl)
-                    .put(endpoint + addedUser.id)
-                    .send(testUpdatedUser)
-                    .then((updateRes) => {
-                        expect(updateRes).to.have.status(200);
-                        expect(updateRes.body).to.be.an('object');
-                        expect(updateRes).to.be.json;
-                    });
-            }));
+        const updateResult = await chai.request(appUrl)
+            .put(`/auth/user/${testUser.id}`)
+            .send(TestUserUpdatedEmail);
 
-    it.skip('should update a user password', () =>
-        chai.request(appUrl)
-            .get(endpoint)
-            .then((res) => {
-                const addedUser = res.body.find(usr =>
-                    (
-                        usr.email === testUpdatedUser.email
-                    ));
+            expect(updateResult);
+            expect(updateResult).to.have.status(200);
 
-                return chai.request(appUrl)
-                    .put(endpoint + addedUser.id)
-                    .send(testUpdatedUser)
-                    .then(updateRes => {
-                        const userData = updateRes && updateRes.body;
+    });
 
-                        expect(updateRes).to.have.status(200);
-                        expect(updateRes.body).to.be.an('object');
-                        expect(updateRes).to.be.json;
 
-                        const isSame = bcrypt.compareSync(testUpdatedUser.password, userData.password);
 
-                        expect(isSame).to.be.true;
-                    });
-            }));
+    it.skip('should update a user password', async () => {
+        const testUser = await UserAuth.find({ where: { email: TestUserUpdatedEmail.email } });
+
+        const updatedResult = await chai.request(appUrl)
+            .put(`/auth/user/${testUser.id}`)
+            .send(TestUserUpdatedPassword);
+
+        const isSame = bcrypt.compareSync(TestUserUpdatedPassword, updatedResult);
+
+        expect(isSame).to.be(true);
+    });
 });
 
 describe('endpoint is auth/deleteuser', () => {
