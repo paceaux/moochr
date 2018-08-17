@@ -73,12 +73,12 @@ describe(`endpoint is auth/user/:id`, function endpointTest() {
     });
 });
 
-describe('endpoint is auth/deleteuser', () => {
+describe('endpoint is auth/user/:id', () => {
     it('should delete a user', async () => {
         const testUser = await UserAuth.find({ where: { email: TestUserUpdatedEmail.email } });
         const deleteResponse = await chai.request(appUrl)
-            .delete('/auth/deleteuser')
-            .send({ id: testUser.id });
+            .delete(`/auth/user/${testUser.id}`)
+            .send({ destroyData: true });
 
         expect(deleteResponse);
         expect(deleteResponse).to.have.status(200);
