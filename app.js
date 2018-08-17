@@ -2,15 +2,25 @@ const Koa = require('koa');
 const Serve = require('koa-static');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
+const unless = require('koa-unless');
 
 const router = new Router();
 const app = new Koa();
 const path = require('path');
 
+const jwt = require('./api/middlewares/jwt');
 const authCrud = require('./api/auth/index.js');
 const categoryCrud = require('./api/category/index.js');
 const userCrud = require('./api/user/index.js');
 const itemCrud = require('./api/item/index.js');
+
+app.unless = unless;
+
+// app
+//     .use(jwt)
+//     .unless({
+//         path: [/^\/public/, '/'],
+//     });
 
 app
     .use(bodyParser({
