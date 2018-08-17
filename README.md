@@ -27,9 +27,9 @@ A personal inventory app. useful for keeping track of your stuff, and who you lo
 Current api url is `api/v1`
 
 There are 6 endpoints
-* `register` : registers (creates) a user (future: will login, too)
+* `register` : registers (creates) a user
 * `auth` : gets user information
-* `login` : authenticates a user (in progress)
+* `login` : authenticates a user
 * `logout`: logs out a user (in progress)
 * `category` : categorizaton of items
 * `user` : user data (address, phone, location)
