@@ -43,7 +43,7 @@ describe('endpoint is auth/register', ()=> {
             }));
 });
 
-describe(`endpoint is auth/user/:id`, function endpointTest() {
+describe('endpoint is auth/user/:id', function endpointTest() {
     this.timeout(5000);
 
     it('should update a user', async () => {
