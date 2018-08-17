@@ -1,4 +1,3 @@
-const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const crudOp = 'login';
