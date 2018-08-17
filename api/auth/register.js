@@ -14,4 +14,5 @@ module.exports = async (ctx, next) => {
         ctx.status = 500;
         ctx.body = { err, crudOp };
     }
- };
+    next();
+};
