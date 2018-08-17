@@ -60,16 +60,18 @@ describe(`endpoint is auth/user/:id`, function endpointTest() {
 
 
 
-    it.skip('should update a user password', async () => {
-        const testUser = await UserAuth.find({ where: { email: TestUserUpdatedEmail.email } });
+    it('should update a user password', async () => {
+        const userInDb = await UserAuth.find({ where: { email: TestUserUpdatedEmail.email } });
 
-        const updatedResult = await chai.request(appUrl)
-            .put(`/auth/user/${testUser.id}`)
+        await chai.request(appUrl)
+            .put(`/auth/user/${userInDb.id}`)
             .send(TestUserUpdatedPassword);
 
-        const isSame = bcrypt.compareSync(TestUserUpdatedPassword, updatedResult);
+        const userInDbAfterUpdate = await UserAuth.find({ where: { email: TestUserUpdatedEmail.email } });
 
-        expect(isSame).to.be(true);
+        const isSame = bcrypt.compareSync(TestUserUpdatedPassword.password, userInDbAfterUpdate.password);
+
+        expect(isSame).to.be.true;
     });
 });
 
