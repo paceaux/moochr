@@ -16,7 +16,7 @@
                     <span class="form__fieldLabel">Password</span>
                     <input
                         class="form__fieldInput form__fieldInput--email"
-                        type="text"
+                        type="password"
                         v-model="password"
                         required
                     />
@@ -27,7 +27,7 @@
                 </output>
             </fieldset>
             <fieldset class="form__fieldset form__fieldset--controls">
-                <button class="form__submit" @submit="signIn">Log In</button>
+                <button class="form__submit" @click="signIn">Log In</button>
             </fieldset>
         </form>
 </template>
