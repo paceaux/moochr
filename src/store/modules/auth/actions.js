@@ -5,7 +5,7 @@ export default {
         axios.post('/api/v1/login', user)
             .then(res => {
                 if (res.status === 201) {
-                    commit('LOGIN', res.body);
+                    commit('LOGIN', res.data);
                 }
             })
             .catch(err => {
