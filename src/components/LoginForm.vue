@@ -51,7 +51,9 @@ export default {
     },
     methods: {
         submitUserData() {
-
+            const email = this.email;
+            const password = this.password;
+            this.$store.dispatch('login', { email, password });
         },
         resetFormData() {
             this.email = null;
