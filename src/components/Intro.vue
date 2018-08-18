@@ -14,6 +14,7 @@
       <nav class="appHeader__mainNav nav nav--horizontal">
         <router-link class="nav__link" to="/users">Users</router-link>
         <router-link class="nav__link" to="/items">Items</router-link>
+        <span v-if="isAuthenticated">Welcome!</span>
       </nav>
   </header>
 </template>
@@ -24,11 +25,13 @@ export default {
     },
     data() {
       return {
-        isNavVisible: false
+        isNavVisible: false,
       };
     },
     computed: {
-
+      isAuthenticated() {
+        return this.$store.state.auth.isAuthenticated;
+      }
     }
 }
 </script>
