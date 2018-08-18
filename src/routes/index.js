@@ -5,6 +5,7 @@ import UserCards from '../components/UserCards.vue';
 import UserProfile from '../components/UserProfile.vue';
 import ItemCards from '../components/ItemCards.vue';
 import LoginSection from '../components/LoginSection.vue';
+import RegisterSection from '../components/RegisterSection.vue';
 
 const routes = [
 
@@ -12,6 +13,7 @@ const routes = [
     { path: '/user/:id', component: UserProfile, name: 'user' },
     { path: '/items/', component: ItemCards },
     { path: '/login/', component: LoginSection },
+    { path: '/register/', component: RegisterSection },
 ];
 
 routes.push(...AdminRoutes);
