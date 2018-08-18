@@ -1,3 +1,4 @@
+const axios = require('axios');
 import Vue from 'vue';
 import Vuex from 'vuex';
 import categories from './modules/categories/index';
@@ -16,6 +17,8 @@ export default new Vuex.Store({
     },
     state: {
         isServerSync,
+        token: '',
+        isAuthenticated: false,
     },
     getters: {
 
@@ -24,8 +27,23 @@ export default new Vuex.Store({
         INITSTORE() {
 
         },
+        LOGIN(state, loginData) {
+            console.log('logged in?', loginData);
+            Vue.set(state.isAuthenticated, true);
+            Vue.set(state.token, loginData.token);
+        },
     },
     actions: {
-
+        login({ commit }, user) {
+            axios.post('/login', user)
+                .then(res => {
+                    if (res.status === 201) {
+                        commit('LOGIN', res.body);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
     },
 });
