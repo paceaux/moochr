@@ -1,6 +1,6 @@
 export default {
     isAuthenticated: false,
-    token: '',
-    currentUser: '',
-    currentUserId: '',
+    token: null,
+    currentUser: null,
+    authenticationId: null,
 };
