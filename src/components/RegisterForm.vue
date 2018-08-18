@@ -57,7 +57,6 @@ export default {
     },
     methods: {
         onPasswordUpdate(password) {
-            console.log('update',password);
             this.password = password;
         },
         submitUserData() {
@@ -65,8 +64,7 @@ export default {
             const password = this.password;
             const newUser = { email, password };
 
-            console.log('submitting', newUser);
-            this.$store.dispatch('login', newUser);
+            this.$store.dispatch('register', newUser);
         },
         resetFormData() {
             this.email = null;
@@ -80,7 +78,6 @@ export default {
             console.log(this.password);
         },
         register(evt) {
-            console.log('signin');
             evt.preventDefault();
             this.validateForm();
             this.submitUserData();
