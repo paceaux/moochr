@@ -1,7 +1,7 @@
-const axios = require('axios');
+const axios = require('../../../helpers/axioshelper');
 
-const apiGetCategory = '/api/v1/category';
-const apiGetCategories = '/api/v1/categories';
+const apiGetCategory = '/category';
+const apiGetCategories = '/categories';
 
 export default {
     addCategory({ commit }, category) {

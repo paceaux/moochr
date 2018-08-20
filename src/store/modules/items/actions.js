@@ -1,7 +1,7 @@
-const axios = require('axios');
+const axios = require('../../../helpers/axioshelper');
 
-const apiGetItem = '/api/v1/item';
-const apiGetItems = '/api/v1/items';
+const apiGetItem = '/item';
+const apiGetItems = '/items';
 
 export default {
     addItem({ commit }, item) {
