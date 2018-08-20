@@ -1,6 +1,6 @@
 export default {
     isAuthenticated: false,
-    token: null,
+    token: localStorage.getItem('MUT'),
     currentUser: null,
     authenticationId: null,
 };
