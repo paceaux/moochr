@@ -1,4 +1,4 @@
-const axios = require('../../../helpers/axioshelper');
+import axios from '../../../helpers/authhelper';
 
 const apiGetUser = '/user';
 const apiGetUsers = '/users';
@@ -40,6 +40,7 @@ export default {
             });
     },
     requestUsers({ commit }) {
+        console.log(axios);
         axios.get(apiGetUsers)
             .then(res => {
                 res.data.forEach(user => {

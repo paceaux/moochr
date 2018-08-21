@@ -1,4 +1,4 @@
-const axios = require('../../../helpers/axioshelper');
+import axios from '../../../helpers/authhelper';
 
 const apiGetCategory = '/category';
 const apiGetCategories = '/categories';
