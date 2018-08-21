@@ -40,7 +40,6 @@ export default {
             });
     },
     requestUsers({ commit }) {
-        console.log(axios);
         axios.get(apiGetUsers)
             .then(res => {
                 res.data.forEach(user => {
